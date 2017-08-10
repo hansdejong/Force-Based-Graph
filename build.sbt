@@ -6,6 +6,11 @@ scalaVersion := "2.12.2"
 // This is an application with a main method
 scalaJSUseMainModuleInitializer := true
 
+//Stap 3. Later vervangen door JQuery.Ik probeer <p> erin te houden.
+
+libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "0.9.1"
+
+//JQuery:
 libraryDependencies += "be.doeraene" %%% "scalajs-jquery" % "0.9.1"
 
 skip in packageJSDependencies := false
