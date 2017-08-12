@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>Kleur en tekst</title>
+	 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" href="./webixcode/webix.css" type="text/css" charset="utf-8">
+        <script src="./webixcode/webix.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+ 
+    <div id="data" style="width:350px;"></div>
+
+        <script type="text/javascript" charset="utf-8">
+        //place for your app
+        //webix.ui() can be optionally placed into webix.ready() function 
+        //to ensure that your code will be executed as soon as page loading is complete.
+	webix.ready(function(){
+
+		webix.ui(
+			{
+				container:"data",
+				view:"form", scroll:false, elements:[
+					{ view:"text", label:"Label", name:"label", value:"Some text" },
+
+					{ view:"colorpicker", label:"Color", name:"color", value:"#ffaadd" },
+
+					{ view:"button", type:"form", value:"Submit data", click:function()
+						{
+							webix.message("<pre>"+JSON.stringify(this.getParentView().getValues(),0,1)+"</pre>");
+						}
+					}
+				],	
+				elementsConfig:
+				{
+					labelAlign:"center"
+				}
+			}
+		);
+	});
+
+
+        </script>
+
+    </body> 
+</html>

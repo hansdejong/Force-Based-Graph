@@ -1,10 +1,12 @@
 enablePlugins(ScalaJSPlugin)
 
-name := "Scala.js Tutorial"
+name := "CanvasApp"
 scalaVersion := "2.12.2"
 
 // This is an application with a main method
-scalaJSUseMainModuleInitializer := true
+//scalaJSUseMainModuleInitializer := true // Vreemd, deed het niet. Toch  maar 1 main
+scalaJSUseMainModuleInitializer := false
+mainClass := Some("canvasapp.ScratchPad")
 
 //Stap 3. Later vervangen door JQuery.Ik probeer <p> erin te houden.
 

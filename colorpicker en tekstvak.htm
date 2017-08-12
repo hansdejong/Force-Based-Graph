@@ -1,0 +1,43 @@
+
+	<div class='single-demo-area' id='single_demo_area'>
+		<style>
+
+			#data{
+				margin: 20px;
+			}
+			html, body{height:100%}
+		
+		</style>
+
+
+
+
+		<div id="data" style="width:350px;"></div>
+	
+
+		
+	
+
+		<script>
+
+			webix.ui({ 
+				container:"data",
+				view:"form", scroll:false, elements:[
+					{ view:"text", label:"Label", name:"label", value:"Some text" },
+
+					{ view:"colorpicker", label:"Color", name:"color", value:"#ffaadd" },
+
+					{ view:"button", type:"form", value:"Submit data", click:function(){
+						webix.message("<pre>"+JSON.stringify(this.getParentView().getValues(),0,1)+"</pre>");
+					}}
+				], elementsConfig:{
+					labelAlign:"center"
+				}
+			});
+
+			
+		</script>
+
+	</div>
+
+  

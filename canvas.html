@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CanvasApp application</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body style="margin: 0px">
+Ik heb hier een canvas
+<div>
+    <canvas style="display: block" id="canvas" width="255" height="255"/>
+</div>
+en dat loopt ongeveer tot hier
+<script type="text/javascript" src="target/scala-2.12/canvasapp-fastopt.js"></script>
+<script type="text/javascript" src="target/scala-2.12/classes/workbench.js"></script>
+<script>
+    canvasapp.ScratchPad().main(document.getElementById('canvas'));
+</script>
+</body>
+</html>
