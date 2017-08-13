@@ -14,22 +14,30 @@ import dom.document    //1. later er uit
 import scala.scalajs.js.annotation.JSExportTopLevel
 import scalajs.js.annotation.JSExport
 import dom.html
+/* [warn] /home/hans/scalaJS/CanvasApp fromTemplate/CanvasAppJS/src/main/scala/graph/opstart/StartGraph.scala:
+ * 18: @JSExport on objects is deprecated and will be removed in 1.0.0. Use @JSExportTopLevel instead. 
+ *  Note that it exports the object itself (rather than a 0-arg function returning the object), 
+ *  so the calling JavaScript code must be adapted.
+ *  Voorbeeld: https://github.com/scala-js/scala-js-dom/blob/master/example/src/main/scala/example/Example.scala
+ */
 
-//@JSExport Dit moete er kennelijk uit
+//@JSExport //Dit moet er kennelijk uit. Misschien, maar dan wel met toplevel
+
+@JSExportTopLevel("graph.opstart.StartGraph") //Dit moet er kennelijk uit. Misschien, maar dan wel met toplevel
 object StartGraph extends{
 
-//  //1. Gebruikt DOM. Later er uit
-//  def appendPar(targetNode: dom.Node, text: String): Unit = {
-//    val parNode = document.createElement("p")
-//    val textNode = document.createTextNode(text)
-//    parNode.appendChild(textNode)
-//    targetNode.appendChild(parNode)
-//  }
-//
-//  @JSExportTopLevel("klik_volgende")
-//  def klik_volgende(): Unit = {
-//    appendPar(document.body, "Je klikte de VOLGENDE knop!")
-//  }
+  //1. Gebruikt DOM. Later er uit
+  def appendPar(targetNode: dom.Node, text: String): Unit = {
+    val parNode = document.createElement("p")
+    val textNode = document.createTextNode(text)
+    parNode.appendChild(textNode)
+    targetNode.appendChild(parNode)
+  }
+
+  @JSExportTopLevel("klik_volgende")
+  def klik_volgende(): Unit = {
+    appendPar(document.body, "Je klikte op de VOLGENDE knop!")
+  }
 //  @JSExportTopLevel("toggle_mode")
 //  def toggle_mode(mode:String): Unit = {
 //    appendPar(document.body, "De toggle ging naar " + mode)
