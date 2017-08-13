@@ -1,92 +1,91 @@
 package graph.opstart
+/*** 
+ * Afgezien van de objectnaam begonnen als een kopie van Scratchpad (en zou moeten tekenen)
+ * Eerst wil ik de mogelijke communicatiemanieren met de FBG.html uitproberen, 
+ * daarna pas andere klassen betrekken: 
+ * Ik krijg een referentie binnen naar Canvas --> daar op tekenen
+ * Iets schrijven in een tekstvak
+ * Reageren op een knop
+ * Misschen een slider uitlezen of zelfs een kleur kiezen
+ * Dit aLLES LIEFST ZONDER JqUERY 
+*/
+import org.scalajs.dom
+import dom.document    //1. later er uit
+import scala.scalajs.js.annotation.JSExportTopLevel
+import scalajs.js.annotation.JSExport
+import dom.html
 
-/**
-  * @copyright (C) Hans de Jong, 2010
-  * @author Hans de Jong.<br><br>
-  * The main entrancepoint of the application<br>
-  */
-import java.awt.Color
+//@JSExport Dit moete er kennelijk uit
+object StartGraph extends{
 
-import java.awt.event.WindowAdapter
+//  //1. Gebruikt DOM. Later er uit
+//  def appendPar(targetNode: dom.Node, text: String): Unit = {
+//    val parNode = document.createElement("p")
+//    val textNode = document.createTextNode(text)
+//    parNode.appendChild(textNode)
+//    targetNode.appendChild(parNode)
+//  }
+//
+//  @JSExportTopLevel("klik_volgende")
+//  def klik_volgende(): Unit = {
+//    appendPar(document.body, "Je klikte de VOLGENDE knop!")
+//  }
+//  @JSExportTopLevel("toggle_mode")
+//  def toggle_mode(mode:String): Unit = {
+//    appendPar(document.body, "De toggle ging naar " + mode)
+//  }
+//  @JSExportTopLevel("color_picker")
+//  def toggle_color_picker(): Unit = {
+//    appendPar(document.body, "De colorpicker werkt nog niet")
+//  }
+//  @JSExportTopLevel("doe_iets")
+//  def doe_iets(): Unit = {
+//    appendPar(document.body, "De colorpicker werkt nog niet")
+//  val text = dom.document.getElementById("test_text").asInstanceOf[AnyRef].getClass.getSimpleName
+//    appendPar(document.body, text) //Lijkt me sterk dat dit lukt 
+//  //asInstanceOf[TextField]
+////	text.value="Eindelijk"
+//  }
 
-import java.awt.event.WindowEvent
+//  dom.document.getElementById("mainForm").asInstanceOf[HTMLFormElement]
+//Hoe weet je het type?
+// https://docs.webix.com/desktop__textarea.html
+// Geeft veel info over velden, maar een expliciete cast?
+// En als je de cast achterwege laat en toegestane eigenschappen gebruikt?
+  
+  @JSExport //Is dit goed of moet het TopLevel zijn?
+  def main(canvas: html.Canvas) = {
+    /*setup*/
+    val renderer = canvas.getContext("2d")
+                         .asInstanceOf[dom.CanvasRenderingContext2D]
 
-import javax.swing._
+    canvas.width = canvas.parentElement.clientWidth
+    canvas.height = canvas.parentElement.clientHeight
 
-import fimme.graph.gui.GraphGui
+    renderer.fillStyle = "#f8f8f8"
+    renderer.fillRect(0, 0, canvas.width, canvas.height)
 
-//import fimme.graph.lib.Lib;
-import fimme.graph.lib.Lib
+    /*code*/
+//    renderer.fillStyle = "black"
+    renderer.fillStyle = "red"
+//    renderer.fillStyle = "orange"
+    var down = false
+    canvas.onmousedown =
+      (e: dom.MouseEvent) => down = true
 
-import StartGraph._
+    canvas.onmouseup =
+      (e: dom.MouseEvent) => down = false
 
-object StartGraph {
-
-// indicates whether frame should be packed
-  private var packFrame: Boolean = false
-
-  private var myFrame: JFrame = null
-
-//Einde init()
-  def setStaticTitleCallBack(title: String): Unit = {
-    myFrame.setTitle("Force-Based Graph: " + title)
+    canvas.onmousemove = {
+      (e: dom.MouseEvent) =>
+        val rect =
+          canvas.getBoundingClientRect()
+        if (down) renderer.fillRect(
+          e.clientX - rect.left,
+          e.clientY - rect.top,
+          10, 10
+        )
+    }
   }
-
-//Voor applicatie:
-  def main(args: Array[String]): Unit = {
-    try UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName)
-    catch {
-      case e: Exception => Lib.melding("Fout: " + e, "StartGraph.main()")
-
-    }
-    myFrame = new JFrame("Force-Based Graph")
-    myFrame.setSize(500, 450)
-    myFrame.setResizable(true)
-    myFrame.setVisible(true)
-    myFrame.setBackground(Color.lightGray)
-    myFrame.addWindowListener(new WindowAdapter() {
-      def windowClosing(e: WindowEvent): Unit = {
-        if (e.getID == WindowEvent.WINDOW_CLOSING) {
-          System.exit(0)
-        } else if (e.getID == WindowEvent.WINDOW_ACTIVATED) {
-          e.getWindow.repaint()
-        }
-      }
-    })
-    val isApplet: Boolean = false
-    val gui: GraphGui = new GraphGui(isApplet)
-    myFrame.add(gui)
-// layout or validate frames that have preset sizes.
-    if (packFrame) {
-      myFrame.pack()
-    } else {
-      myFrame.validate()
-    }
-    myFrame.setVisible(true)
-  }
-// Pack frames that have useful preferred size info. from their
-// Pack frames that have useful preferred size info. from their
-
-}
-
-class StartGraph extends JApplet {
-
-//voor applet:
-  def init(): Unit = {
-    try UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName)
-    catch {
-      case e: Exception => Lib.melding("Fout:" + e, "StartGraph.init()")
-
-    }
-    try {
-      val isApplet: Boolean = true
-      val gui: GraphGui = new GraphGui(isApplet)
-      getContentPane.add(gui)
-    } catch {
-      case e: Exception => Lib.melding("Fout: " + e, "StartGraph.init()")
-
-    }
-  }
-
 }
 

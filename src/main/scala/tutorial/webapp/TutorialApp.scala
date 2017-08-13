@@ -1,4 +1,4 @@
-/*
+
 package tutorial.webapp
 
 import org.scalajs.dom //1. later er uit
@@ -42,4 +42,4 @@ object TutorialApp {
   }
 
 }
-*/
+

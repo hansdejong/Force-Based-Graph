@@ -56,7 +56,7 @@ Ik moet kunnen tekenen, slepen, de sliders uitlezen, plus reageren op de knop ac
 
 //{ template:"Column 2", width: 250},
 {view:"form", id:"kol2", width: 250, elements:[
-	{ view:"text", placeholder:"Connecties (random poging)", width:200, align:"center"},  
+	{ view:"text",id:"test_tekst",  placeholder:"Connecties (random poging)", width:200, align:"center"},  
         { view:"slider", id:"sl2", width: 200, align:"left",
 	title:function(obj){return obj.value;}, /*label:"Level B"*/}
 ]}, 
@@ -70,11 +70,12 @@ Ik moet kunnen tekenen, slepen, de sliders uitlezen, plus reageren op de knop ac
 ]},	
 //===============================================================================
  { view:"toolbar", id:"mybar", elements:[
-            { view:"button", value:"Volgende", width: 70, click:"add_row"},
-            { view:"button", value:"Kleur", width: 70, click:"delete_row" },
+            { view:"button", value:"Volgende", width: 70, click:"klik_volgende"},
+            { view:"button", value:"Kleur", width: 70, click:"color_picker" },
 //            { view:"toggle", offLabel:"Sleep", onLabel:"Wijzig", width: 70/* , height: 40 */, click:"update_row" },
-{ view:"toggle", name:"s3",  width: 85,offLabel:"Sleep", onLabel:"Wijzig" },
-            { view:"button", value:"Clear Form", width: 85, click:"$$('myform').clear()" }]
+	    { view:"toggle", name:"s3",  width: 85,offLabel:"Sleep", onLabel:"Wijzig" },
+//            { view:"button", value:"Clear Form", width: 85, click:"toggle_mode(value)" }]
+            { view:"button", value:"DoeIets", width: 85, click:"DoeIets" }]
     }
 
             
@@ -130,7 +131,8 @@ function update_row(){
 <script type="text/javascript" src="target/scala-2.12/canvasapp-fastopt.js"></script>
 <script type="text/javascript" src="target/scala-2.12/classes/workbench.js"></script>
 <script>
-    canvasapp.ScratchPad().main(document.getElementById('canvas'));
+//    canvasapp.ScratchPad().main(document.getElementById('canvas'));
+    graph.opstart.StartGraph().main(document.getElementById('canvas'));
 </script>
 
     </body> 

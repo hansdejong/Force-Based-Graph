@@ -6,7 +6,8 @@ scalaVersion := "2.12.2"
 // This is an application with a main method
 //scalaJSUseMainModuleInitializer := true // Vreemd, deed het niet. Toch  maar 1 main
 scalaJSUseMainModuleInitializer := false
-mainClass := Some("canvasapp.ScratchPad")
+//mainClass := Some("canvasapp.ScratchPad")
+mainClass := Some("graph.opstart.StartGraph")
 
 //Stap 3. Later vervangen door JQuery.Ik probeer <p> erin te houden.
 

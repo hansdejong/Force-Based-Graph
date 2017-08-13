@@ -6,9 +6,9 @@ import org.scalajs.dom
 import scalajs.js.annotation.JSExport
 import dom.html
 
-@JSExport
+//@JSExport Moet er uit
 object ScratchPad extends{
-  @JSExport
+  //@JSExport //is dit modig of moet het @JSExportTopLevel zijn 
   def main(canvas: html.Canvas) = {
     /*setup*/
     val renderer = canvas.getContext("2d")
