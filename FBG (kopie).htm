@@ -71,14 +71,12 @@ Ik moet kunnen tekenen, slepen, de sliders uitlezen, schrijven naar een tekstvak
 //===============================================================================
  { view:"toolbar", id:"mybar", elements:[
             { view:"button", value:"Volgende", width: 70, click:"SCALA_volgende()"},
-            { view:"button", value:"Kies kleur:", width: 80, click:"kies_kleur()" },
-   
-{ view:"button", value:"Kies kleur:", width: 80, click:function(){	    
+//          { view:"button", value:"Kies kleur:", width: 80, click:"kies_kleur()" },
+            { view:"button", value:"Kies kleur:", width: 80, click:function(){
 				val tuple = this.getParentView().getvalues();
 				msg(tuple);
 			}
 	    },
-
 	   { view:"colorpicker", id:"picker", name:"color", value:"#ffaadd", width:120 },
 //            { view:"toggle", offLabel:"Sleep", onLabel:"Wijzig", width: 70/* , height: 40 */, click:"update_row" },
 	    { view:"toggle", name:"s3",  width: 85,offLabel:"Sleep", onLabel:"Wijzig" },
@@ -92,7 +90,6 @@ Ik moet kunnen tekenen, slepen, de sliders uitlezen, schrijven naar een tekstvak
 		});
 	});
 <!-- ======== Voorbeeldcode ====== -->
-/*
 			<script>
 			webix.ui({ 
 				container:"data",
@@ -110,9 +107,7 @@ Ik moet kunnen tekenen, slepen, de sliders uitlezen, schrijven naar een tekstvak
 				}
 			});
 		</script>
-*/		
 <!-- ======== Voorbeeldcode ====== -->
-/*
 //https://stackoverflow.com/questions/20392782/a-list-of-tuples-in-javascript
 var nameAndAgeList = incomingList.map(function(item) {
   return {
@@ -120,13 +115,13 @@ var nameAndAgeList = incomingList.map(function(item) {
     age: item.age
   };
 });
-*/
+
 <!-- ======== Mijn functiess ====== -->
 function kies_kleur(){
 	var kleur = document.getElementById("picker");
 	//.value;
 	//alert("De alert doet het"); //er weer uit	
-///////////////////	document.write("De kleurkiezer wordt bereikt "+ kleur); //er weer uit	
+	document.write("De kleurkiezer wordt bereikt "+ kleur); //er weer uit	
 //	alert(kleur); //er weer uit	
 //	SCALA_kies_kleur(kleur);
 
@@ -141,14 +136,12 @@ function kies_kleur(){
 //    });
 //});
 
-/*
 function msg( txt ){
 	document.getElementById("test").innerHTML = txt;
 };
-*/
+
 
 <!-- ======== Niet meer gebruikt. Hoogstens als voorbeeld ====== -->
-/*
 function add_row(){
 
 	$$("mylist").add({
@@ -182,7 +175,7 @@ function update_row(){
     item.year = value2;
     $$("mylist").updateItem(sel, item);
 };
-*/
+
         </script>
 
 <!-- ======== Tot hier de webix scripts. Nu de ScalaJS scripts ====== -->
