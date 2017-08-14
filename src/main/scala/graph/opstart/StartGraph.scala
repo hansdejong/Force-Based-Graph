@@ -23,7 +23,7 @@ import dom.html
 
 //@JSExport //Dit moet er kennelijk uit. Misschien, maar dan wel met toplevel
 
-@JSExportTopLevel("graph.opstart.StartGraph") //Dit moet er kennelijk uit. Misschien, maar dan wel met toplevel
+@JSExportTopLevel("StartGraph")
 object StartGraph extends{
 
   //1. Gebruikt DOM. Later er uit
@@ -34,17 +34,17 @@ object StartGraph extends{
     targetNode.appendChild(parNode)
   }
 
-  @JSExportTopLevel("klik_volgende")
-  def klik_volgende(): Unit = {
+  @JSExportTopLevel("SCALA_volgende")
+  def SCALA_volgende(): Unit = {
     appendPar(document.body, "Je klikte op de VOLGENDE knop!")
+  }
+  @JSExportTopLevel("SCALA_kies_kleur")
+  def SCALA_kies_kleur(kleur: String): Unit = {
+    appendPar(document.body, "De volgende kleur is nu actief: " + kleur)
   }
 //  @JSExportTopLevel("toggle_mode")
 //  def toggle_mode(mode:String): Unit = {
 //    appendPar(document.body, "De toggle ging naar " + mode)
-//  }
-//  @JSExportTopLevel("color_picker")
-//  def toggle_color_picker(): Unit = {
-//    appendPar(document.body, "De colorpicker werkt nog niet")
 //  }
 //  @JSExportTopLevel("doe_iets")
 //  def doe_iets(): Unit = {

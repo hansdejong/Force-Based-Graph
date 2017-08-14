@@ -11,8 +11,8 @@
 Een canvas, een aantal labels, knoppen en sliders<br>
 <a href="https://webix.com/tutorials/" target="_blank">Webix tutorials</a><br>
 Nu eerst verder met de canvas-app van Li Haoyi, en eventueel ook deze canvas aanspreken.<br>
-Ik moet kunnen tekenen, slepen, de sliders uitlezen, plus reageren op de knop acties. 
-
+Ik moet kunnen tekenen, slepen, de sliders uitlezen, schrijven naar een tekstvak, <br>
+een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties. 
 
 <!-- Ik zie geen canvas-view dus dan maar zo: -->
     <div id="myDiv" style="width:750px; height:300px; margin:10px; border:1px solid #c0c0c0;">
@@ -70,8 +70,19 @@ Ik moet kunnen tekenen, slepen, de sliders uitlezen, plus reageren op de knop ac
 ]},	
 //===============================================================================
  { view:"toolbar", id:"mybar", elements:[
-            { view:"button", value:"Volgende", width: 70, click:"klik_volgende"},
-            { view:"button", value:"Kleur", width: 70, click:"color_picker" },
+	    { view:"button", value:"Volgende", width: 70, click:"SCALA_volgende()"},
+	    
+	    { view:"button", value:"Kies kleur:", width: 80, click:function(){	    
+//				val tuple = this.getParentView().getvalues();  //Niet correct
+//				document.getElementById("test").innerHTML = tuple; //TODO XXXXXXXXXXXXXXXX
+				//Stuur waarde naar SCALA_kies_kleur
+			}
+	    },
+	   { view:"colorpicker", id:"picker", name:"color", value:"#ffaadd", width:120 },
+
+	    
+	    
+	    
 //            { view:"toggle", offLabel:"Sleep", onLabel:"Wijzig", width: 70/* , height: 40 */, click:"update_row" },
 	    { view:"toggle", name:"s3",  width: 85,offLabel:"Sleep", onLabel:"Wijzig" },
 //            { view:"button", value:"Clear Form", width: 85, click:"toggle_mode(value)" }]
@@ -132,8 +143,8 @@ function update_row(){
 <script type="text/javascript" src="target/scala-2.12/classes/workbench.js"></script>
 <script>
 //    canvasapp.ScratchPad().main(document.getElementById('canvas'));
-    graph.opstart.StartGraph.main(document.getElementById('canvas'));
+    StartGraph.main(document.getElementById('canvas'));
 </script>
-
+<div id="test"></div>
     </body> 
 </html>
