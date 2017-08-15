@@ -44,27 +44,27 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 
 //======= De kolommen met sliders =========================================================
             { cols:[ 
-{view:"form", id:"kolom1", width: 250, elements:[
+// template:"Kolom 1" }, 
+{view:"form", id:"kol1", width: 250, elements:[
         { view:"text", text:"Knopen (random poging)", width:200, align:"center"},  
 	{ view:"slider", id:"slider1", value:[10], width: 200, align:"left",
-	title:function(obj){return obj.value;}, click: function(){
-		SCALA_nodes( this.getValue() ); 
-//		webix.message("<pre>"+ this.getValue() +"</pre>");
-	}}]},
+	title:function(obj){return obj.value;}, click: function(){webix.message("<pre>"+ this.getValue() +"</pre>");}}
+//	title:function(obj){return obj.value;}, /*label:"Level B"*/}
+]},
 
-{view:"form", id:"kolom2", width: 250, elements:[
-	{ view:"text",  text:"Connecties (random poging)", width:200, align:"center"},  
+//{ template:"Column 2", width: 250},
+{view:"form", id:"kol2", width: 250, elements:[
+	{ view:"text",id:"test_tekst",  text:"Connecties (random poging)", width:200, align:"center"},  
         { view:"slider", id:"slider2", width: 200, align:"left",
-	title:function(obj){return obj.value;}, click: function(){ 
-		SCALA_edges( this.getValue() ); 
-	}}]}, 
+	title:function(obj){return obj.value;} /*label:"Level B"*/}
+]}, 
 
- {view:"form", id:"kolom3", width: 245, elements:[
+ //{ template:"Column 3"}
+{view:"form", id:"kol3", width: 245, elements:[
         { view:"text", text:"Zoomfactor", width:200, align:"center"},  
         { view:"slider", id:"slider3", width: 200, align:"left",
-	title:function(obj){return obj.value;}, click: function(){ 
-		SCALA_zoom( this.getValue() ); 
-	}}]}
+	title:function(obj){return obj.value;}, /*label:"Level B"*/}
+]}
 ]}//Einde klommen
 ,	
 //======= De toolbar ================================================================
@@ -74,21 +74,15 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 	{ view:"button", value:"Kies kleur:", width: 80, click:function(){	    
 			var json = JSON.stringify(this.getParentView().getValues(),0,1);
 			var kleur = JSON.parse(json)["color"];
-			SCALA_kiesKleur(kleur);
+			SCALA_kies_kleur(kleur);
 			webix.message("<pre>"+ kleur +"</pre>");        
 		}
 	},
 	
 	{ view:"colorpicker", name:"color", value:"#ffaadd", width:120 },
 
-	{ view:"toggle", name:"toggle", id:"toggle", width: 85,offLabel:"Sleep", onLabel:"Wijzig", click:function(){	    
-			var json = JSON.stringify(this.getParentView().getValues(),0,1);
-			var tg = JSON.parse(json)["toggle"];
-			SCALA_onToggle(tg);
-			webix.message("<pre>"+ tg +"</pre>");   
-		}			
-	},
-	
+	{ view:"toggle", name:"toggle", id:"toggle", width: 85,offLabel:"Sleep", onLabel:"Wijzig", click:"ToonWaarden"},
+
         { view:"button", value:"Test waarden", width: 95, click:"ToonWaarden" }
 	
 ]//einde toolbar-elementen array
@@ -97,22 +91,30 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 		});//Einde webix.ui
 	}); //Einde webix.ready
 
+//attachEvents(); //Eerst gewoon proberen metr change: ?
 //======= De Hulpfuncties =======================================================
 
 function ToonWaarden(){
 	var json = JSON.stringify(this.getParentView().getValues(),0,1);
 	webix.message("<pre>"+ json +"</pre>");        	
 };
+//function attachEvents(){
+//toggle.attachEvent("onAfterLoad",function(){
+//   SCALA_toggle( value );
+//slider1.attachEvent("onAfterLoad",function(){
+//   SCALA_toggle( value );
+//toggle.attachEvent("onAfterLoad",function(){
+//    SCALA_toggle( value );
+//}
+        </script>
 
-</script>
 <!-- ======== Tot hier de webix scripts. Nu de ScalaJS scripts ====== -->
 
 <script type="text/javascript" src="target/scala-2.12/graph-fastopt.js"></script>
 <script type="text/javascript" src="target/scala-2.12/classes/workbench.js"></script>
 <script>
 //    canvasapp.ScratchPad().main(document.getElementById('canvas'));
-    StartGraph.loadCanvas(document.getElementById('canvas'));
-    StartGraph.loadTekstvak1(document.getElementById('tekstvak1'));
+    StartGraph.main(document.getElementById('canvas'));
 </script>
 ToDo (aanpassen):
 <ul>

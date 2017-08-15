@@ -25,7 +25,8 @@ import dom.html
 
 @JSExportTopLevel("StartGraph")
 object StartGraph extends{
-
+  var mColor = "red"
+  
   //1. Gebruikt DOM. Later er uit
   def appendPar(targetNode: dom.Node, text: String): Unit = {
     val parNode = document.createElement("p")
@@ -34,35 +35,39 @@ object StartGraph extends{
     targetNode.appendChild(parNode)
   }
 
+  @JSExportTopLevel("SCALA_nodes")
+  def SCALA_nodes( noNodes:Int ): Unit = {
+    appendPar(document.body, "Aantal nodes nu ingesteld op " + noNodes)
+  }
+  @JSExportTopLevel("SCALA_edges")
+  def SCALA_edges( noEdges:Int ): Unit = {
+    appendPar(document.body, "Aantal connecties nu ingesteld op " + noEdges)
+  }
+  @JSExportTopLevel("SCALA_zoom")
+  def SCALA_zoom( zoom:Int ): Unit = {
+    appendPar(document.body, "Zoom-factor nu ingesteld op " + zoom)
+  }
   @JSExportTopLevel("SCALA_volgende")
   def SCALA_volgende(): Unit = {
     appendPar(document.body, "Je klikte op de VOLGENDE knop!")
   }
-  @JSExportTopLevel("SCALA_kies_kleur")
-  def SCALA_kies_kleur(kleur: String): Unit = {
+  @JSExportTopLevel("SCALA_kiesKleur")
+  def SCALA_kiesKleur(kleur: String): Unit = {
+    mColor = kleur 
     appendPar(document.body, "De volgende kleur is nu actief: " + kleur)
   }
-//  @JSExportTopLevel("toggle_mode")
-//  def toggle_mode(mode:String): Unit = {
-//    appendPar(document.body, "De toggle ging naar " + mode)
-//  }
-//  @JSExportTopLevel("doe_iets")
-//  def doe_iets(): Unit = {
-//    appendPar(document.body, "De colorpicker werkt nog niet")
-//  val text = dom.document.getElementById("test_text").asInstanceOf[AnyRef].getClass.getSimpleName
-//    appendPar(document.body, text) //Lijkt me sterk dat dit lukt 
-//  //asInstanceOf[TextField]
-////	text.value="Eindelijk"
-//  }
-
-//  dom.document.getElementById("mainForm").asInstanceOf[HTMLFormElement]
-//Hoe weet je het type?
-// https://docs.webix.com/desktop__textarea.html
-// Geeft veel info over velden, maar een expliciete cast?
-// En als je de cast achterwege laat en toegestane eigenschappen gebruikt?
+  @JSExportTopLevel("SCALA_onToggle")
+  def SCALA_onToggle(waarde: Int): Unit = {
+    val keuze = waarde match{
+      case 0 => "wijzig"
+      case 1 => "sleep"
+      case _ => "pardon?"  
+    }
+    appendPar(document.body, "Toggle is nu: " + keuze)
+  }
   
-  @JSExport //Is dit goed of moet het TopLevel zijn?
-  def main(canvas: html.Canvas) = {
+  @JSExport //Is dit goed of moet het TopLevel zijn?  
+  def loadCanvas(canvas: html.Canvas) = {
     /*setup*/
     val renderer = canvas.getContext("2d")
                          .asInstanceOf[dom.CanvasRenderingContext2D]
@@ -70,13 +75,13 @@ object StartGraph extends{
     canvas.width = canvas.parentElement.clientWidth
     canvas.height = canvas.parentElement.clientHeight
 
-    renderer.fillStyle = "#f8f8f8"
+//    renderer.fillStyle = "#f8f8f8"
+    renderer.fillStyle = "#FFFFFF"
     renderer.fillRect(0, 0, canvas.width, canvas.height)
 
     /*code*/
-//    renderer.fillStyle = "black"
-    renderer.fillStyle = "red"
-//    renderer.fillStyle = "orange"
+    renderer.fillStyle = mColor
+
     var down = false
     canvas.onmousedown =
       (e: dom.MouseEvent) => down = true
@@ -94,6 +99,12 @@ object StartGraph extends{
           10, 10
         )
     }
+  }
+  
+  @JSExport  
+  def loadTekstvak1(tekstvak: html.TextArea) = {
+    tekstvak.defaultValue = "De aap uit de mouw"
+
   }
 }
 

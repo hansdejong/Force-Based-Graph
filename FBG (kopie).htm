@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>FBG</title>
+	 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" href="./webixcode/webix.css" type="text/css" charset="utf-8">
+        <script src="./webixcode/webix.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+    Dit wil ik geleidelijk veranderen in een FBG-app:<br>
+Een canvas, een aantal labels, knoppen en sliders<br>
+<a href="https://webix.com/tutorials/" target="_blank">Webix tutorials</a><br>
+Nu eerst verder met de canvas-app van Li Haoyi, en eventueel ook deze canvas aanspreken.<br>
+Ik moet kunnen tekenen, slepen, de sliders uitlezen, schrijven naar een tekstvak, <br>
+een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties. 
+
+<!-- Ik zie geen canvas-view dus dan maar zo: -->
+    <div id="myDiv" style="width:750px; height:300px; margin:10px; border:1px solid #c0c0c0;">
+      <canvas id="canvas">
+      </canvas>
+    </div>
+    
+    <div id="myDiv" style="width:750px; height:80px; margin:10px; border:1px solid #c0c0c0;">
+	<TEXTAREA NAME="tekstvak" ROWS="4" COLS="50" style="resize:none"></TEXTAREA>
+	<TEXTAREA NAME="tekstvak" ROWS="4" COLS="25" READONLY>Niet veranderbaar</TEXTAREA>
+	<TEXTAREA NAME="tekstvak" ROWS="4" COLS="20" DISABLED>Disabled</TEXTAREA>
+    </div>
+    <div id="FBG" style="width:500px; height:300px; margin:10px;"></div>
+    
+    <div id="FBG" style="width:500px; height:300px; margin:10px;"></div>
+
+        <script type="text/javascript" charset="utf-8">
+        //place for your app
+        //webix.ui() can be optionally placed into webix.ready() function 
+        //to ensure that your code will be executed as soon as page loading is complete.
+	webix.ready(function(){
+
+		webix.ui({
+		        width:750,
+		        height:600,
+			type:"line",
+			container:"FBG",
+	    		rows: [
+//{ template:"Hier wil ik een canvas", height:250},
+//{view:"canvas",  width: 300, height:200},
+//{template: "<canvas id='mapCanvas' height=705px width=404px></canvas>"},
+//Is er een soort canvas-view? Het vb. deed het binnen een view:template
+//https://forum.webix.com/discussion/30264/adding-a-canvas-element-to-a-webix-ui-row
+//{template: "<canvas id='canvas' />", height:300}, 
+
+//{
+//view: 'template',
+//template: "<canvas id='canvas' height=705px width=404px></canvas>"
+//},
+//===============================================================================
+    	    //{ template:"Row 2"}
+            { cols:[ //2nd row
+// template:"Kolom 1" }, 
+{view:"form", id:"kol1", width: 250, elements:[
+        { view:"text", placeholder:"Knopen (random poging)", width:200, align:"center"},  
+	{ view:"slider", value:[10], width: 200, align:"left",
+	title:function(obj){return obj.value;}, /*label:"Level B"*/}
+]},
+
+//{ template:"Column 2", width: 250},
+{view:"form", id:"kol2", width: 250, elements:[
+	{ view:"text",id:"test_tekst",  placeholder:"Connecties (random poging)", width:200, align:"center"},  
+        { view:"slider", id:"sl2", width: 200, align:"left",
+	title:function(obj){return obj.value;}, /*label:"Level B"*/}
+]}, 
+
+ //{ template:"Column 3"}
+{view:"form", id:"kol3", width: 245, elements:[
+        { view:"text", placeholder:"Zoomfactor", width:200, align:"center"},  
+        { view:"slider", id:"sl3", width: 200, align:"left",
+	title:function(obj){return obj.value;}, /*label:"Level B"*/}
+]}
+]},	
+//===============================================================================
+ { view:"toolbar", id:"mybar", elements:[
+	{ view:"button", value:"Volgende", width: 70, click:"SCALA_volgende()"},
+	    
+	{ view:"button", value:"Kies kleur:", width: 80, click:function(){	    
+			var json = JSON.stringify(this.getParentView().getValues(),0,1);
+			var kleur = JSON.parse(json)["color"];
+			SCALA_kies_kleur(kleur);
+			webix.message("<pre>"+ kleur +"</pre>");        
+		}
+	},
+	//Stuur waarde naar SCALA_kies_kleur
+	
+	{ view:"colorpicker", id:"picker", name:"color", value:"#ffaadd", width:120 },
+
+	    
+	    
+	    
+//            { view:"toggle", offLabel:"Sleep", onLabel:"Wijzig", width: 70/* , height: 40 */, click:"update_row" },
+	    { view:"toggle", name:"s3",  width: 85,offLabel:"Sleep", onLabel:"Wijzig" },
+//            { view:"button", value:"Clear Form", width: 85, click:"toggle_mode(value)" }]
+            { view:"button", value:"Test waarden", width: 95, click:"ToonWaarden" }]
+    }
+
+            
+    			]
+		});
+	});
+
+//Attach a form-setting function to an "onAfterSelect" list event and pass item ID to it
+//$$("mylist").attachEvent("onAfterSelect", function(id){
+//    $$("myform").setValues({
+//        title: $$("mylist").getItem(id).title,
+//        year: $$("mylist").getItem(id).year 
+//    });
+//});
+
+function ToonWaarden(){
+	var json = JSON.stringify(this.getParentView().getValues(),0,1);
+	webix.message("<pre>"+ json +"</pre>");        	
+};
+
+function add_row(){
+	$$("mylist").add({
+		title: $$("myform").getValues().title,
+		year: $$("myform").getValues().year,
+	})
+};
+function delete_row(){
+   var id = $$("mylist").getSelectedId(); //returns the ID of selected item
+   // $$("mylist").remove(id);
+    webix.confirm({
+        title: "Delete",
+        text: "Are you sure you want to delete the selected contact?",
+        callback: function(result) { 
+            if (result) {
+                $$("mylist").remove(id);
+            } 
+        }
+	})
+};
+function update_row(){
+	    var sel = $$("mylist").getSelectedId();
+    if(!sel) return;
+ 
+    var value1 = $$('myform').getValues().title;
+    var value2 = $$('myform').getValues().year;
+ 
+ 
+    var item = $$("mylist").getItem(sel); //selected item object
+    item.title = value1;
+    item.year = value2;
+    $$("mylist").updateItem(sel, item);
+};
+
+        </script>
+
+<!-- ======== Tot hier de webix scripts. Nu de ScalaJS scripts ====== -->
+
+<script type="text/javascript" src="target/scala-2.12/graph-fastopt.js"></script>
+<script type="text/javascript" src="target/scala-2.12/classes/workbench.js"></script>
+<script>
+//    canvasapp.ScratchPad().main(document.getElementById('canvas'));
+    StartGraph.main(document.getElementById('canvas'));
+</script>
+
+    </body> 
+</html>
