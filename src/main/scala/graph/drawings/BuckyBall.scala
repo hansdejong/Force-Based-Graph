@@ -4,12 +4,12 @@
 //
 //import java.util.ArrayList
 //
-//import fimme.graph.model.Grid
+//import graph.model.Grid
 //
-//import fimme.graph.model.Vertex3D
+//import graph.model.Vertex3D
 //
 //
-//class BuckyBall extends IDrawing {
+//class BuckyBall extends TDrawing {
 //
 //  var vertices: ArrayList[Vertex3D] = new ArrayList[Vertex3D]()
 //
@@ -22,7 +22,7 @@
 //    edges = new Grid(numVertices)
 //    for (i <- 0.until(5)) {
 //      val v: Vertex3D = new Vertex3D(Color.YELLOW)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -30,7 +30,7 @@
 //    }
 //    for (i <- 5.until(10)) {
 //      val v: Vertex3D = new Vertex3D(Color.BLUE)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -38,7 +38,7 @@
 //    }
 //    for (i <- 10.until(15)) {
 //      val v: Vertex3D = new Vertex3D(Color.CYAN)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -46,7 +46,7 @@
 //    }
 //    for (i <- 15.until(20)) {
 //      val v: Vertex3D = new Vertex3D(Color.GREEN)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -54,7 +54,7 @@
 //    }
 //    for (i <- 20.until(25)) {
 //      val v: Vertex3D = new Vertex3D(Color.MAGENTA)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -62,7 +62,7 @@
 //    }
 //    for (i <- 25.until(30)) {
 //      val v: Vertex3D = new Vertex3D(new Color(0x80000000))
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -70,7 +70,7 @@
 //    }
 //    for (i <- 30.until(35)) {
 //      val v: Vertex3D = new Vertex3D(new Color(0x8395ee))
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -78,7 +78,7 @@
 //    }
 //    for (i <- 35.until(40)) {
 //      val v: Vertex3D = new Vertex3D(Color.PINK)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -86,7 +86,7 @@
 //    }
 //    for (i <- 40.until(45)) {
 //      val v: Vertex3D = new Vertex3D(Color.BLACK)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -94,7 +94,7 @@
 //    }
 //    for (i <- 45.until(50)) {
 //      val v: Vertex3D = new Vertex3D(Color.GRAY)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -102,7 +102,7 @@
 //    }
 //    for (i <- 50.until(55)) {
 //      val v: Vertex3D = new Vertex3D(Color.WHITE)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -110,7 +110,7 @@
 //    }
 //    for (i <- 55.until(60)) {
 //      val v: Vertex3D = new Vertex3D(Color.RED)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)

@@ -3,10 +3,11 @@
 //import java.awt.Color
 //
 //import java.util.ArrayList
+////import graph.drawings.EDrawings
 //
-//import fimme.graph.model.Grid
+//import graph.model.Grid
 //
-//import fimme.graph.model.Vertex3D
+//import graph.model.Vertex3D
 //
 //class Cube extends TDrawing {
 //
@@ -21,7 +22,7 @@
 //    edges = new Grid(numVertices)
 //    for (i <- 0 until numVertices) {
 //      val v: Vertex3D = new Vertex3D(Color.RED)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)

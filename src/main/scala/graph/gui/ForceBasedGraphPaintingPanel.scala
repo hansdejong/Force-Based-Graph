@@ -1,8 +1,8 @@
-//package graph.gui
+package graph.gui
 //
 //import java.awt.BasicStroke
 //
-//import java.awt.Color
+import java.awt.Color
 //
 //import java.awt.Graphics2D
 //
@@ -44,13 +44,14 @@
 ////remove if not needed
 //import scala.collection.JavaConversions._
 //
-//class ForceBasedGraphPaintingPanel(numVertices: Int,
-//                                   maxNumEdges: Int,
-//                                   theBgColor: Color,
-//                                   private var drawWithLabels: Boolean)
-//    extends AbstractPaintingPanel
+class ForceBasedGraphPaintingPanel(numVertices: Int,
+                                   maxNumEdges: Int,
+                                   theBgColor: Color,
+                                   private var drawWithLabels: Boolean)
+    extends AbstractPaintingPanel
 //    with MouseListener
-//    with MouseMotionListener {
+//    with MouseMotionListener 
+    {
 //
 //  var model: IGraphModel = new GraphModel(numVertices, maxNumEdges)
 //
@@ -367,5 +368,5 @@
 //
 //  private def str(d: Double): String = Lib.formatDouble(d)
 //
-//}
+}
 //

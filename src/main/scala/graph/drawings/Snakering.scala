@@ -4,17 +4,15 @@
 //
 //import java.util.ArrayList
 //
-//import fimme.graph.model.Grid
+//import graph.model.Grid
 //
-//import fimme.graph.model.Vertex3D
+//import graph.model.Vertex3D
 //
 //
 //class Snakering extends TDrawing {
 //
-//  @BeanProperty
 //  var vertices: ArrayList[Vertex3D] = new ArrayList[Vertex3D]()
 //
-//  @BeanProperty
 //  var edges: Grid = null
 //
 //  makeGraph_Snakering()
@@ -28,7 +26,7 @@
 //        if (i % 3 == 0) new Vertex3D(Color.RED)
 //        else if (i % 3 == 1) new Vertex3D(Color.WHITE)
 //        else new Vertex3D(Color.BLUE)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -39,7 +37,7 @@
 //        if (i % 3 == 0) new Vertex3D(Color.PINK)
 //        else if (i % 3 == 1) new Vertex3D(Color.YELLOW)
 //        else new Vertex3D(Color.CYAN)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)

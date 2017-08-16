@@ -88,7 +88,17 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 			webix.message("<pre>"+ tg +"</pre>");   
 		}			
 	},
-	
+/*
+        {view:"combo", label: 'App',  name:"app", value:2, yCount:"3", width:250, options:[ 
+			{ id:1, value:"Sierpinski"},
+			{ id:2, value:"Scratchpad"}, 
+			{ id:3, value:"ForceBasedGraph"}   
+		]
+		, afterChange: function(){
+			SCALA_app( this.getValue() );
+		}
+	},
+*/
         { view:"button", value:"Test waarden", width: 95, click:"ToonWaarden" }
 	
 ]//einde toolbar-elementen array

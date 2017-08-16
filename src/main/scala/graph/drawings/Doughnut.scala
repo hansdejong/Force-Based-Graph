@@ -4,9 +4,9 @@
 //
 //import java.util.ArrayList
 //
-//import fimme.graph.model.Grid
+//import graph.model.Grid
 //
-//import fimme.graph.model.Vertex3D
+//import graph.model.Vertex3D
 //
 //
 //class Doughnut extends TDrawing {
@@ -38,7 +38,7 @@
 //      v =
 //        if (i % 2 == 0) new Vertex3D(Color.ORANGE)
 //        else new Vertex3D(Color.BLUE)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)

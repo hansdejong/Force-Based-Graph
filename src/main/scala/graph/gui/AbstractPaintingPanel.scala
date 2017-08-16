@@ -1,4 +1,4 @@
-//package graph.gui
+package graph.gui
 //
 ///**
 //  * De bedoeling is faciliteiten te bundelen voor een Graphics-panel.
@@ -26,14 +26,14 @@
 //
 //import javax.swing.BorderFactory
 //
-//import javax.swing.JPanel
+import javax.swing.JPanel
 //
 //import javax.swing.border.EtchedBorder
 //
 ////remove if not needed
 //import scala.collection.JavaConversions._
 //
-//abstract class AbstractPaintingPanel extends JPanel {
+abstract class AbstractPaintingPanel extends JPanel {
 //
 //  private var width: Int = 1680
 //
@@ -96,4 +96,4 @@
 //
 //  def paintAnything(g2D: Graphics2D): Unit
 //
-//}
+}

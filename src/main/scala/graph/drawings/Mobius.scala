@@ -4,9 +4,9 @@
 //
 //import java.util.ArrayList
 //
-//import fimme.graph.model.Grid
+//import graph.model.Grid
 //
-//import fimme.graph.model.Vertex3D
+//import graph.model.Vertex3D
 //
 //import scala.beans.{BeanProperty, BooleanBeanProperty}
 //
@@ -27,7 +27,7 @@
 //    for (i <- 0 until numVertices) {
 //      v =
 //        if (i % 2 == 0) new Vertex3D(Color.RED) else new Vertex3D(Color.YELLOW)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -45,10 +45,10 @@
 //      edges.setConnected(i, i + 3, true)
 //      i = i + 4
 //    }
-//    var i: Int = 2
-//    while (i < numVertices - 2) {
-//      edges.setConnected(i, i + 3, true)
-//      i = i + 4
+//    var j: Int = 2 //Veranderd van i in j
+//    while (j < numVertices - 2) {
+//      edges.setConnected(j, j + 3, true)
+//      j = j + 4
 //    }
 //  }
 ////Verbind 0 met 3 en 2 met 5,

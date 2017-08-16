@@ -4,17 +4,15 @@
 //
 //import java.util.ArrayList
 //
-//import fimme.graph.model.Grid
+//import graph.model.Grid
 //
-//import fimme.graph.model.Vertex3D
+//import graph.model.Vertex3D
 //
 //
 //class Simplex4 extends TDrawing {
 //
-//  @BeanProperty
 //  var vertices: ArrayList[Vertex3D] = new ArrayList[Vertex3D]()
 //
-//  @BeanProperty
 //  var edges: Grid = null
 //
 //  makeVertices()
@@ -30,7 +28,7 @@
 //      val v: Vertex3D = new Vertex3D()
 //      /*Color.MAGENTA*/
 //
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)

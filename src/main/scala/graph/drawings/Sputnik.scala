@@ -4,17 +4,15 @@
 //
 //import java.util.ArrayList
 //
-//import fimme.graph.model.Grid
+//import graph.model.Grid
 //
-//import fimme.graph.model.Vertex3D
+//import graph.model.Vertex3D
 //
 //
 //class Sputnik extends TDrawing {
 //
-//  @BeanProperty
 //  var vertices: ArrayList[Vertex3D] = new ArrayList[Vertex3D]()
 //
-//  @BeanProperty
 //  var edges: Grid = null
 //
 //  makeGraph_Sputnik()
@@ -25,7 +23,7 @@
 //    edges = new Grid(numVertices)
 //    for (i <- 0 until numVerticesPerCube) {
 //      val v: Vertex3D = new Vertex3D(new Color(0xFF0099))
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -45,7 +43,7 @@
 //    edges.setConnected(3, 7, true)
 //    for (i <- 0 until numVerticesPerCube) {
 //      val v: Vertex3D = new Vertex3D(new Color(0x3333FF))
-//      v.setLabel(java.lang.Integer.toString(i + 8))
+//      v.label_=(java.lang.Integer.toString(i + 8))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -68,7 +66,7 @@
 //    }
 //    for (i <- 0 until numVerticesPerCube) {
 //      val v: Vertex3D = new Vertex3D(new Color(0xccffff))
-//      v.setLabel(java.lang.Integer.toString(i + 16))
+//      v.label_=(java.lang.Integer.toString(i + 16))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)

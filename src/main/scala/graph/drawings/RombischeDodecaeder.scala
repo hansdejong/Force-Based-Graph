@@ -4,9 +4,9 @@
 //
 //import java.util.ArrayList
 //
-//import fimme.graph.model.Grid
+//import graph.model.Grid
 //
-//import fimme.graph.model.Vertex3D
+//import graph.model.Vertex3D
 //
 ////remove if not needed
 //import scala.collection.JavaConversions._
@@ -24,7 +24,7 @@
 //    edges = new Grid(numVertices)
 //    for (i <- 0.until(8)) {
 //      val v: Vertex3D = new Vertex3D(new Color(0xDD0099))
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)
@@ -37,7 +37,7 @@
 //      else if (i == 10 || i == 11) //        		v = new Vertex3D( Color.MAGENTA );
 //        v = new Vertex3D(Color.ORANGE)
 //      else if (i == 9 || i == 12) v = new Vertex3D(Color.CYAN)
-//      v.setLabel(java.lang.Integer.toString(i))
+//      v.label_=(java.lang.Integer.toString(i))
 //      v.setXYZ(200 + Math.random() * 300,
 //               100 + Math.random() * 200,
 //               100 + Math.random() * 200)

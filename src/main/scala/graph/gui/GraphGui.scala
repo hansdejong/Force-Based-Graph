@@ -1,4 +1,4 @@
-//package graph.gui
+package graph.gui
 //
 //import java.awt.BorderLayout
 //
@@ -6,7 +6,7 @@
 //
 //import java.awt.GridLayout
 //
-//import javax.swing._
+import javax.swing._
 //
 //import javax.swing.border.BevelBorder
 //
@@ -14,7 +14,8 @@
 //
 //import javax.swing.event.ChangeListener
 //
-//import drawings.EDrawings
+import graph.drawings.EDrawings
+import graph.drawings.EDrawings._
 //
 ///////import fimme.graph.ioDialog.ChooserDialog;
 //import fimme.graph.lib.Lib
@@ -36,9 +37,9 @@
 ////remove if not needed
 //import scala.collection.JavaConversions._
 //
-//class GraphGui(private var isApplet: Boolean) extends JPanel {
+class GraphGui/*(private var isApplet: Boolean) extends JPanel*/ {
 //
-//  private var graphPanel: ForceBasedGraphPaintingPanel = _
+var graphPanel: ForceBasedGraphPaintingPanel = _
 //
 //////private ChooserDialog chooserDialog;
 //  private var saveMenuItem: JMenuItem = _
@@ -105,19 +106,19 @@
 ////		if( bar != null){
 ////			if( !isApplet || usingXml ){ add(createMenuBar(), BorderLayout.NORTH );}
 //
-//  private def createUitvoerPanel(): JPanel = {
-//    val thePanel: JPanel = new JPanel()
+  private def createUitvoerPanel(): JPanel = {
+    val thePanel: JPanel = new JPanel()
 //    thePanel.setLayout(new BorderLayout())
 //    val achtergrondkleurtje: Color = new Color(0xF0F8FF)
-//    val graphName: EDrawings = getRandomDrawing
+    val graphName: EDrawings = getRandomDrawing
 ////	    graphPanel = new ForceBasedGraphPaintingPanel( numberOfVertices, maxNumberOfEdges, achtergrondkleurtje,, withLabels);
 //    graphPanel = new ForceBasedGraphPaintingPanel(graphName,
 //                                                  achtergrondkleurtje,
 //                                                  withLabels)
 ////		    thePanel.add( scrollPane , BorderLayout.CENTER );
 //    thePanel.add(graphPanel, BorderLayout.CENTER)
-//    thePanel
-//  }
+    thePanel
+  }
 ////	    JScrollPane scrollPane = new JScrollPane( graphPanel ,
 ////	    		JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 ////	    		JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -126,12 +127,14 @@
 ////	    		JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 //
 ////Kopietje. Duplicaat verwijderen
-//  private def getRandomDrawing(): EDrawings = {
-//    val waarden: Array[EDrawings] = EDrawings.values
-//    val numItems: Int = waarden.length
+  private def getRandomDrawing(): EDrawings = {
+    //https://stackoverflow.com/questions/36386610/how-to-efficiently-pick-a-random-element-from-an-enumeration-in-scala
+//    val waarden: ValueSet = EDrawings.values
+//    val numItems: Int = waarden.size
 //    val num: Int = (Math.random() * numItems).toInt
 //    waarden(num)
-//  }
+    EDrawings(scala.util.Random.nextInt(EDrawings.maxId))
+  }
 //
 //  private def createBottomPanel(): JPanel = {
 //    val thePanel: JPanel = new JPanel()
@@ -382,7 +385,7 @@
 ////				});
 ////		}
 //
-//}
+}
 //
 ////import fimme.graph.io.IoAdapter;
 //

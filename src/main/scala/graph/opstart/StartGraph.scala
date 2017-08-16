@@ -14,18 +14,19 @@ import dom.document    //1. later er uit
 import scala.scalajs.js.annotation.JSExportTopLevel
 import scalajs.js.annotation.JSExport
 import dom.html
+import canvasapp._
+import sierpinski._
+import graph.gui._
 /* [warn] /home/hans/scalaJS/CanvasApp fromTemplate/CanvasAppJS/src/main/scala/graph/opstart/StartGraph.scala:
  * 18: @JSExport on objects is deprecated and will be removed in 1.0.0. Use @JSExportTopLevel instead. 
  *  Note that it exports the object itself (rather than a 0-arg function returning the object), 
  *  so the calling JavaScript code must be adapted.
  *  Voorbeeld: https://github.com/scala-js/scala-js-dom/blob/master/example/src/main/scala/example/Example.scala
+ *  @JSExport bij object moet er kennelijk uit. Misschien, maar dan wel met toplevel  
  */
 
-//@JSExport //Dit moet er kennelijk uit. Misschien, maar dan wel met toplevel
-
 @JSExportTopLevel("StartGraph")
-object StartGraph extends{
-  var mColor = "red"
+object StartGraph{ 
   
   //1. Gebruikt DOM. Later er uit
   def appendPar(targetNode: dom.Node, text: String): Unit = {
@@ -53,7 +54,7 @@ object StartGraph extends{
   }
   @JSExportTopLevel("SCALA_kiesKleur")
   def SCALA_kiesKleur(kleur: String): Unit = {
-    mColor = kleur 
+    Globals.gColor = kleur 
     appendPar(document.body, "De volgende kleur is nu actief: " + kleur)
   }
   @JSExportTopLevel("SCALA_onToggle")
@@ -65,45 +66,35 @@ object StartGraph extends{
     }
     appendPar(document.body, "Toggle is nu: " + keuze)
   }
+
+  @JSExportTopLevel("SCALA_app")
+  def SCALA_app(waarde: Int): Unit = {
+    val keuze = waarde match{
+      case 1 => "Sierpinski"
+      case 2 => "Scratchpad"
+      case 3 => "FBG"
+      case _ => "pardon?"  
+    }
+    appendPar(document.body, "Applicatie is nu: " + keuze)
+  }
   
   @JSExport //Is dit goed of moet het TopLevel zijn?  
   def loadCanvas(canvas: html.Canvas) = {
-    /*setup*/
-    val renderer = canvas.getContext("2d")
-                         .asInstanceOf[dom.CanvasRenderingContext2D]
-
-    canvas.width = canvas.parentElement.clientWidth
-    canvas.height = canvas.parentElement.clientHeight
-
-//    renderer.fillStyle = "#f8f8f8"
-    renderer.fillStyle = "#FFFFFF"
-    renderer.fillRect(0, 0, canvas.width, canvas.height)
-
-    /*code*/
-    renderer.fillStyle = mColor
-
-    var down = false
-    canvas.onmousedown =
-      (e: dom.MouseEvent) => down = true
-
-    canvas.onmouseup =
-      (e: dom.MouseEvent) => down = false
-
-    canvas.onmousemove = {
-      (e: dom.MouseEvent) =>
-        val rect =
-          canvas.getBoundingClientRect()
-        if (down) renderer.fillRect(
-          e.clientX - rect.left,
-          e.clientY - rect.top,
-          10, 10
-        )
+    Globals.app match{
+      case "FBG" => runFBG(canvas)
+      case "ScratchPad" => ScratchPad.runScratchPad(canvas)
+      case "Sierpinski" => ScalaJSExample.runSierpinski(canvas)
+      case _ => println ("Foutje in StartGraph.loadCanvas")
+    }
+    
+    def runFBG(canvas: html.Canvas):Unit = {
+       val gui: GraphGui = new GraphGui()
     }
   }
   
   @JSExport  
   def loadTekstvak1(tekstvak: html.TextArea) = {
-    tekstvak.defaultValue = "De aap uit de mouw"
+    tekstvak.defaultValue = "Huidige app:" + Globals.app
 
   }
 }
