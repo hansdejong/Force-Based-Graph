@@ -42,7 +42,10 @@ import dom.html
 class GraphGui(var canvas:html.Canvas,var tekstvak:html.TextArea)/*(private var isApplet: Boolean) extends JPanel*/ {
 def appendText(extra:String)={ tekstvak.value = tekstvak.value + extra }
 appendText("\nDit is GraphGui")
-var graphPanel: FBGPaintingPanel = _
+
+/* AANROEP TIJDELIJK ER UITvar graphPanel: FBGPaintingPanel = _*/
+
+
 //
 //////private ChooserDialog chooserDialog;
 //  private var saveMenuItem: JMenuItem = _
@@ -116,12 +119,17 @@ var graphPanel: FBGPaintingPanel = _
     val achtergrondkleurtje: String = "#F0F8FF"
     val graphName: EDrawings = getRandomDrawing
 //	    graphPanel = new ForceBasedGraphPaintingPanel( numberOfVertices, maxNumberOfEdges, achtergrondkleurtje, withLabels);
-    graphPanel = new FBGPaintingPanel(
+/* AANROEP TIJDELIJK ER UIT
+     graphPanel = new FBGPaintingPanel(
+ 
                                                   canvas,
                                                   tekstvak,
                                                   graphName,
                                                   achtergrondkleurtje,
                                                   withLabels)
+                                                 
+                                                  */
+    
 //		    thePanel.add( scrollPane , BorderLayout.CENTER );
 //    thePanel.add(graphPanel, BorderLayout.CENTER)
 //    thePanel

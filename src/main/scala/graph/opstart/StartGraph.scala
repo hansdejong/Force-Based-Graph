@@ -67,7 +67,7 @@ object StartGraph{
     }
     appendPar(document.body, "Toggle is nu: " + keuze)
   }
-
+//Tijdelijk. Bedoeld voor combo die het soort applicatie zou moeten instellen
   @JSExportTopLevel("SCALA_app")
   def SCALA_app(waarde: Int): Unit = {
     val keuze = waarde match{
@@ -77,6 +77,13 @@ object StartGraph{
       case _ => "pardon?"  
     }
     appendPar(document.body, "Applicatie is nu: " + keuze)
+  }
+
+  //Voor het starten van willekeurige tests in scala
+  @JSExportTopLevel("SCALA_test")
+  def SCALA_test(): Unit = {
+    //Hier als eerste een testroutine van de canvas-interface trait
+     appendPar(document.body, "De Scala test-knop")
   }
   
   @JSExport //Is dit goed of moet het TopLevel zijn?  
