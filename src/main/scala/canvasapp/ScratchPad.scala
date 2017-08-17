@@ -3,6 +3,7 @@ package canvasapp
 import org.scalajs.dom
 import graph.opstart._
 import dom.html
+import graph.global.Globals
 
 object ScratchPad {
 

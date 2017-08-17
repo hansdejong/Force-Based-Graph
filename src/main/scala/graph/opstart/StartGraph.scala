@@ -17,6 +17,8 @@ import dom.html
 import canvasapp._
 import sierpinski._
 import graph.gui._
+import graph.global._
+
 /* [warn] /home/hans/scalaJS/CanvasApp fromTemplate/CanvasAppJS/src/main/scala/graph/opstart/StartGraph.scala:
  * 18: @JSExport on objects is deprecated and will be removed in 1.0.0. Use @JSExportTopLevel instead. 
  *  Note that it exports the object itself (rather than a 0-arg function returning the object), 
@@ -27,7 +29,7 @@ import graph.gui._
 
 @JSExportTopLevel("StartGraph")
 object StartGraph{ 
- 
+//Niet getest, maar ik denk dat dit object als enige niet TCanvas en TTextArea moet gebruiken 
   
   //1. Gebruikt DOM. Later er uit
   def appendPar(targetNode: dom.Node, text: String): Unit = {
@@ -84,12 +86,17 @@ object StartGraph{
   def SCALA_test(): Unit = {
     //Hier als eerste een testroutine van de canvas-interface trait
      appendPar(document.body, "De Scala test-knop")
+     val textAreaUser = new TestTextArea()
+     textAreaUser.taAppendText("En zie ik dit?")
+     
   }
   
   @JSExport //Is dit goed of moet het TopLevel zijn?  
   def main(canvas: html.Canvas, tekstvak: html.TextArea) = {
-    tekstvak.defaultValue = "Huidige app:" + Globals.app
-    Globals.app match{
+    Globals.gCanvas = Some(canvas)
+    Globals.gTextArea = Some(tekstvak)
+    tekstvak.defaultValue = "Huidige app:" + Globals.gApp
+    Globals.gApp match{
       case "FBG" => runFBG(canvas, tekstvak)
       case "ScratchPad" => ScratchPad.runScratchPad(canvas)
       case "Sierpinski" => ScalaJSExample.runSierpinski(canvas)
