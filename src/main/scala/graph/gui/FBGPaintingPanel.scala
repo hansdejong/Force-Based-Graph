@@ -21,49 +21,58 @@ import java.awt.Color
 //import java.awt.geom.Line2D
 //
 //import java.awt.geom.Point2D
+
+import scala.collection.mutable.ArrayBuffer
+
+import graph.drawings.EDrawings._
 //
-//import java.util.ArrayList
+import graph.controller.EditGraphController
 //
-//import drawings.EDrawings
-//
-//import fimme.graph.controller.EditGraphController
-//
-//import fimme.graph.controller.IGraphController
+import graph.controller.TGraphController
 //
 //import fimme.graph.lib.Lib
 //
-//import fimme.graph.model.GraphModel
-//
-//import fimme.graph.model.Grid
-//
-//import fimme.graph.model.IGraphModel
-//
-//import fimme.graph.model.Vertex3D
+import graph.model.GraphModel
+
+import graph.model.Grid
+
+import graph.model.TGraphModel
+
+import graph.model.Vertex3D
+import org.scalajs.dom
+import dom.html
 //
 //
 ////remove if not needed
 //import scala.collection.JavaConversions._
 //
-class ForceBasedGraphPaintingPanel(numVertices: Int,
+class FBGPaintingPanel (canvas: html.Canvas,
+                                    tekstvak: html.TextArea
+                                  /*numVertices: Int,
                                    maxNumEdges: Int,
-                                   theBgColor: Color,
-                                   private var drawWithLabels: Boolean)
-    extends AbstractPaintingPanel
+                                   theBgColor: String,   //Color,
+                                   private var drawWithLabels: Boolean
+                                   */
+                                   )
+    extends AbstractPaintingPanel(canvas)
 //    with MouseListener
 //    with MouseMotionListener 
-    {
-//
-//  var model: IGraphModel = new GraphModel(numVertices, maxNumEdges)
-//
-//  private var vertices: ArrayList[Vertex3D] = model.getVertices
-//
-//  private var edges: Grid = model.getEdges
+  {
+  def appendText(extra:String)={ tekstvak.value = tekstvak.value + extra }
+  appendText("\nDit is FBGPaintingPanel")
+  
+  //var model: TGraphModel = new GraphModel(numVertices, maxNumEdges)
+  private var model: TGraphModel =  new GraphModel(RANDOM) //iets verzinnen. Dit niet dan is alles random
+
+  private var vertices: ArrayBuffer[Vertex3D] = model.vertices
+
+  private var edges: Grid = model.edges
+  private var drawWithLabels: Boolean = false
 //
 ////Anders editMode
 //  private var draggingMode: Boolean = true
 //
-//  private var graphController: IGraphController = new EditGraphController(
-//    model)
+  private var graphController: TGraphController = new EditGraphController( model)
 //
 //  private var defaultVertexColor: Color = Color.YELLOW
 //
@@ -75,20 +84,31 @@ class ForceBasedGraphPaintingPanel(numVertices: Int,
 //
 //  /*vertices, edges*/
 //
-//  this.background = theBgColor
+  //this.background = theBgColor //Swingfunctie
 //
-//  def this(graphName: EDrawings, theBgColor: Color, withLabels: Boolean) = {
-//    this()
+  def this (canvas: html.Canvas, tekstvak: html.TextArea, numVertices: Int, maxNumEdges: Int, theBgColor: String,   //Color,
+                                   withLabels: Boolean
+                                   ) = {
+      this(canvas, tekstvak)
+       drawWithLabels = withLabels
+       model = new GraphModel(numVertices, maxNumEdges)
+     //  this.background = theBgColor
+                                       
+  }
+  def this(canvas: html.Canvas, tekstvak: html.TextArea, graphName: EDrawings, theBgColor: String/*Color*/, withLabels: Boolean) = {
+      this(canvas,tekstvak)
 //    addMouseListener(this)
 //    addMouseMotionListener(this)
-//    drawWithLabels = withLabels
-//    model = new GraphModel(graphName)
-//    vertices = model.getVertices
-//    edges = model.getEdges
-//    graphController = new EditGraphController(model)
-//    this.background = theBgColor
-//  }
-//
+    drawWithLabels = withLabels
+    model = new GraphModel(graphName)
+    vertices = model.vertices
+    edges = model.edges
+    graphController = new EditGraphController(model)
+   //  this.background = theBgColor //Swingfunctie
+  }
+ 
+    
+    
 //  def setNewModel(numVertices: Int, maxNumEdges: Int): Unit = {
 //    model = new GraphModel(numVertices, maxNumEdges)
 //    vertices = model.getVertices
@@ -134,14 +154,29 @@ class ForceBasedGraphPaintingPanel(numVertices: Int,
 //      drawEditingLine(g2D)
 //    }
 //  }
-//
+
+
+  override def paintAnything(ctx: dom.CanvasRenderingContext2D): Unit = {
+    drawEdges(ctx)
+    drawVertices(ctx)
+    if (graphController.getVertexIsDraggedForEditing) {
+      drawEditingLine(ctx)
+    }
+  }
+
 //  private def drawVertices(g2D: Graphics2D): Unit = {
 ////Miste, Toegevoegd
 //    for (vertex3D <- vertices) {
 //      drawVertex(g2D, vertex3D)
 //    }
 //  }
-//
+
+  private def drawVertices(ctx: dom.CanvasRenderingContext2D): Unit = {
+    for (vertex3D <- vertices) {
+      drawVertex(ctx, vertex3D)
+    }
+  }
+  
 //  def drawVertex(gr: Graphics2D, vertex: Vertex3D): Unit = {
 //    val xScreen: Double = vertex.getX / zoom
 //    val yScreen: Double = vertex.getY / zoom
@@ -159,6 +194,28 @@ class ForceBasedGraphPaintingPanel(numVertices: Int,
 //      gr.drawString(label, xScreen.toInt + 15, yScreen.toInt)
 //    }
 //  }
+  
+  def drawVertex(ctx: dom.CanvasRenderingContext2D, vertex: Vertex3D): Unit = {
+/*
+    val xScreen: Double = vertex.getX / zoom
+ 
+    val yScreen: Double = vertex.getY / zoom
+    val color: Color = vertex.getColor
+    val label: String = vertex.getLabel
+    val r: Double = Vertex3D.getRadius / zoom
+    val shape: Shape =
+      new Ellipse2D.Double(xScreen - r, yScreen - r, 2 * r, 2 * r)
+    ctx.setStroke(new BasicStroke(1))
+    ctx.setColor(color)
+    ctx.fill(shape)
+    ctx.setColor(Color.BLACK)
+    ctx.draw(shape)
+    if (drawWithLabels) {
+      ctx.drawString(label, xScreen.toInt + 15, yScreen.toInt)
+    }
+ */
+  }
+  
 ////gr.drawString( "" + (int)xScreen + ", " + (int)yScreen, (int)xScreen+15, (int)yScreen);
 ////gr.drawString( "" + (int)xScreen + ", " + (int)yScreen, (int)xScreen+15, (int)yScreen);
 //
@@ -184,10 +241,39 @@ class ForceBasedGraphPaintingPanel(numVertices: Int,
 //  }
 ////Verplaatsen?
 ////Verplaatsen?
-//
+
+//gr.drawString( "" + (int)xScreen + ", " + (int)yScreen, (int)xScreen+15, (int)yScreen);
+//gr.drawString( "" + (int)xScreen + ", " + (int)yScreen, (int)xScreen+15, (int)yScreen);
+
+  private def drawEdges(ctx: dom.CanvasRenderingContext2D): Unit = {/*
+//Lib.melding( edgesToString(),"ForceBasedGraphPaintingPanel.drawEdges");
+    ctx.setStroke(new BasicStroke(1))
+    ctx.setColor(new Color(0x333333))
+    for (i <- 0 until vertices.size; j <- 0 until vertices.size) {}
+CONVERTER PROBLEEM
+                if(! edges.isConnected(i, j) ) continue;
+        		int x1 = (int)(vertices.get(i).getX() / zoom);
+        		int y1 = (int)(vertices.get(i).getY() / zoom);
+        		int x2 = (int)(vertices.get(j).getX() / zoom);
+        		int y2 = (int)(vertices.get(j).getY() / zoom);
+        		drawLine( x1, y1, x2, y2.ctx )
+CONVERTER PROBLEEM
+                if(! edges.isConnected(i, j) ) continue;
+        		int x1 = (int)(vertices.get(i).getX() / zoom);
+        		int y1 = (int)(vertices.get(i).getY() / zoom);
+        		int x2 = (int)(vertices.get(j).getX() / zoom);
+        		int y2 = (int)(vertices.get(j).getY() / zoom);
+        		g2D.drawLine( x1, y1, x2, y2 );*/
+  }
+//Verplaatsen?
+//Verplaatsen?
+
 //  private def drawEditingLine(g2D: Graphics2D): Unit = {
 //    val line: Line2D.Double = (graphController.getDraggingLine)
 //  }
+  private def drawEditingLine(ctx: dom.CanvasRenderingContext2D): Unit = {
+    //val line: Line2D.Double = (graphController.getDraggingLine)
+  }
 //  /*
 //		int x1Screen = (int)(line.x1 / zoom);
 //		int y1Screen = (int)(line.y1 / zoom);

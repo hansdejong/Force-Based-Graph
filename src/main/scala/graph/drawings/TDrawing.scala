@@ -1,6 +1,6 @@
 package graph.drawings
 
-import java.util.ArrayList
+import scala.collection.mutable.ArrayBuffer
 
 import graph.model.Grid
 
@@ -8,9 +8,9 @@ import graph.model.Vertex3D
 
 trait TDrawing {
 
-  def getVertices(): ArrayList[Vertex3D]
+  var vertices: ArrayBuffer[Vertex3D]
 
-  def getEdges(): Grid
+  var edges: Grid
 
 }
 

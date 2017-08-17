@@ -27,6 +27,7 @@ import graph.gui._
 
 @JSExportTopLevel("StartGraph")
 object StartGraph{ 
+ 
   
   //1. Gebruikt DOM. Later er uit
   def appendPar(targetNode: dom.Node, text: String): Unit = {
@@ -79,23 +80,21 @@ object StartGraph{
   }
   
   @JSExport //Is dit goed of moet het TopLevel zijn?  
-  def loadCanvas(canvas: html.Canvas) = {
+  def main(canvas: html.Canvas, tekstvak: html.TextArea) = {
+    tekstvak.defaultValue = "Huidige app:" + Globals.app
     Globals.app match{
-      case "FBG" => runFBG(canvas)
+      case "FBG" => runFBG(canvas, tekstvak)
       case "ScratchPad" => ScratchPad.runScratchPad(canvas)
       case "Sierpinski" => ScalaJSExample.runSierpinski(canvas)
       case _ => println ("Foutje in StartGraph.loadCanvas")
+          
+      
     }
     
-    def runFBG(canvas: html.Canvas):Unit = {
-       val gui: GraphGui = new GraphGui()
+    def runFBG(canvas: html.Canvas, tekstvak: html.TextArea):Unit = {
+       val gui: GraphGui = new GraphGui(canvas, tekstvak)
     }
   }
   
-  @JSExport  
-  def loadTekstvak1(tekstvak: html.TextArea) = {
-    tekstvak.defaultValue = "Huidige app:" + Globals.app
-
-  }
 }
 

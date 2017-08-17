@@ -20,25 +20,49 @@ package graph.drawings
 
 
 
-//Nu volgens PrScala92
-object EDrawings extends Enumeration {
-  type EDrawings = Value
-  val RANDOM = Value("Random")
-  val CUBE = Value("Cube")
-  val BUCKYBALL = Value("Buckyball")
-  val MOBIUS = Value("Mobius")
-  val DOUGHNUT = Value("Doughnut")
-  val TESSERACT = Value("Tesseract")
-  val SNAKE = Value("Snake")
-  val SNAKERING = Value("SnakeRing")
-  val SIMPLEX4 = Value("Simplex4")
-  val DODECAEDER = Value("Dodecaeder")
-  val SPUTNIK = Value("Sputnik")
-
- // class Edrawings{
+////Nu volgens PrScala92
+//object EDrawings extends Enumeration {
+//  type EDrawings = Value
+//  val RANDOM = Value("Random")
+//  val CUBE = Value("Cube")
+//  val BUCKYBALL = Value("Buckyball")
+//  val MOBIUS = Value("Mobius")
+//  val DOUGHNUT = Value("Doughnut")
+//  val TESSERACT = Value("Tesseract")
+//  val SNAKE = Value("Snake")
+//  val SNAKERING = Value("SnakeRing")
+//  val SIMPLEX4 = Value("Simplex4")
+//  val DODECAEDER = Value("Dodecaeder")
+//  val SPUTNIK = Value("Sputnik")
+//
+////  class EDrawings{
 //    val values = ValueSet(RANDOM, CUBE, BUCKYBALL, MOBIUS, DOUGHNUT,
 //        TESSERACT,SNAKE, SNAKERING, SIMPLEX4, DODECAEDER, SPUTNIK)
+//  //}
+//  implicit def convertValue(v: Value): EDrawings = v.asInstanceOf[EDrawings]
+//}
+
+//Nu volgens https://stackoverflow.com/questions/36056993/scala-enumeration-giving-error
+object EDrawings extends Enumeration {
+  type EDrawings = Value
+//  val RANDOM = Value("Random")
+//  val CUBE = Value("Cube")
+//  val BUCKYBALL = Value("Buckyball")
+//  val MOBIUS = Value("Mobius")
+//  val DOUGHNUT = Value("Doughnut")
+//  val TESSERACT = Value("Tesseract")
+//  val SNAKE = Value("Snake")
+//  val SNAKERING = Value("SnakeRing")
+//  val SIMPLEX4 = Value("Simplex4")
+//  val DODECAEDER = Value("Dodecaeder")
+//  val SPUTNIK = Value("Sputnik")
+
+//  class EDrawings{
+    val /*values = ValueSet(*/RANDOM, CUBE, BUCKYBALL, MOBIUS, DOUGHNUT,
+        TESSERACT,SNAKE, SNAKERING, SIMPLEX4, DODECAEDER, SPUTNIK = Value
+        //)
   //}
-  implicit def convertValue(v: Value): EDrawings = v.asInstanceOf[EDrawings]
+  
+  //implicit def convertValue(v: Value): EDrawings = v.asInstanceOf[EDrawings]
 }
 

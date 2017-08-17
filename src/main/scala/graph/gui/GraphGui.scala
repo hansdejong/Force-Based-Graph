@@ -6,7 +6,7 @@ package graph.gui
 //
 //import java.awt.GridLayout
 //
-import javax.swing._
+//import javax.swing._
 //
 //import javax.swing.border.BevelBorder
 //
@@ -16,6 +16,8 @@ import javax.swing._
 //
 import graph.drawings.EDrawings
 import graph.drawings.EDrawings._
+import org.scalajs.dom
+import dom.html
 //
 ///////import fimme.graph.ioDialog.ChooserDialog;
 //import fimme.graph.lib.Lib
@@ -37,9 +39,10 @@ import graph.drawings.EDrawings._
 ////remove if not needed
 //import scala.collection.JavaConversions._
 //
-class GraphGui/*(private var isApplet: Boolean) extends JPanel*/ {
-//
-var graphPanel: ForceBasedGraphPaintingPanel = _
+class GraphGui(var canvas:html.Canvas,var tekstvak:html.TextArea)/*(private var isApplet: Boolean) extends JPanel*/ {
+def appendText(extra:String)={ tekstvak.value = tekstvak.value + extra }
+appendText("\nDit is GraphGui")
+var graphPanel: FBGPaintingPanel = _
 //
 //////private ChooserDialog chooserDialog;
 //  private var saveMenuItem: JMenuItem = _
@@ -79,14 +82,14 @@ var graphPanel: ForceBasedGraphPaintingPanel = _
 //
 //  private var followerSliderModel3: FollowerRangeModel = _
 //
-//  private var numberOfVertices: Int = 15
+  private var numberOfVertices: Int = 15
 //
-//  private var maxNumberOfEdges: Int = 20
+  private var maxNumberOfEdges: Int = 20
 //
 ////Hier instellen
 //  private var usingXml: Boolean = true
 //
-//  private var withLabels: Boolean = false
+  private var withLabels: Boolean = false
 //
 //  createGuiPanel()
 //
@@ -106,19 +109,23 @@ var graphPanel: ForceBasedGraphPaintingPanel = _
 ////		if( bar != null){
 ////			if( !isApplet || usingXml ){ add(createMenuBar(), BorderLayout.NORTH );}
 //
-  private def createUitvoerPanel(): JPanel = {
-    val thePanel: JPanel = new JPanel()
+  //private def createUitvoerPanel():Unit /*JPanel*/ = {
+//    val thePanel: JPanel = new JPanel()
 //    thePanel.setLayout(new BorderLayout())
-//    val achtergrondkleurtje: Color = new Color(0xF0F8FF)
+    //val achtergrondkleurtje: Color = new Color(0xF0F8FF)
+    val achtergrondkleurtje: String = "#F0F8FF"
     val graphName: EDrawings = getRandomDrawing
-////	    graphPanel = new ForceBasedGraphPaintingPanel( numberOfVertices, maxNumberOfEdges, achtergrondkleurtje,, withLabels);
-//    graphPanel = new ForceBasedGraphPaintingPanel(graphName,
-//                                                  achtergrondkleurtje,
-//                                                  withLabels)
-////		    thePanel.add( scrollPane , BorderLayout.CENTER );
+//	    graphPanel = new ForceBasedGraphPaintingPanel( numberOfVertices, maxNumberOfEdges, achtergrondkleurtje, withLabels);
+    graphPanel = new FBGPaintingPanel(
+                                                  canvas,
+                                                  tekstvak,
+                                                  graphName,
+                                                  achtergrondkleurtje,
+                                                  withLabels)
+//		    thePanel.add( scrollPane , BorderLayout.CENTER );
 //    thePanel.add(graphPanel, BorderLayout.CENTER)
-    thePanel
-  }
+//    thePanel
+  //}
 ////	    JScrollPane scrollPane = new JScrollPane( graphPanel ,
 ////	    		JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 ////	    		JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
