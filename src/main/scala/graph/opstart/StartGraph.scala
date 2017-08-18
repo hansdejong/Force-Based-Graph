@@ -87,6 +87,7 @@ object StartGraph{
     //Hier als eerste een testroutine van de canvas-interface trait
      appendPar(document.body, "De Scala test-knop")
      val textAreaUser = new TestTextArea()
+     val canvasUser = new TestCanvas()
      textAreaUser.taAppendText("En zie ik dit?")
      
   }
@@ -106,7 +107,7 @@ object StartGraph{
     }
     
     def runFBG(canvas: html.Canvas, tekstvak: html.TextArea):Unit = {
-       val gui: GraphGui = new GraphGui(canvas, tekstvak)
+       new FBGPaintingPanel()
     }
   }
   

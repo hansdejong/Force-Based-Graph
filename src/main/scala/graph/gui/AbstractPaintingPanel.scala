@@ -35,23 +35,26 @@ import dom.html
 ////remove if not needed
 //import scala.collection.JavaConversions._
 //
-abstract class AbstractPaintingPanel (var canvas:html.Canvas)/*extends JPanel*/ {
+abstract class AbstractPaintingPanel (/*var canvas:html.Canvas*/)/*extends JPanel*/ {
 //
 //  private var width: Int = 1680
 //  private var height: Int = 1050
-    canvas.width = canvas.parentElement.clientWidth
-    canvas.height = canvas.parentElement.clientHeight
-    private val width: Int = canvas.width //private weg?
-    private val height: Int = canvas.height
-    
-//
-//  private var buffer: BufferedImage = null
-//
-//  private var g2Dbuffer: Graphics2D = null
-    val ctx = canvas.getContext("2d")
-                     .asInstanceOf[dom.CanvasRenderingContext2D]
-    ctx.fillStyle = "#f8f8f8"
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
+  
+//Is verhuisd naar de trait
+//  
+//    canvas.width = canvas.parentElement.clientWidth
+//    canvas.height = canvas.parentElement.clientHeight
+//    private val width: Int = canvas.width //private weg?
+//    private val height: Int = canvas.height
+//    
+////
+////  private var buffer: BufferedImage = null
+////
+////  private var g2Dbuffer: Graphics2D = null
+//    val ctx = canvas.getContext("2d")
+//                     .asInstanceOf[dom.CanvasRenderingContext2D]
+//    ctx.fillStyle = "#f8f8f8"
+//    ctx.fillRect(0, 0, canvas.width, canvas.height)
 
 //
 //  private var buffered: Boolean = true
@@ -92,8 +95,12 @@ abstract class AbstractPaintingPanel (var canvas:html.Canvas)/*extends JPanel*/ 
 //    } else {
 //      g2D.drawLine(0, 0, 15, 10)
 //      paintAnything(g2D)
-        drawLine(0, 0, 15, 10, ctx)
-        paintAnything(ctx)
+  
+//Is verhuisd naar de trait
+//  
+  
+//        drawLine(0, 0, 15, 10, ctx)
+//        paintAnything(ctx)
 //    }
 //  }
 //
@@ -107,14 +114,14 @@ abstract class AbstractPaintingPanel (var canvas:html.Canvas)/*extends JPanel*/ 
 ////Lib.melding("width, height: " + w + ", " + h, "AbstractPaintingPanel.drawBorder()");
 ////Lib.melding("width, height: " + w + ", " + h, "AbstractPaintingPanel.drawBorder()");
         
-    //Kijken of ik was te zien krijg: weer weg
-        drawLine (10,15,200,300,ctx)
-
-    def drawLine(x1:Double,y1:Double,x2:Double,y2:Double,ctx: dom.CanvasRenderingContext2D):Unit={
-      ctx.moveTo(x1, y1)
-      ctx.lineTo(x1, y1)
-    }
-//  def paintAnything(g2D: Graphics2D): Unit
-    def paintAnything(ctx: dom.CanvasRenderingContext2D): Unit
+//    //Kijken of ik was te zien krijg: weer weg
+//        drawLine (10,15,200,300,ctx)
+//
+//    def drawLine(x1:Double,y1:Double,x2:Double,y2:Double,ctx: dom.CanvasRenderingContext2D):Unit={
+//      ctx.moveTo(x1, y1)
+//      ctx.lineTo(x1, y1)
+//    }
+////  def paintAnything(g2D: Graphics2D): Unit
+//    def paintAnything(ctx: dom.CanvasRenderingContext2D): Unit
 //
 }

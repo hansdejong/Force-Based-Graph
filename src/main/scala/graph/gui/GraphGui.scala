@@ -16,8 +16,8 @@ package graph.gui
 //
 import graph.drawings.EDrawings
 import graph.drawings.EDrawings._
-import org.scalajs.dom
-import dom.html
+//import org.scalajs.dom
+//import dom.html
 //
 ///////import fimme.graph.ioDialog.ChooserDialog;
 //import fimme.graph.lib.Lib
@@ -39,11 +39,12 @@ import dom.html
 ////remove if not needed
 //import scala.collection.JavaConversions._
 //
-class GraphGui(var canvas:html.Canvas,var tekstvak:html.TextArea)/*(private var isApplet: Boolean) extends JPanel*/ {
-def appendText(extra:String)={ tekstvak.value = tekstvak.value + extra }
-appendText("\nDit is GraphGui")
+class GraphGui(/*var canvas:html.Canvas,var tekstvak:html.TextArea*/)/*(private var isApplet: Boolean) extends JPanel*/ {
+//def appendText(extra:String)={ tekstvak.value = tekstvak.value + extra }
+//appendText("\nDit is GraphGui")
 
-/* AANROEP TIJDELIJK ER UITvar graphPanel: FBGPaintingPanel = _*/
+// AANROEP TIJDELIJK ER UIT
+  var graphPanel: FBGPaintingPanel = _
 
 
 //
@@ -119,16 +120,16 @@ appendText("\nDit is GraphGui")
     val achtergrondkleurtje: String = "#F0F8FF"
     val graphName: EDrawings = getRandomDrawing
 //	    graphPanel = new ForceBasedGraphPaintingPanel( numberOfVertices, maxNumberOfEdges, achtergrondkleurtje, withLabels);
-/* AANROEP TIJDELIJK ER UIT
-     graphPanel = new FBGPaintingPanel(
- 
-                                                  canvas,
-                                                  tekstvak,
-                                                  graphName,
-                                                  achtergrondkleurtje,
-                                                  withLabels)
+
+   //AANROEP TIJDELIJK ER UIT
+//     graphPanel = new FBGPaintingPanel(
+// 
+//                                                  /*canvas,
+//                                                  tekstvak,*/
+//                                                  graphName,
+//                                                  achtergrondkleurtje,
+//                                                  withLabels)
                                                  
-                                                  */
     
 //		    thePanel.add( scrollPane , BorderLayout.CENTER );
 //    thePanel.add(graphPanel, BorderLayout.CENTER)
@@ -142,14 +143,22 @@ appendText("\nDit is GraphGui")
 ////	    		JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 //
 ////Kopietje. Duplicaat verwijderen
-  private def getRandomDrawing(): EDrawings = {
-    //https://stackoverflow.com/questions/36386610/how-to-efficiently-pick-a-random-element-from-an-enumeration-in-scala
+//  private def getRandomDrawing_org(): EDrawings = {
+//    //https://stackoverflow.com/questions/36386610/how-to-efficiently-pick-a-random-element-from-an-enumeration-in-scala
 //    val waarden: ValueSet = EDrawings.values
 //    val numItems: Int = waarden.size
 //    val num: Int = (Math.random() * numItems).toInt
 //    waarden(num)
-    EDrawings(scala.util.Random.nextInt(EDrawings.maxId))
-  }
+//    EDrawings(scala.util.Random.nextInt(EDrawings.maxId))
+//  }
+
+ private def getRandomDrawing(): EDrawings = {
+    val graph = EDrawings(scala.util.Random.nextInt(EDrawings.maxId))
+ //    println(ClassTag(graph.getClass))
+ //   println(graph)
+   graph 
+ }
+
 //
 //  private def createBottomPanel(): JPanel = {
 //    val thePanel: JPanel = new JPanel()

@@ -1,65 +1,85 @@
-//package graph.gui
-////
-////import java.awt.BasicStroke
-////
-//import java.awt.Color
-////
-////import java.awt.Graphics2D
-////
-////import java.awt.Shape
-////
-////import java.awt.event.InputEvent
-////
-////import java.awt.event.MouseEvent
-////
-////import java.awt.event.MouseListener
-////
-////import java.awt.event.MouseMotionListener
-////
-////import java.awt.geom.Ellipse2D
-////
-////import java.awt.geom.Line2D
-////
-////import java.awt.geom.Point2D
+package graph.gui
 //
-//import scala.collection.mutable.ArrayBuffer
+//import java.awt.BasicStroke
 //
-//import graph.drawings.EDrawings._
-////
-//import graph.controller.EditGraphController
-////
-//import graph.controller.TGraphController
-////
-////import fimme.graph.lib.Lib
-////
-//import graph.model.GraphModel
+import java.awt.Color
+import graph.global._
 //
-//import graph.model.Grid
+//import java.awt.Graphics2D
 //
-//import graph.model.TGraphModel
+//import java.awt.Shape
 //
-//import graph.model.Vertex3D
-//import org.scalajs.dom
-//import dom.html
-////
-////
-//////remove if not needed
-////import scala.collection.JavaConversions._
-////
-//class FBGPaintingPanel (canvas: html.Canvas,
-//                                    tekstvak: html.TextArea
+//import java.awt.event.InputEvent
+//
+//import java.awt.event.MouseEvent
+//
+//import java.awt.event.MouseListener
+//
+//import java.awt.event.MouseMotionListener
+//
+//import java.awt.geom.Ellipse2D
+//
+//import java.awt.geom.Line2D
+//
+//import java.awt.geom.Point2D
+
+import scala.collection.mutable.ArrayBuffer
+
+import graph.drawings.EDrawings._
+//
+import graph.controller.EditGraphController
+//
+import graph.controller.TGraphController
+//
+//import fimme.graph.lib.Lib
+//
+import graph.drawings.EDrawings
+import graph.model.GraphModel
+
+import graph.model.Grid
+
+import graph.model.TGraphModel
+
+import graph.model.Vertex3D
+import org.scalajs.dom
+import dom.html
+//
+//
+////remove if not needed
+//import scala.collection.JavaConversions._
+//
+class FBGPaintingPanel extends TCanvas {
+////(/*canvas*/)//(/* canvas: html.Canvas,
+//                           //         tekstvak: html.TextArea*/
 //                                  /*numVertices: Int,
 //                                   maxNumEdges: Int,
 //                                   theBgColor: String,   //Color,
 //                                   private var drawWithLabels: Boolean
 //                                   */
-//                                   )
-//    extends AbstractPaintingPanel(canvas)
+//                         //          )
+//    //extends AbstractPaintingPanel(/*canvas*/)
+////    extends TCanvas//(/*canvas*/)
 ////    with MouseListener
-////    with MouseMotionListener 
-//  {
-//  def appendText(extra:String)={ tekstvak.value = tekstvak.value + extra }
-//  appendText("\nDit is FBGPaintingPanel")
+////    with MouseMotionListener
+
+}
+ //============Declarations=============================================================
+// //============Body logic ==============================================================
+//  private var graph:EDrawings = getRandomDrawing
+//  private var model: TGraphModel =  new GraphModel( graph )
+//  private var graphController: TGraphController = new EditGraphController( model)
+//  
+// //============Kies een Begin-drawing===================================================
+//   private def getRandomDrawing(): EDrawings = {
+//    val graph = EDrawings(scala.util.Random.nextInt(EDrawings.maxId))
+// //    println(ClassTag(graph.getClass))
+// //   println(graph)
+//   graph 
+// }
+ //===================================================================================== 
+//} 
+////  def appendText(extra:String)={ tekstvak.value = tekstvak.value + extra }
+////  appendText("\nDit is FBGPaintingPanel")
 //  
 //  //var model: TGraphModel = new GraphModel(numVertices, maxNumEdges)
 //  private var model: TGraphModel =  new GraphModel(RANDOM) //iets verzinnen. Dit niet dan is alles random
@@ -86,17 +106,19 @@
 ////
 //  //this.background = theBgColor //Swingfunctie
 ////
-//  def this (canvas: html.Canvas, tekstvak: html.TextArea, numVertices: Int, maxNumEdges: Int, theBgColor: String,   //Color,
+//  def this (/*canvas: html.Canvas, tekstvak: html.TextArea,*/ numVertices: Int, maxNumEdges: Int, theBgColor: String,   //Color,
 //                                   withLabels: Boolean
 //                                   ) = {
-//      this(canvas, tekstvak)
+////    this(canvas, tekstvak)
+//      this()
 //       drawWithLabels = withLabels
 //       model = new GraphModel(numVertices, maxNumEdges)
 //     //  this.background = theBgColor
 //                                       
 //  }
-//  def this(canvas: html.Canvas, tekstvak: html.TextArea, graphName: EDrawings, theBgColor: String/*Color*/, withLabels: Boolean) = {
-//      this(canvas,tekstvak)
+//  def this(/*canvas: html.Canvas, tekstvak: html.TextArea,*/ graphName: EDrawings, theBgColor: String/*Color*/, withLabels: Boolean) = {
+////    this(canvas,tekstvak)
+//      this()
 ////    addMouseListener(this)
 ////    addMouseMotionListener(this)
 //    drawWithLabels = withLabels
@@ -156,13 +178,13 @@
 ////  }
 //
 //
-//  override def paintAnything(ctx: dom.CanvasRenderingContext2D): Unit = {
-//    drawEdges(ctx)
-//    drawVertices(ctx)
-//    if (graphController.getVertexIsDraggedForEditing) {
-//      drawEditingLine(ctx)
-//    }
-//  }
+//  //override  def paintAnything(ctx: dom.CanvasRenderingContext2D): Unit = {
+////    drawEdges(ctx)
+////    drawVertices(ctx)
+////    if (graphController.getVertexIsDraggedForEditing) {
+////      drawEditingLine(ctx)
+////    }
+////  }
 //
 ////  private def drawVertices(g2D: Graphics2D): Unit = {
 //////Miste, Toegevoegd
@@ -455,4 +477,4 @@
 ////  private def str(d: Double): String = Lib.formatDouble(d)
 ////
 //}
-////
+//
