@@ -12,7 +12,7 @@ import graph.model.TGraphModel
 
 import graph.model.Vertex3D
 
-class EditGraphController(var model: TGraphModel) extends TGraphController {
+class EditGraphController(var model: TGraphModel) /*extends TGraphController*/ {
 
 // I can drag the new edge
   private var vertexIsChosen: Boolean = false

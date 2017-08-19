@@ -1,5 +1,5 @@
 package graph.controller
-
+//Kan zonder, maar gebruik als interface is netter
 import java.awt.geom.Line2D
 
 import java.awt.geom.Point2D

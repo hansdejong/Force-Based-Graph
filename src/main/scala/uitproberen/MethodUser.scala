@@ -1,9 +1,10 @@
 package main.scala.uitproberen
-
+import org.scalajs.dom
+import dom.html
 import scala.scalajs.js.annotation.JSExportTopLevel
 import scalajs.js.annotation.JSExport
 
-class Paintercv(html.Canvas){
+class Painter(theCanvas: html.Canvas){
   //constructor zonder canvas?
   var color ="red"
   def init()={}
@@ -11,12 +12,12 @@ class Paintercv(html.Canvas){
     color=newColor
     println("The color is now: " + color)
   }
-  //do things on canvas
+  //do things on theCanvas
 }
 
 @JSExportTopLevel("MethodUser")
 object MethodUser {
-   var schilder:Painter = new Painter() //een object wat niets spontaan mag doen
+   //var schilder:Painter = new Painter() //een object wat niets spontaan mag doen
    
    
  @JSExportTopLevel("setColor")
@@ -27,7 +28,7 @@ object MethodUser {
  
   @JSExport
    def main(canvas: html.Canvas) = {
-     schilder = new Painter(canvas)
+     val schilder = new Painter(canvas)
      schilder.init()
    }
   

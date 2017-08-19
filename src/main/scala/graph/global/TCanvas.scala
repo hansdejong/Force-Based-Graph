@@ -6,38 +6,89 @@ import dom.html
 trait TCanvas {//argument mag niet. Zie PiSc 419 PreInitialized Fields.
 	val canvas: html.Canvas   // = Globals.gCanvas.get  //Dangerous
 	val context = canvas.getContext("2d").asInstanceOf[dom.CanvasRenderingContext2D]
-  var cvColor:String = "red"//Globals.gColor
-//Vanaf  hier van Scratchpad  ============================================
+	canvas.width = canvas.parentElement.clientWidth
+	canvas.height = canvas.parentElement.clientHeight
+	val canvasWidth = canvas.width 
+	val canvasHeight = canvas.height 
+	var currentColor:String = Globals.gColor //gColor direct gebruiken
+	def canvasBgColor(bgColor:String) = {
+  	context.fillStyle = bgColor 
+	  context.fillRect(0, 0, canvasWidth, canvasHeight)
+  }
+  def drawLine(x1: Double, y1: Double, x2: Double, y2: Double)={    
+  		context.strokeStyle = "black"
+  		context.lineWidth = 1
+  		context.beginPath()
+  		context.moveTo(x1, y1)
+  		context.lineTo(x2, y2)
+  		context.stroke()
+  }   
+  def drawCircle(x: Double,y: Double,r: Double, color: String) = {
+  		context.beginPath()
+  		context.arc(x,y,r,0,2*Math.PI)
+  		context.fillStyle = color
+  		context.fill()
+  		context.fillStyle = "black"
+  		context.stroke()
+  }
+  def drawText(text:String, x: Double, y: Double):Unit = {
+  		context.fillStyle = "black"  
+  		context.font = "20px Arial"
+  		context.fillText(text,x,y)
+  }
+  var mouseDown = false
+  canvas.onmousedown = (e: dom.MouseEvent) => mouseDown = true
   
-      canvas.width = canvas.parentElement.clientWidth
-      canvas.height = canvas.parentElement.clientHeight
+  canvas.onmouseup = (e: dom.MouseEvent) => mouseDown = false
   
-  //    renderer.fillStyle = "#f8f8f8"
-      context.fillStyle = "#a6F611" //Dit lijkt niets te doen
-      context.fillRect(0, 0, canvas.width, canvas.height)
+  canvas.onmousemove = { (e: dom.MouseEvent) =>
+  		if (mouseDown)
+  		  	onDragged(e)
+  		else 
+  				onMoved(e)
+  }
+  def onMoved(e: dom.MouseEvent){//add whatever
   
-      /*code*/
-      //context.fillStyle = Globals.gColor
+  }
   
-      var down = false
-      canvas.onmousedown =
-        (e: dom.MouseEvent) => down = true
+  def onDragged(e: dom.MouseEvent){//add whatever
+  	  //Later sleep of wijzig afhankelijk van mode 
+  	  scratch(e)
+  }
   
-      canvas.onmouseup =
-        (e: dom.MouseEvent) => down = false
+  //Vanaf  hier van Scratchpad, verhuizen voor handhaven =====================================
+  def paintface()={    
+  		val w = 300
+  		context.strokeStyle = "purple"
+  		context.lineWidth = 3
+  		context.beginPath()
+  		context.moveTo(w/3, 0)
+  		context.lineTo(w/3, w/3)
+  		context.moveTo(w*2/3, 0)
+  		context.lineTo(w*2/3, w/3)
+  		context.moveTo(w, w/2)
+  		context.arc(w/2, w/2, w/2, 0, 3.14)
+  		context.stroke()
+  } 
   
-      canvas.onmousemove = {
-        (e: dom.MouseEvent) =>
-          context.fillStyle = cvColor //Globals.gColor
-          val rect =
-            canvas.getBoundingClientRect()
-          if (down) context.fillRect(
-            e.clientX - rect.left,
-            e.clientY - rect.top,
-            10, 10
-          )
-      }
-    
+  testDrawing()
+  def testDrawing() ={
+    canvasBgColor( "#a6F611")
+    //canvasBgColor( "pink")
+    drawText("Hallo allemaal",10,50)
+    drawCircle(95,80,40, "yellow")
+    paintface()
+    drawLine(150,250, 130,160)
+    drawLine (0 ,0 , canvasWidth, canvasHeight)
+  }
+  
+  def scratch(e: dom.MouseEvent) = {
+  	  context.fillStyle = Globals.gColor
+  		val rect = canvas.getBoundingClientRect()
+  		context.fillRect( e.clientX - rect.left, e.clientY - rect.top, 10, 10)
+  }
+}
+
 
 /*
 
@@ -89,49 +140,6 @@ trait TCanvas {//argument mag niet. Zie PiSc 419 PreInitialized Fields.
 			def onReleased(){//add whatever
 
 			}
-			def onMoved(){//add whatever
 
-			}
-			def onDragged(){//add whatever
-			  fromCanvasApp
-			}
-			
-			def fromCanvasApp{
-          val rect =
-					canvas.getBoundingClientRect()
-					if (mouseIsDown) context.fillRect( mx - rect.left, my - rect.top, 10, 10 )
-			}
+ */
 
-*/
-			//    canvas.width = canvas.parentElement.clientWidth
-			//    canvas.height = canvas.parentElement.clientHeight
-			//    private val width: Int = canvas.width //private weg?
-			//    private val height: Int = canvas.height
-			//    
-			////
-			////  private var buffer: BufferedImage = null
-			////
-			////  private var g2Dbuffer: Graphics2D = null
-			//    val ctx = canvas.getContext("2d")
-			//                     .asInstanceOf[dom.CanvasRenderingContext2D]
-			//    ctx.fillStyle = "#f8f8f8"
-			//    ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-
-
-			//         //Kijken of ik was te zien krijg: weer weg
-			//        drawLine (10,15,200,300,ctx)
-			//
-			//    def drawLine(x1:Double,y1:Double,x2:Double,y2:Double,ctx: dom.CanvasRenderingContext2D):Unit={
-			//      ctx.moveTo(x1, y1)
-			//      ctx.lineTo(x1, y1)
-			//    }
-			////  def paintAnything(g2D: Graphics2D): Unit
-			//    def paintAnything(ctx: dom.CanvasRenderingContext2D): Unit
-
-			//             drawLine(0, 0, 15, 10, ctx)
-			//        paintAnything(ctx)
-
-
-
-}

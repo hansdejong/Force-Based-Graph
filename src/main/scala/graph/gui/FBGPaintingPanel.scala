@@ -53,7 +53,7 @@ class FBGPaintingPanel(cv: html.Canvas, ta: html.TextArea) extends{
   val textarea = ta
 } with TCanvas with TTextArea {
 def setCanvasColor(kleur:String):Unit ={
-  cvColor = kleur
+  currentColor = kleur
   //Is er nog ergens een notification nodig?
   //Anders is er geen setter nodig
 }
@@ -69,6 +69,7 @@ def setCanvasColor(kleur:String):Unit ={
 ////    extends TCanvas//(/*canvas*/)
 ////    with MouseListener
 ////    with MouseMotionListener
+//drawLine (10 ,10 , 50, 50)
 
 }
  //============Declarations=============================================================
