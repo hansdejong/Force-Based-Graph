@@ -13,12 +13,16 @@ object Globals {
    * bevatten, dus in geval van een canvas alle tekenfuncties. 
    * Alle code die iets wil tekenen kan dan die trait gebruiken
    */    
-  
+  /**De variabelen hier moeten zijn geinitialiseerd
+   * En als ik hier een lazy val gebruik met een functie die de waarde ophaalt uit StartGraph? 
+   * */
   //en in graph.global voor elk een trait te maken als interface om ze te benaderen
-  //De html-objecten
-  var gCanvas: Option[html.Canvas] = None   
-  var gTextArea: Option[html.TextArea] = None
-  var gColor: String = "red"
+  //De html-objecten:
+ // var gCanvas: html.Canvas
+ // lazy val gCanvas = StartGraph.
+ //// var gCanvas: Option[html.Canvas] = None   
+ // var gTextArea: Option[html.TextArea] = None
+  var gColor: String = "red" //TOCH NOG HANDHAVEN
 
 
   //gApp geeft de  actiev applicatie, in te stellen via "welke"

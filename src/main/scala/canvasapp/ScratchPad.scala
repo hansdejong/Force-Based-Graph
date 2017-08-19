@@ -15,12 +15,13 @@ object ScratchPad {
       canvas.width = canvas.parentElement.clientWidth
       canvas.height = canvas.parentElement.clientHeight
   
-  //    renderer.fillStyle = "#f8f8f8"
-      ctx.fillStyle = "#a6F611" //Dit lijkt niets te doen
+
+//      ctx.fillStyle = "#a6F611" 
+      ctx.fillStyle =   "#f8f8c8" 
       ctx.fillRect(0, 0, canvas.width, canvas.height)
   
       /*code*/
-      ctx.fillStyle = Globals.gColor
+      ctx.fillStyle = "blue" // Globals.gColor
   
       var down = false
       canvas.onmousedown =

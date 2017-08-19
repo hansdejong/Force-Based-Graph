@@ -48,7 +48,15 @@ import dom.html
 ////remove if not needed
 //import scala.collection.JavaConversions._
 //
-class FBGPaintingPanel extends TCanvas {
+class FBGPaintingPanel(cv: html.Canvas, ta: html.TextArea) extends{
+  val canvas = cv
+  val textarea = ta
+} with TCanvas with TTextArea {
+def setCanvasColor(kleur:String):Unit ={
+  cvColor = kleur
+  //Is er nog ergens een notification nodig?
+  //Anders is er geen setter nodig
+}
 ////(/*canvas*/)//(/* canvas: html.Canvas,
 //                           //         tekstvak: html.TextArea*/
 //                                  /*numVertices: Int,

@@ -71,7 +71,7 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
  { view:"toolbar", id:"mybar", elements:[
 	{ view:"button", value:"Volgende", width: 70, click:"SCALA_volgende()"},
 	    
-	{ view:"button", value:"Kies kleur:", width: 80, click:function(){	    
+	{ view:"button", value:"Activeer kleur:", width: 110, click:function(){	    
 			var json = JSON.stringify(this.getParentView().getValues(),0,1);
 			var kleur = JSON.parse(json)["color"];
 			SCALA_kiesKleur(kleur);
@@ -79,8 +79,13 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 		}
 	},
 	
-	{ view:"colorpicker", name:"color", value:"#ffaadd", width:120 },
-
+	{ view:"colorpicker", id:"colorId", name:"color", value:"#ffaadd", width:120 },
+	/*
+	{ view:"colorpicker", name:"color", value:"#ffaadd", width:120, update:function(){	
+	webix.message("<pre>"+ "Hallo"+"</pre>");        
+		}
+	},
+*/
 	{ view:"toggle", name:"toggle", id:"toggle", width: 85,offLabel:"Sleep", onLabel:"Wijzig", click:function(){	    
 			var json = JSON.stringify(this.getParentView().getValues(),0,1);
 			var tg = JSON.parse(json)["toggle"];
@@ -106,7 +111,6 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
     			] //Einde rijen-array 
 		});//Einde webix.ui
 	}); //Einde webix.ready
-
 //======= De Hulpfuncties =======================================================
 
 function ToonWaarden(){

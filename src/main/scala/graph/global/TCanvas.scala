@@ -3,11 +3,10 @@ package graph.global
 import org.scalajs.dom
 import dom.html
 
-trait TCanvas {
-	val canvas: html.Canvas = Globals.gCanvas.get  //Dangerous
+trait TCanvas {//argument mag niet. Zie PiSc 419 PreInitialized Fields.
+	val canvas: html.Canvas   // = Globals.gCanvas.get  //Dangerous
 	val context = canvas.getContext("2d").asInstanceOf[dom.CanvasRenderingContext2D]
-  
-  
+  var cvColor:String = "red"//Globals.gColor
 //Vanaf  hier van Scratchpad  ============================================
   
       canvas.width = canvas.parentElement.clientWidth
@@ -18,7 +17,7 @@ trait TCanvas {
       context.fillRect(0, 0, canvas.width, canvas.height)
   
       /*code*/
-      context.fillStyle = Globals.gColor
+      //context.fillStyle = Globals.gColor
   
       var down = false
       canvas.onmousedown =
@@ -29,6 +28,7 @@ trait TCanvas {
   
       canvas.onmousemove = {
         (e: dom.MouseEvent) =>
+          context.fillStyle = cvColor //Globals.gColor
           val rect =
             canvas.getBoundingClientRect()
           if (down) context.fillRect(
@@ -40,7 +40,7 @@ trait TCanvas {
     
 
 /*
-	val cvColor:String = Globals.gColor
+
 	context.fillStyle = "#a6F611" //voorlopig
 			//Van scratchpad 
 			canvas.onmousedown =

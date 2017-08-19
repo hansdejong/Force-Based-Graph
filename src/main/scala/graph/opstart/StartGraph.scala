@@ -31,7 +31,14 @@ import graph.global._
 object StartGraph{ 
 //Niet getest, maar ik denk dat dit object als enige niet TCanvas en TTextArea moet gebruiken 
   
+  //var mCanvas= (Bij BasisTutorial->test hebben ze het over html-elementen in memory)
+  
   //1. Gebruikt DOM. Later er uit
+  //var painter: FBGPaintingPanel=new FBGPaintingPanel(null,null)//Kan dit beter?
+  //compileert maar wordt niet geaccepteerd. Misschien de klassen uit de basic-tutorial test?
+  //Het is een lastig probleem, maar ik kan het voor deze applicatie negeren. 
+  //Alleen als er nieuwe nodes worden aangemaakt zou ik dan gColor moeten checken.
+  
   def appendPar(targetNode: dom.Node, text: String): Unit = {
     val parNode = document.createElement("p")
     val textNode = document.createTextNode(text)
@@ -57,7 +64,9 @@ object StartGraph{
   }
   @JSExportTopLevel("SCALA_kiesKleur")
   def SCALA_kiesKleur(kleur: String): Unit = {
-    Globals.gColor = kleur 
+  //  TCanvas.cvColor = kleur
+/////////////////    painter.setCanvasColor(kleur)
+    Globals.gColor = kleur //NOG EVEN HANDHAVEN 
     appendPar(document.body, "De volgende kleur is nu actief: " + kleur)
   }
   @JSExportTopLevel("SCALA_onToggle")
@@ -81,21 +90,22 @@ object StartGraph{
     appendPar(document.body, "Applicatie is nu: " + keuze)
   }
 
-  //Voor het starten van willekeurige tests in scala
-  @JSExportTopLevel("SCALA_test")
-  def SCALA_test(): Unit = {
-    //Hier als eerste een testroutine van de canvas-interface trait
-     appendPar(document.body, "De Scala test-knop")
-     val textAreaUser = new TestTextArea()
-     val canvasUser = new TestCanvas()
-     textAreaUser.taAppendText("En zie ik dit?")
-     
-  }
+//  //Voor het starten van willekeurige tests in scala
+//  @JSExportTopLevel("SCALA_test")
+//  def SCALA_test(): Unit = {
+//    //Hier als eerste een testroutine van de canvas-interface trait
+//     appendPar(document.body, "De Scala test-knop")
+////     val textAreaUser = new TestTextArea()
+////     val canvasUser = new TestCanvas()
+//     textAreaUser.taAppendText("En zie ik dit?")
+//     
+//  }
   
   @JSExport //Is dit goed of moet het TopLevel zijn?  
   def main(canvas: html.Canvas, tekstvak: html.TextArea) = {
-    Globals.gCanvas = Some(canvas)
-    Globals.gTextArea = Some(tekstvak)
+    //Globals.gCanvas = Some(canvas)
+    //mCanvas = canvas
+    //Globals.gTextArea = Some(tekstvak)
     tekstvak.defaultValue = "Huidige app:" + Globals.gApp
     Globals.gApp match{
       case "FBG" => runFBG(canvas, tekstvak)
@@ -107,7 +117,8 @@ object StartGraph{
     }
     
     def runFBG(canvas: html.Canvas, tekstvak: html.TextArea):Unit = {
-       new FBGPaintingPanel()
+//       painter = new FBGPaintingPanel(canvas,tekstvak)
+       new FBGPaintingPanel(canvas,tekstvak)
     }
   }
   
