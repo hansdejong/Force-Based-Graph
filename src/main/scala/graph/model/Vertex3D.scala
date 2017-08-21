@@ -1,12 +1,14 @@
 package graph.model
 
-import java.awt.Color
+import graph.lib._
 
-import java.io.Serializable
+//import java.awt.Color
 
-import graph.lib.Lib
+//import java.io.Serializable
 
-import Vertex3D._
+//import graph.lib.Lib
+
+//import Vertex3D._
 
 object Vertex3D {
 
@@ -18,15 +20,15 @@ object Vertex3D {
 class Vertex3D extends Comparable[Vertex3D] {
 
 // location. Toegevoegd. Beter in Sprite?
-  var location: Point3d = new Point3d()
+  var location: Point3D = new graph.lib.Point3D()
 
-  var color: Color = getRandomColor
+  var color: String = getRandomColor
 
 // speed of vertex
-  var velocity: Point3d = new Point3d()
+  var velocity: graph.lib.Point3D = new graph.lib.Point3D()
 
 // force towards other vertices in the network
-  var net_force: Point3d = new Point3d()
+  var net_force: graph.lib.Point3D = new graph.lib.Point3D()
 
   var label: String = ""
 
@@ -37,26 +39,27 @@ class Vertex3D extends Comparable[Vertex3D] {
   private var movement: Double = 100
   
 
-  def this(theColor: Color) = {
+  def this(theColor: String) = {
     this()
     color = theColor
   }
 
   def setNet_force(xForce: Double, yForce: Double, zForce: Double): Unit = {
-    val newPoint: Point3d = new Point3d(xForce, yForce, zForce)
+    val newPoint: Point3D = new Point3D(xForce, yForce, zForce)
     net_force = newPoint
   }
 
-  private def getRandomColor(): Color = {
+  private def getRandomColor(): String = {
     val R: Int = (Math.random() * 255).toInt
     val G: Int = (Math.random() * 255).toInt
     val B: Int = (Math.random() * 255).toInt
-    new Color(R, G, B)
+//    new Color(R, G, B)
+    "#" + R.toHexString + G.toHexString + B.toHexString
   }
 
   def setXYZ(x: Double, y: Double, z: Double): Unit = {
 //Lib.melding( "yyy","Vertex3D.setXYZ()");
-    val newPoint: Point3d = new Point3d(x, y, z)
+    val newPoint: Point3D = new Point3D(x, y, z)
     location = newPoint
   }
 
@@ -77,9 +80,9 @@ class Vertex3D extends Comparable[Vertex3D] {
     val cx: Double = 600 * zoomFactor
     val cy: Double = 400 * zoomFactor
     val cz: Double = 200 * zoomFactor
-    net_force.x += scaling * (cx - vx)
-    net_force.y += scaling * (cy - vy)
-    net_force.z += scaling * (cz - vz)
+    net_force.x = net_force.x + scaling * (cx - vx)
+    net_force.y = net_force.y + scaling * (cy - vy)
+    net_force.z = net_force.z + scaling * (cz - vz)
   }
 
   def addRepulsion(other: Vertex3D): Unit = {
@@ -96,9 +99,9 @@ class Vertex3D extends Comparable[Vertex3D] {
     net_force.z += scaling * (vz - uz) / distanceSquared
   }
 
-  def setBoundingBox(a: Point3d, b: Point3d): Unit = {
+  def setBoundingBox(a: Point3D, b: Point3D): Unit = {
     if (a.x >= b.x || a.y >= b.y || a.z >= b.z) {
-      Lib.melding("Verkeerde Box-Co�rdinaten", "Vertex3D.setBoundingBox")
+     //HERSTELLEN FBGLib.melding("Verkeerde Box-Coordinaten", "Vertex3D.setBoundingBox")
       return
     }
     if (location.x < a.x) location.x = a.x
@@ -163,7 +166,7 @@ class Vertex3D extends Comparable[Vertex3D] {
     result
   }
 
-  private def str(d: Double): String = Lib.formatDouble(d)
+  private def str(d: Double): String = d.toString //HERSTELLEN FBGLib.formatDouble(d)
 
   override def compareTo(other: Vertex3D): Int = {
     val ty: Double = this.location.y

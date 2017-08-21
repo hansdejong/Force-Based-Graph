@@ -1,6 +1,6 @@
 package graph.drawings
 
-import java.awt.Color
+import graph.lib._
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -61,7 +61,7 @@ class BuckyBall extends TDrawing {
       vertices.append(v)
     }
     for (i <- 25.until(30)) {
-      val v: Vertex3D = new Vertex3D(new Color(0x80000000))
+      val v: Vertex3D = new Vertex3D("#800000")
       v.label_=(java.lang.Integer.toString(i))
       v.setXYZ(200 + Math.random() * 300,
                100 + Math.random() * 200,
@@ -69,7 +69,7 @@ class BuckyBall extends TDrawing {
       vertices.append(v)
     }
     for (i <- 30.until(35)) {
-      val v: Vertex3D = new Vertex3D(new Color(0x8395ee))
+      val v: Vertex3D = new Vertex3D("#8395ee")
       v.label_=(java.lang.Integer.toString(i))
       v.setXYZ(200 + Math.random() * 300,
                100 + Math.random() * 200,

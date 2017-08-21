@@ -1,6 +1,6 @@
 package graph.drawings
 
-import java.awt.Color
+import graph.lib._
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -23,7 +23,7 @@ class RombischeDodecaeder extends TDrawing {
     val numVertices: Int = 14
     edges = new Grid(numVertices)
     for (i <- 0.until(8)) {
-      val v: Vertex3D = new Vertex3D(new Color(0xDD0099))
+      val v: Vertex3D = new Vertex3D("#DD0099")
       v.label_=(java.lang.Integer.toString(i))
       v.setXYZ(200 + Math.random() * 300,
                100 + Math.random() * 200,

@@ -39,6 +39,13 @@ object StartGraph{
   //Het is een lastig probleem, maar ik kan het voor deze applicatie negeren. 
   //Alleen als er nieuwe nodes worden aangemaakt zou ik dan gColor moeten checken.
   
+  /**
+  Uiteidelijk komt het probleem doordat ik een referentie wil hebben via een klasse 
+  die ik nog niet meteen kan instantieren. Het kan zijn dat ik er gewoon voor moet kiezen 
+  de toegangsroutines (ontvanger van canvas) en de tekencode (gebruiker van canvas) in een
+   klasse te verenigen (in dit geval StartGraph en FBGPaintingPanel)
+   Het probleem is dan met de TCanvas Trait. Die zal dan met lazy vals moeten werken
+  */
   def appendPar(targetNode: dom.Node, text: String): Unit = {
     val parNode = document.createElement("p")
     val textNode = document.createTextNode(text)

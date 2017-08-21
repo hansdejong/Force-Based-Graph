@@ -1,8 +1,16 @@
 package graph.controller
 
-import java.awt.geom.Line2D
 
-import java.awt.geom.Point2D
+import graph.model._
+import graph.lib._
+import graph.global._
+import org.scalajs.dom
+import dom.html
+
+
+//import java.awt.geom.Line2D
+
+//import java.awt.geom.Point2D
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -12,7 +20,16 @@ import graph.model.TGraphModel
 
 import graph.model.Vertex3D
 
-class EditGraphController(var model: TGraphModel) /*extends TGraphController*/ {
+//class EditGraphController(var model: TGraphModel) extends TGraphController {
+class EditGraphController(var model: TGraphModel, cv:html.Canvas) extends{val canvas = cv }with TCanvas with TGraphController {
+  
+  
+//  class FBGPaintingPanel(cv: html.Canvas, ta: html.TextArea) extends{
+//  val canvas = cv
+//  val textarea = ta
+//} with TCanvas with TTextArea {
+
+  
 
 // I can drag the new edge
   private var vertexIsChosen: Boolean = false
@@ -23,7 +40,7 @@ class EditGraphController(var model: TGraphModel) /*extends TGraphController*/ {
 
   private var foundVertexReleased: Int = 0
 
-  private var draggingCursor: Point2D.Double = new Point2D.Double(0, 0)
+  private var draggingCursor: Point2D = new Point2D(0, 0)
 
   def setVertexIsDragged(dragged: Boolean): Unit = {
     vertexIsDragged = dragged
@@ -31,14 +48,14 @@ class EditGraphController(var model: TGraphModel) /*extends TGraphController*/ {
 
   def getVertexIsDraggedForEditing(): Boolean = vertexIsDragged
 
-  def getDraggingLine(): Line2D.Double =
+  def getDraggingLine(): Line2D =
     if (vertexIsDragged) {
       val vertices: ArrayBuffer[Vertex3D] = model.vertices
       val x1: Double = vertices(foundVertexPressed).getX
       val y1: Double = vertices(foundVertexPressed).getY
-      val p1: Point2D.Double = new Point2D.Double(x1, y1)
-      val p2: Point2D.Double = draggingCursor
-      new Line2D.Double(p1, p2)
+      val p1: Point2D = new Point2D(x1, y1)
+      val p2: Point2D = draggingCursor
+      new graph.lib.Line2D (p1, p2)
     } else null
 
   def onMouseIsPressed(leftButton: Boolean, pressedVertex: Int): Unit = {
@@ -49,7 +66,7 @@ class EditGraphController(var model: TGraphModel) /*extends TGraphController*/ {
     }
   }
 
-  def onMouseIsReleased(point: Point2D.Double, releasedVertex: Int): Unit = {
+  def onMouseIsReleased(point: Point2D, releasedVertex: Int): Unit = {
     if (vertexIsDragged) {
       if (releasedVertex != -1) {
         foundVertexReleased = releasedVertex
@@ -62,7 +79,7 @@ class EditGraphController(var model: TGraphModel) /*extends TGraphController*/ {
     }
   }
 
-  def onMouseIsDragged(point: Point2D.Double): Unit = {
+  def onMouseIsDragged(point: Point2D): Unit = {
     if (vertexIsChosen) vertexIsDragged = true
     draggingCursor = point
   }
@@ -81,7 +98,7 @@ class EditGraphController(var model: TGraphModel) /*extends TGraphController*/ {
   }
 
 //Edges en vertices moeten naar het graphmodel-interface
-  private def makeVertex(point: Point2D.Double): Unit = {
+  private def makeVertex(point: Point2D): Unit = {
     val vertices: ArrayBuffer[Vertex3D] = model.vertices
     val edges: Grid = model.edges
     val vertex3D: Vertex3D = new Vertex3D()

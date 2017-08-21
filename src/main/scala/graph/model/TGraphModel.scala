@@ -2,7 +2,8 @@ package graph.model
 
 //import java.awt.Color
 
-import java.awt.geom.Point2D
+//import java.awt.geom.Point2D
+import graph.lib._
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -17,15 +18,15 @@ trait TGraphModel  {
   //def vertexColor:( vertex: Int, vertexColor: Color) //Snap ik even niet
 
 //int voor de vertex?
-  def VertexContains(vertex: Vertex3D, point: Point2D.Double): Boolean
+  def VertexContains(vertex: Vertex3D, point: Point2D): Boolean
 
-  def findFirstVertex(point: Point2D.Double): Int
+  def findFirstVertex(point: Point2D): Int
 
 //Blijft over
   def removeEdge(vertex1: Int, vertex2: Int): Unit
 
 //Moet weg
-  def findEdge(point: Point2D.Double): Boolean
+  def findEdge(point: Point2D): Boolean
 
 //Moet weg
   def getLastFoundEdgeVertex1(): Int

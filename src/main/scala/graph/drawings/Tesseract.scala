@@ -1,6 +1,6 @@
 package graph.drawings
 
-import java.awt.Color
+import graph.lib._
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -22,7 +22,7 @@ class Tesseract extends TDrawing {
     val numVerticesPerCube: Int = 8
     edges = new Grid(numVertices)
     for (i <- 0 until numVerticesPerCube) {
-      val v: Vertex3D = new Vertex3D(new Color(0xFF0099))
+      val v: Vertex3D = new Vertex3D("#FF0099")
       v.label_=(java.lang.Integer.toString(i))
       v.setXYZ(200 + Math.random() * 300,
                100 + Math.random() * 200,
@@ -42,7 +42,7 @@ class Tesseract extends TDrawing {
     edges.setConnected(2, 6, true)
     edges.setConnected(3, 7, true)
     for (i <- 0 until numVerticesPerCube) {
-      val v: Vertex3D = new Vertex3D(new Color(0x3333FF))
+      val v: Vertex3D = new Vertex3D("#3333FF")
       v.label_=(java.lang.Integer.toString(i + 8))
       v.setXYZ(200 + Math.random() * 300,
                100 + Math.random() * 200,

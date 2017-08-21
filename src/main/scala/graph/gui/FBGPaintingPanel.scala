@@ -1,38 +1,13 @@
 package graph.gui
-//
-//import java.awt.BasicStroke
-//
-import java.awt.Color
+//import java.awt.Color
 import graph.global._
-//
-//import java.awt.Graphics2D
-//
-//import java.awt.Shape
-//
-//import java.awt.event.InputEvent
-//
-//import java.awt.event.MouseEvent
-//
-//import java.awt.event.MouseListener
-//
-//import java.awt.event.MouseMotionListener
-//
-//import java.awt.geom.Ellipse2D
-//
-//import java.awt.geom.Line2D
-//
-//import java.awt.geom.Point2D
-
 import scala.collection.mutable.ArrayBuffer
 
 import graph.drawings.EDrawings._
-//
 import graph.controller.EditGraphController
-//
 import graph.controller.TGraphController
-//
+import graph.controller.EditGraphController
 //import fimme.graph.lib.Lib
-//
 import graph.drawings.EDrawings
 import graph.model.GraphModel
 
@@ -43,11 +18,7 @@ import graph.model.TGraphModel
 import graph.model.Vertex3D
 import org.scalajs.dom
 import dom.html
-//
-//
-////remove if not needed
-//import scala.collection.JavaConversions._
-//
+
 class FBGPaintingPanel(cv: html.Canvas, ta: html.TextArea) extends{
   val canvas = cv
   val textarea = ta
@@ -70,13 +41,18 @@ def setCanvasColor(kleur:String):Unit ={
 ////    with MouseListener
 ////    with MouseMotionListener
 //drawLine (10 ,10 , 50, 50)
+private def getRandomDrawing(): EDrawings = {
+    val graph = EDrawings(scala.util.Random.nextInt(EDrawings.maxId))
+ //    println(ClassTag(graph.getClass))
+ //   println(graph)
+   graph 
+ }
 
-}
  //============Declarations=============================================================
 // //============Body logic ==============================================================
-//  private var graph:EDrawings = getRandomDrawing
-//  private var model: TGraphModel =  new GraphModel( graph )
-//  private var graphController: TGraphController = new EditGraphController( model)
+ private var graph:EDrawings = getRandomDrawing()
+ private var model: TGraphModel =  new GraphModel( graph )
+ private var graphController: TGraphController = new EditGraphController( model, canvas)
 //  
 // //============Kies een Begin-drawing===================================================
 //   private def getRandomDrawing(): EDrawings = {
@@ -89,7 +65,6 @@ def setCanvasColor(kleur:String):Unit ={
 //} 
 ////  def appendText(extra:String)={ tekstvak.value = tekstvak.value + extra }
 ////  appendText("\nDit is FBGPaintingPanel")
-//  
 //  //var model: TGraphModel = new GraphModel(numVertices, maxNumEdges)
 //  private var model: TGraphModel =  new GraphModel(RANDOM) //iets verzinnen. Dit niet dan is alles random
 //
@@ -485,5 +460,5 @@ def setCanvasColor(kleur:String):Unit ={
 ////
 ////  private def str(d: Double): String = Lib.formatDouble(d)
 ////
-//}
-//
+}
+

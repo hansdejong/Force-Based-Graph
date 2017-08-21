@@ -1,6 +1,6 @@
 package graph.model
 
-class Edge extends Serializable {
+class Edge {
   var length: Double = 1
   var connected: Boolean = false
 }

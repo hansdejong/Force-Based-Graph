@@ -1,6 +1,6 @@
 package graph.drawings
 
-import java.awt.Color
+import graph.lib._
 
 import scala.collection.mutable.ArrayBuffer
 

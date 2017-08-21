@@ -1,14 +1,14 @@
 package graph.model
 
-import java.awt.Color
+//import java.awt.Color
 
-import java.awt.Shape
+//import java.awt.Shape
 
-import java.awt.geom.Ellipse2D
+//import java.awt.geom.Ellipse2D
 
-import java.awt.geom.Point2D
+//import java.awt.geom.Point2D
 
-import java.io.Serializable
+//import java.io.Serializable
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -38,7 +38,7 @@ import graph.drawings.RombischeDodecaeder
 
 import graph.errors.ProgrammingError
 
-import graph.lib.Lib
+import graph.lib._
 
 
 class GraphModel extends TGraphModel{
@@ -65,7 +65,7 @@ class GraphModel extends TGraphModel{
     makeGraph(graphName)
   }
 
-  def setVertexColor(index: Int, newColor: Color): Unit = {
+  def setVertexColor(index: Int, newColor: String): Unit = {
     (vertices(index)).color_=(newColor)
   }
 
@@ -88,7 +88,7 @@ class GraphModel extends TGraphModel{
   }
 
 //=====================================Vertex-code===================
-  def findFirstVertex(point: Point2D.Double): Int = {
+  def findFirstVertex(point: Point2D): Int = {
     var currentVertex: Vertex3D = null
     for (i <- 0 until vertices.size) {
       currentVertex = vertices(i)
@@ -97,16 +97,17 @@ class GraphModel extends TGraphModel{
     -1
   }
 
-  def VertexContains(vertex: Vertex3D, point: Point2D.Double): Boolean = {
+  def VertexContains(vertex: Vertex3D, point: Point2D): Boolean = {
     val x: Double = vertex.getX
     val y: Double = vertex.getY
     val r: Double = Vertex3D.radius
-    val shape: Shape = new Ellipse2D.Double(x - r, y - r, 2 * r, 2 * r)
+//  val shape: Shape = new Ellipse2D.Double(x - r, y - r, 2 * r, 2 * r)
+    val shape: Circle2D = new Circle2D(new Point2D(x, y), r)
     shape.contains(point)
   }
 
 //=====================================Edge-code===================
-  def findEdge(point: Point2D.Double): Boolean = {
+  def findEdge(point: Point2D): Boolean = {
     for (i <- 0 until vertices.size; j <- 0 until vertices.size) {
       if (!edges.isConnected(i, j)) //continue
         if (edgeContains(point, i, j)) {
@@ -135,7 +136,8 @@ class GraphModel extends TGraphModel{
     val y1: Double = vtx1.getY
     val x2: Double = vtx2.getX
     val y2: Double = vtx2.getY
-    Lib.onLine(point.getX, point.getY, x1, y1, x2, y2, d)
+   //HERSTELLEN  FBGLib.onLine(point.x, point.y, x1, y1, x2, y2, d)
+    false
   }
 
   private def makeGraph(theGraphName: EDrawings): Unit = {

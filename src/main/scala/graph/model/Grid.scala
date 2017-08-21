@@ -1,8 +1,6 @@
 package graph.model
 
-import java.io.Serializable
-
-import graph.lib.Lib
+import graph.lib._
 
 class Grid {
 
@@ -55,7 +53,7 @@ class Grid {
 //Gaat dit goed met null?
       edgeArray(i)(j) = temp(i)(j)
     }
-    Lib.melding("Resized!", "Grid.resize()")
+    //graph.lib.FBGLib.melding("Resized!", "Grid.resize()")
   }
 
 }

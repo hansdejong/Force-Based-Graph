@@ -1,6 +1,6 @@
-package graph.model
+package graph.lib
 
-class Point3d {
+class Point3D {
 
   var x: Double = 0.0
 
@@ -14,6 +14,8 @@ class Point3d {
     y = theY
     z = theZ
   }
-
+  override def toString():String= {
+    "(" + x + "," + y + "," + z + ")"
+  }
 }
 
