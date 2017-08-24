@@ -19,54 +19,61 @@ import org.scalajs.dom
 import dom.html
 
 class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
-  { val canvas = cv; val textarea = ta } with TCanvas with TTextArea {
- val zoom = 1 //TODO
-  //============Method Declarations=======================================================
+{ val canvas = cv; val textarea = ta } with TCanvas with TTextArea {
+	val zoom = 1 //TODO
+	//============Method Declarations=======================================================
+	//------------Tekenen van de graph------------------------------------------------------
 	private def setCanvasColor(kleur:String):Unit ={
 			currentColor = kleur
 	}
 	private def getRandomDrawing(): EDrawings = {
 			val graph = EDrawings(scala.util.Random.nextInt(EDrawings.maxId))
-			taAppendText("\nGekozen Graph: "+ graph.toString())
+			taText("\nGekozen Graph: "+ graph.toString())
 			graph 
 	}
-	//val drawEdge = (edge: Edge) => {}
-	//Meteen een drawEdges?
-	def drawGraph(model: TGraphModel):Unit = {
-	  	val edges: Grid = model.edges
-	  //map(edges, drawEdge())
 
-	    val vertices: ArrayBuffer[Vertex3D] = model.vertices
-	    drawEdges(vertices, edges)
-//
-
+	private def drawGraph(model: TGraphModel):Unit = {
+			val edges: Grid = model.edges
+			val vertices: ArrayBuffer[Vertex3D] = model.vertices
+			drawEdges(vertices, edges)
+			drawVertices(vertices)
 	}
-  private def drawEdges(vertices:ArrayBuffer[Vertex3D], edges:Grid/*g2D: Graphics2D*/): Unit = {
-//Lib.melding( edgesToString(),"ForceBasedGraphPaintingPanel.drawEdges");
-//    g2D.setStroke(new BasicStroke(1))
-//    g2D.setColor(new Color(0x333333))
-    for (i <- 0 until vertices.size; j <- 0 until vertices.size) {
-      if(edges.isConnected(i, j) ){
-        val x1 = (vertices(i).getX() / zoom)
-        val y1 = (vertices(i).getY() / zoom)
-       	val x2 = (vertices(j).getX() / zoom)
-     		val y2 = (vertices(j).getY() / zoom)
-        drawLine( x1, y1, x2, y2 )
-  }
-//CONVERTER PROBLEEM
-//                if(! edges.isConnected(i, j) ) continue;
-//        		int x1 = (int)(vertices.get(i).getX() / zoom);
-//        		int y1 = (int)(vertices.get(i).getY() / zoom);
-//        		int x2 = (int)(vertices.get(j).getX() / zoom);
-//        		int y2 = (int)(vertices.get(j).getY() / zoom);
-//        		g2D.drawLine( x1, y1, x2, y2 );
-  //}
-    }
-  }
-	// //============Body logic ==============================================================
+	private def drawEdges(vertices:ArrayBuffer[Vertex3D], edges:Grid): Unit = {
+			for (i <- 0 until vertices.size; j <- 0 until vertices.size) {
+				if(edges.isConnected(i, j) ){
+					val x1 = (vertices(i).getX() / zoom)
+					val y1 = (vertices(i).getY() / zoom)
+					val x2 = (vertices(j).getX() / zoom)
+					val y2 = (vertices(j).getY() / zoom)
+					drawLine( x1, y1, x2, y2 )
+				}
+			}
+	}
+	private def drawVertices(vertices: ArrayBuffer[Vertex3D]): Unit = {
+			for (vertex3D <- vertices) {
+				drawVertex( vertex3D)
+			}
+	}
+
+	def drawVertex( vertex: Vertex3D): Unit = {
+			val xScreen: Double = vertex.getX / zoom
+			val yScreen: Double = vertex.getY / zoom
+			val color: String = vertex.color
+			val label: String = vertex.label
+			val r: Double = Vertex3D.radius / zoom
+			//    if (drawWithLabels) {
+			//      ctx.drawString(label, xScreen.toInt + 15, yScreen.toInt)
+			//    }
+			drawCircle(xScreen,yScreen,r, color)
+	}
+	//------------Force expansion-----------------------------------------------------------
+	//------------Slepen van de graph-------------------------------------------------------
+	//------------Veranderen van de graph---------------------------------------------------
+
+	//============Body logic ===============================================================
 	private var graph:EDrawings = getRandomDrawing()
-	private var model: TGraphModel =  new GraphModel( graph )
-	drawGraph(model)
-	
+			private var model: TGraphModel =  new GraphModel( graph )
+			drawGraph(model)
+
 }
 

@@ -70,6 +70,9 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 //======= De toolbar ================================================================
  { view:"toolbar", id:"mybar", elements:[
 	{ view:"button", value:"Volgende", width: 70, click:"SCALA_volgende()"},
+//				 document.getElementById('canvas'), 
+//				 document.getElementById('tekstvak1')
+//				 )"},
 	    
 	{ view:"button", value:"Activeer kleur:", width: 110, click:function(){	    
 			var json = JSON.stringify(this.getParentView().getValues(),0,1);

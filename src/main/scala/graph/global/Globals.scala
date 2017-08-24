@@ -23,6 +23,8 @@ object Globals {
  //// var gCanvas: Option[html.Canvas] = None   
  // var gTextArea: Option[html.TextArea] = None
   var gColor: String = "red" //TOCH NOG HANDHAVEN
+  var gMode: String = "sleep" 
+  var gZoom_Int = 1
 
 
   //gApp geeft de  actiev applicatie, in te stellen via "welke"

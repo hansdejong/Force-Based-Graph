@@ -63,16 +63,17 @@ object StartGraph{
   }
   @JSExportTopLevel("SCALA_zoom")
   def SCALA_zoom( zoom:Int ): Unit = {
+    
     appendPar(document.body, "Zoom-factor nu ingesteld op " + zoom)
   }
   @JSExportTopLevel("SCALA_volgende")
-  def SCALA_volgende(): Unit = {
+  def SCALA_volgende(/*canvas: html.Canvas, tekstvak: html.TextArea*/): Unit = {
+   ///// new FBGPainting(canvas,tekstvak)
+   // document.location.reload()
     appendPar(document.body, "Je klikte op de VOLGENDE knop!")
   }
   @JSExportTopLevel("SCALA_kiesKleur")
   def SCALA_kiesKleur(kleur: String): Unit = {
-  //  TCanvas.cvColor = kleur
-/////////////////    painter.setCanvasColor(kleur)
     Globals.gColor = kleur //NOG EVEN HANDHAVEN 
     appendPar(document.body, "De volgende kleur is nu actief: " + kleur)
   }
@@ -83,6 +84,7 @@ object StartGraph{
       case 1 => "sleep"
       case _ => "pardon?"  
     }
+    Globals.gMode=keuze
     appendPar(document.body, "Toggle is nu: " + keuze)
   }
 //Tijdelijk. Bedoeld voor combo die het soort applicatie zou moeten instellen
