@@ -1,15 +1,5 @@
 package graph.model
 
-//import java.awt.Color
-
-//import java.awt.Shape
-
-//import java.awt.geom.Ellipse2D
-
-//import java.awt.geom.Point2D
-
-//import java.io.Serializable
-
 import scala.collection.mutable.ArrayBuffer
 
 import graph.drawings.BuckyBall
@@ -107,10 +97,21 @@ class GraphModel extends TGraphModel{
   }
 
 //=====================================Edge-code===================
+//De originele (geconverteerde) code
+//  def findEdge(point: Point2D): Boolean = {
+//    for (i <- 0 until vertices.size; j <- 0 until vertices.size) {
+//      if (!edges.isConnected(i, j)) //continue
+//        if (edgeContains(point, i, j)) {
+//          foundEdgeVertex1 = i
+//          foundEdgeVertex2 = j
+//          true
+//        }
+//    }
+//    false
+//  }
   def findEdge(point: Point2D): Boolean = {
     for (i <- 0 until vertices.size; j <- 0 until vertices.size) {
-      if (!edges.isConnected(i, j)) //continue
-        if (edgeContains(point, i, j)) {
+      if (  edges.isConnected(i, j) && edgeContains(point, i, j) ) {
           foundEdgeVertex1 = i
           foundEdgeVertex2 = j
           true

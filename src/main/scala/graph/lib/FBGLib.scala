@@ -1,7 +1,7 @@
 package graph.lib
 
 class FBGLib {
-  def melding (what:String,where:String):Unit = {} //dummy
+  def melding (what:String,where:String): Unit = {} //dummy
   
 //	//Ook behoefte aan een losse versie
 	def formatDouble( waarde:Double ):String = {       	

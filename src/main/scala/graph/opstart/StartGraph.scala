@@ -125,7 +125,8 @@ object StartGraph{
     
     def runFBG(canvas: html.Canvas, tekstvak: html.TextArea):Unit = {
 //       painter = new FBGPaintingPanel(canvas,tekstvak)
-       new FBGPaintingPanel(canvas,tekstvak)
+       //new FBGPaintingPanel(canvas,tekstvak)
+       new FBGPainting(canvas,tekstvak)
     }
   }
   

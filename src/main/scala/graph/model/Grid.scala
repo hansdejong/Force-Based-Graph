@@ -3,7 +3,7 @@ package graph.model
 import graph.lib._
 
 class Grid {
-
+//Fatsoeneren, vooral edgeArray
   var edgeArray: Array[Array[Edge]] = null
   var ribSize: Int = 0
   var edgeCount: Int = 0

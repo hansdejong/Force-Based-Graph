@@ -18,9 +18,9 @@ object Vertex3D {
 }
 
 class Vertex3D extends Comparable[Vertex3D] {
-
+val dummy = 4
 // location. Toegevoegd. Beter in Sprite?
-  var location: Point3D = new graph.lib.Point3D()
+  var location: Point3D = new Point3D()
 
   var color: String = getRandomColor
 
@@ -63,6 +63,15 @@ class Vertex3D extends Comparable[Vertex3D] {
     location = newPoint
   }
 
+
+////Wat onzin om de bloel; te laten compileren
+//  def this(theColor: String) = {this();/* color = theColor*/ }
+//  def setXYZ(x: Double, y: Double, z: Double):Unit={}
+//  def getX(): Int = 0
+//  def getY(): Int = 0
+//  def getZ(): Int = 0
+//  var label: String = ""
+  
   def getX(): Int = location.x.toInt
 
   def getY(): Int = location.y.toInt
@@ -99,7 +108,7 @@ class Vertex3D extends Comparable[Vertex3D] {
     net_force.z += scaling * (vz - uz) / distanceSquared
   }
 
-  def setBoundingBox(a: Point3D, b: Point3D): Unit = {
+  def setBoundingBox(a: Point3D, b:Point3D): Unit = {
     if (a.x >= b.x || a.y >= b.y || a.z >= b.z) {
      //HERSTELLEN FBGLib.melding("Verkeerde Box-Coordinaten", "Vertex3D.setBoundingBox")
       return
@@ -172,6 +181,10 @@ class Vertex3D extends Comparable[Vertex3D] {
     val ty: Double = this.location.y
     val oy: Double = other.location.y
     if ((ty < oy)) -1 else (if ((ty == oy)) 0 else 1)
+  
+//  //Ik wilde dat de boel eerst compileerde. 
+//  //Bij Point3D blijft hij zeueren over een Point3d not found 
+//    if ((this.dummy < other.dummy)) -1 else (if ((this.dummy == other.dummy)) 0 else 1)
   }
 
 }
