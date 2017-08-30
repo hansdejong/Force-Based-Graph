@@ -74,7 +74,7 @@ object StartGraph{
   }
   @JSExportTopLevel("SCALA_kiesKleur")
   def SCALA_kiesKleur(kleur: String): Unit = {
-    Globals.gColor = kleur //NOG EVEN HANDHAVEN 
+    Global.gColor = kleur //NOG EVEN HANDHAVEN 
     appendPar(document.body, "De volgende kleur is nu actief: " + kleur)
   }
   @JSExportTopLevel("SCALA_onToggle")
@@ -84,7 +84,7 @@ object StartGraph{
       case 1 => "sleep"
       case _ => "pardon?"  
     }
-    Globals.gMode=keuze
+    Global.gDraggingMode = if (waarde == 1) true else false
     appendPar(document.body, "Toggle is nu: " + keuze)
   }
 //Tijdelijk. Bedoeld voor combo die het soort applicatie zou moeten instellen
@@ -115,8 +115,8 @@ object StartGraph{
     //Globals.gCanvas = Some(canvas)
     //mCanvas = canvas
     //Globals.gTextArea = Some(tekstvak)
-    tekstvak.defaultValue = "Huidige app:" + Globals.gApp
-    Globals.gApp match{
+    tekstvak.defaultValue = "Huidige app:" + Global.gApp
+    Global.gApp match{
       case "FBG" => runFBG(canvas, tekstvak)
       case "ScratchPad" => ScratchPad.runScratchPad(canvas)
       case "Sierpinski" => ScalaJSExample.runSierpinski(canvas)

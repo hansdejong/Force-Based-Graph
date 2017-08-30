@@ -80,15 +80,17 @@ val dummy = 4
 
   def getLastMovement(): Double = movement
 
+  /**Ik heb de zoomfactor eruit gesloopt. 
+   * Expanderen heeft niets met de schaal te maken als het goed is.*/
 //Als addAttraction, maar naar vast centraal punt
-  def addCenterForce(zoomFactor: Double): Unit = {
+  def addCenterForce(/*zoomFactor: Double*/): Unit = {
     val scaling: Double = 0.00001
     val vx: Double = location.x
     val vy: Double = location.y
     val vz: Double = location.z
-    val cx: Double = 600 * zoomFactor
-    val cy: Double = 400 * zoomFactor
-    val cz: Double = 200 * zoomFactor
+    val cx: Double = 600 /* * zoomFactor*/
+    val cy: Double = 400 /* * zoomFactor*/
+    val cz: Double = 200 /* * zoomFactor*/
     net_force.x = net_force.x + scaling * (cx - vx)
     net_force.y = net_force.y + scaling * (cy - vy)
     net_force.z = net_force.z + scaling * (cz - vz)
@@ -166,7 +168,8 @@ val dummy = 4
       (newx - oldx) * (newx - oldx) + (newy - oldy) * (newy - oldy) +
         (newz - oldz) * (newz - oldz))
   }
-
+  
+//Moet toch zonder die str-functies werken?
   override def toString(): String = {
     val result: String = "Vertex3D " + str(location.x) + ", " + str(location.y) +
         ", " +

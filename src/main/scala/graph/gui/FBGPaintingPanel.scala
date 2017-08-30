@@ -49,6 +49,16 @@ private def getRandomDrawing(): EDrawings = {
  }
 
  //============Declarations=============================================================
+
+//Implementaties van  Trait-methods----------------------------------------------------
+  def onDragged(e: dom.MouseEvent){//add whatever
+  }
+  def onMoved(e: dom.MouseEvent){//add whatever
+  }
+  def onReleased(e: dom.MouseEvent) = {//add whatever
+	}
+  def onPressed(e: dom.MouseEvent) = {//add whatever
+	}
 // //============Body logic ==============================================================
  private var graph:EDrawings = getRandomDrawing()
  private var model: TGraphModel =  new GraphModel( graph )

@@ -3,7 +3,7 @@ package canvasapp
 import org.scalajs.dom
 import graph.opstart._
 import dom.html
-import graph.global.Globals
+//import graph.global.Global
 
 object ScratchPad {
 
@@ -21,7 +21,7 @@ object ScratchPad {
       ctx.fillRect(0, 0, canvas.width, canvas.height)
   
       /*code*/
-      ctx.fillStyle = "blue" // Globals.gColor
+      ctx.fillStyle = "blue" // Global.gColor
   
       var down = false
       canvas.onmousedown =

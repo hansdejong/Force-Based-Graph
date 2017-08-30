@@ -3,7 +3,7 @@ package graph.global
 import org.scalajs.dom
 import dom.html
 
-object Globals {
+object Global {
   /**Het is de bedoeling hier een enkele referentie te hebben naar html-objecten.
    * Als je alleen met vals wilt werken kun je de referentie alleen maar doorgeven, 
    * via constructors en argumenten: elegant en veilig, maar lastig.
@@ -23,7 +23,7 @@ object Globals {
  //// var gCanvas: Option[html.Canvas] = None   
  // var gTextArea: Option[html.TextArea] = None
   var gColor: String = "red" //TOCH NOG HANDHAVEN
-  var gMode: String = "sleep" 
+  var gDraggingMode: Boolean = true //anders "wijzig"
   var gZoom_Int = 1
 
 

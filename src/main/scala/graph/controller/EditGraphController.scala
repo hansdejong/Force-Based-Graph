@@ -28,8 +28,18 @@ class EditGraphController(var model: TGraphModel, cv:html.Canvas) extends{val ca
 //  val canvas = cv
 //  val textarea = ta
 //} with TCanvas with TTextArea {
+//Implementaties van traits --------------------------------------
+  def onDragged(e: dom.MouseEvent){//add whatever
+  }
+  def onMoved(e: dom.MouseEvent){//add whatever
+  }
+  def onReleased(e: dom.MouseEvent) = {//add whatever
+	}
+  def onPressed(e: dom.MouseEvent) = {//add whatever
+	}
 
-  
+
+//---------------------------------------------------------------  
 
 // I can drag the new edge
   private var vertexIsChosen: Boolean = false
