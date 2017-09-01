@@ -38,7 +38,7 @@ trait TCanvas {
   }
   def drawText(text:String, x: Double, y: Double):Unit = {
   		context.fillStyle = "black"  
-  		context.font = "20px Arial"
+  		context.font = "12px Arial"
   		context.fillText(text,x,y)
   }
   var mouseDown = false

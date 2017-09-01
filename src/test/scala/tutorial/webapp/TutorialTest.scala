@@ -4,10 +4,10 @@ import utest._
 import org.scalajs.jquery.jQuery
 
 object TutorialTest extends TestSuite {
-
-  // Initialize App
+  
+//Initialize App  
+  
   TutorialApp.setupUI()
-
   def tests = TestSuite {
     'HelloWorld {
       //length is het aantal <p>'s met de betreffende tekst

@@ -22,12 +22,16 @@ import dom.html
 
 class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 { val canvas = cv; val textarea = ta } with TCanvas with TTextArea {
-	val zoom = 1 //TODO
+  //val canvasTop = Global.canvasRect.top
+  //val canvasLeft = Global.canvasRect.left
+  val zoom = 1 //TODO
+  val rect = canvas.getBoundingClientRect()
   private var vertexIsChosen: Boolean = false
   private var vertexIsDragged: Boolean = false
   private var foundVertexPressed: Int = 0
   private var foundVertexReleased: Int = 0
   private var draggingCursor: Point2D = new Point2D(0, 0)
+	
 
 	//============Method Declarations=======================================================
 	//------------Tekenen van de graph------------------------------------------------------
@@ -60,6 +64,7 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 	private def drawVertices(vertices: ArrayBuffer[Vertex3D]): Unit = {
 			for (vertex3D <- vertices) {
 				drawVertex( vertex3D)
+				drawVertexLabel( vertex3D)
 			}
 	}
 
@@ -69,35 +74,44 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 			val color: String = vertex.color
 			val label: String = vertex.label
 			val r: Double = Vertex3D.radius / zoom
-			//    if (drawWithLabels) {
-			//      ctx.drawString(label, xScreen.toInt + 15, yScreen.toInt)
-			//    }
 			drawCircle(xScreen,yScreen,r, color)
+	}
+
+	def drawVertexLabel( vertex: Vertex3D): Unit = {
+			val xScreen: Double = vertex.getX / zoom
+			val yScreen: Double = vertex.getY / zoom
+			val txt = "" + xScreen + ", "+ yScreen
+			drawText(txt,xScreen+15,yScreen )
 	}
 	
 	//------------Mouse---------------------------------------------------------------------
 	  def onDragged(e: dom.MouseEvent)
   {//add whatever
-	      val xModel: Double = e.clientX * zoom
-        val yModel: Double = e.clientY * zoom
+	    	
+	      val xModel: Double = (e.clientX -rect.left) * zoom //even zonder zoom
+        val yModel: Double = (e.clientY -rect.top) * zoom
         val pointModel: Point2D = new Point2D(xModel, yModel)
-
    	  scratch(e)
+//taText("left "+ rect.left+ ", top " + rect.top)
    	  if (Global.gDraggingMode){
-   	    taText("voor "+ model) 
-   	    dragger.dragVertex(xModel.toInt, yModel.toInt, this)
-   	    taAppendText("na "+ model)
+   	   //// taText("voor "+ model) 
+   	    dragger.dragVertex(xModel.toInt, yModel.toInt)
+   	    taText("left "+ rect.left+ ", top " + rect.top)//19,95
+
+   	    /////taAppendText("na "+ model)
    	  }
    	  else
    	    changer.tryConnecting
+   	  testDrawing()
    	  drawGraph()
   }
   def onMoved(e: dom.MouseEvent){//add whatever
   }
   def onReleased(e: dom.MouseEvent) = {//add whatever
+    val rect = canvas.getBoundingClientRect()
     ////  override def mouseReleased(event: MouseEvent): Unit = {
-    val xModel: Double = e.clientX * zoom
-    val yModel: Double = e.clientY * zoom
+    val xModel: Double = (e.clientX - rect.left) * zoom
+    val yModel: Double = (e.clientY - rect.top) * zoom
     val pointModel: Point2D = new Point2D(xModel, yModel)
 //Lib.melding("Omhoog: " + x + ", " + y, "ForceBasedGraphPaintingPanel.mouseReleased");
  if (Global.gDraggingMode){////    if (draggingMode) {
@@ -116,8 +130,8 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
   def onPressed(e: dom.MouseEvent) = {//add whatever
       //////mouseListener = new MouseAdapter(){
 ////  def mousePressed(event: MouseEvent): Unit = {
-    val xModel: Double = e.clientX * zoom
-    val yModel: Double = e.clientY * zoom
+    val xModel: Double = (e.clientX - rect.left) * zoom
+    val yModel: Double = (e.clientY - rect.top) * zoom
     //TODO
     val pointModel: Point2D = new Point2D(xModel, yModel)
 ////showPoints( pointModel/*, point*/);//TODO, magweg
@@ -256,11 +270,13 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
   
   //waarschijnlijk kan Expander een object blijven, maar dit is
   //gemakkelijker en consistenter 
-	var graph:EDrawings = getRandomDrawing()
+	
+  //var graph:EDrawings = getRandomDrawing()
+  var graph:EDrawings = EDrawings.STICK
   //var graph:EDrawings = EDrawings.CUBE //getRandomDrawing()
   private var model: TGraphModel =  new GraphModel( graph )
 			drawGraph(/*model*/)
-  val dragger = new Dragger(model)
+  val dragger = new Dragger(model,this)
   val changer = new Changer(model)
   val expander = new Expander(model)
 			

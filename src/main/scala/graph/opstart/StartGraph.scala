@@ -14,6 +14,7 @@ import dom.document    //1. later er uit
 import scala.scalajs.js.annotation.JSExportTopLevel
 import scalajs.js.annotation.JSExport
 import dom.html
+import dom.raw.ClientRect
 import canvasapp._
 import sierpinski._
 import graph.gui._
@@ -115,6 +116,7 @@ object StartGraph{
     //Globals.gCanvas = Some(canvas)
     //mCanvas = canvas
     //Globals.gTextArea = Some(tekstvak)
+    //Global.canvasRect = canvas.getBoundingClientRect()
     tekstvak.defaultValue = "Huidige app:" + Global.gApp
     Global.gApp match{
       case "FBG" => runFBG(canvas, tekstvak)

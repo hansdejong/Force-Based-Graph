@@ -2,6 +2,7 @@ package graph.global
 
 import org.scalajs.dom
 import dom.html
+import dom.raw.ClientRect
 
 object Global {
   /**Het is de bedoeling hier een enkele referentie te hebben naar html-objecten.
@@ -25,7 +26,7 @@ object Global {
   var gColor: String = "red" //TOCH NOG HANDHAVEN
   var gDraggingMode: Boolean = true //anders "wijzig"
   var gZoom_Int = 1
-
+ // var canvasRect:ClientRect = new ClientRect()
 
   //gApp geeft de  actiev applicatie, in te stellen via "welke"
   val welke = 3

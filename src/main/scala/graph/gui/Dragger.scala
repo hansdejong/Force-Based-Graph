@@ -4,22 +4,25 @@ import graph.gui._
 import graph.lib._
 import org.scalajs.dom
 
-class Dragger(model: TGraphModel ) {
+class Dragger(model: TGraphModel, writer: FBGPainting ) {
   
   def connectDragger(/*e: dom.MouseEvent, */pointModel: Point2D) = {
+    writer.taAppendText ("Cursor "+ pointModel.x + "," + pointModel.y)
        for (vertex3D <- model.vertices) {
           vertex3D.setDragged(model.VertexContains(vertex3D, pointModel))
        }
+       for (vertex3D <- model.vertices; if(vertex3D.isDragged)) 
+            writer.taText("raak")
   }
-   def dragVertex( xModel: Int, yModel: Int, writer: FBGPainting): Unit = {
+   def dragVertex( xModel: Int, yModel: Int): Unit = {
      //////Draw the Graph
 ////  private def dragVertex(xModel: Int, yModel: Int): Unit = {
      
-      writer.taAppendText("dragger1 "+ model) //Dit blijkt hetzelfde model
+      //writer.taAppendText("dragger1 "+ model) //Dit blijkt hetzelfde model
      
        //even eruit Maakt dit alles nul? Ja/ Dragger2 is pas nul
      updateVertices(xModel, yModel)
-        writer.taAppendText("dragger2 "+ model) //Dit blijkt hetzelfde model
+       /// writer.taAppendText("dragger2 "+ model) //Dit blijkt hetzelfde model
        
        
 ////    recalcGraphAsNeeded()
