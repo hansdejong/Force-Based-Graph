@@ -100,9 +100,11 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 
    	    /////taAppendText("na "+ model)
    	  }
-   	  else
+   	  else{
    	    changer.tryConnecting
+   	  }
    	  testDrawing()
+	    //expander.expandGraph(model)//Doet het (hier) niet
    	  drawGraph()
   }
   def onMoved(e: dom.MouseEvent){//add whatever
@@ -271,14 +273,15 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
   //waarschijnlijk kan Expander een object blijven, maar dit is
   //gemakkelijker en consistenter 
 	
-  //var graph:EDrawings = getRandomDrawing()
-  var graph:EDrawings = EDrawings.STICK
+  var graph:EDrawings = getRandomDrawing()
+  //var graph:EDrawings = EDrawings.STICK
   //var graph:EDrawings = EDrawings.CUBE //getRandomDrawing()
+  
   private var model: TGraphModel =  new GraphModel( graph )
 			drawGraph(/*model*/)
-  val dragger = new Dragger(model,this)
+  val dragger = new Dragger(model, this)
   val changer = new Changer(model)
-  val expander = new Expander(model)
+  val expander = new Expander(model, this)
 			
 //Expander doet niets 
 //			//			Thread.sleep(1000)
