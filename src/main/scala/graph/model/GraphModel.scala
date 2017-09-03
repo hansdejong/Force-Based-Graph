@@ -15,9 +15,9 @@ class GraphModel extends TGraphModel{
 
   var edges: Grid = null
 
-  private var foundEdgeVertex1: Int = 0
-
-  private var foundEdgeVertex2: Int = 0
+//  private var foundEdgeVertex1: Int = 0
+//
+//  private var foundEdgeVertex2: Int = 0
 
   def this(theNumberOfVertices: Int, theMaxNumberOfEdges: Int) = {
     this()
@@ -72,50 +72,6 @@ class GraphModel extends TGraphModel{
     shape.contains(point)
   }
 
-//=====================================Edge-code===================
-//De originele (geconverteerde) code
-//  def findEdge(point: Point2D): Boolean = {
-//    for (i <- 0 until vertices.size; j <- 0 until vertices.size) {
-//      if (!edges.isConnected(i, j)) //continue
-//        if (edgeContains(point, i, j)) {
-//          foundEdgeVertex1 = i
-//          foundEdgeVertex2 = j
-//          true
-//        }
-//    }
-//    false
-//  }
-  def findEdge(point: Point2D): Boolean = {
-    for (i <- 0 until vertices.size; j <- 0 until vertices.size) {
-      if (  edges.isConnected(i, j) && edgeContains(point, i, j) ) {
-          foundEdgeVertex1 = i
-          foundEdgeVertex2 = j
-          true
-        }
-    }
-    false
-  }
-
-  def removeEdge(vertex1: Int, vertex2: Int): Unit = {
-    //val edges: Grid = edges
-    edges.setConnected(vertex1, vertex2, false)
-  }
-
-  def getLastFoundEdgeVertex1(): Int = foundEdgeVertex1
-
-  def getLastFoundEdgeVertex2(): Int = foundEdgeVertex2
-
-  private def edgeContains(point: Point2D, v1: Int, v2: Int): Boolean = {
-    val d: Double = 2
-    val vtx1: Vertex3D = vertices(v1)
-    val vtx2: Vertex3D = vertices(v2)
-    val x1: Double = vtx1.getX
-    val y1: Double = vtx1.getY
-    val x2: Double = vtx2.getX
-    val y2: Double = vtx2.getY
-   //HERSTELLEN  FBGLib.onLine(point.x, point.y, x1, y1, x2, y2, d)
-    false
-  }
 
   private def makeGraph(theGraphName: EDrawings): Unit = {
     theGraphName match {

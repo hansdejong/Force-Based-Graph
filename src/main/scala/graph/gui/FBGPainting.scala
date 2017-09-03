@@ -137,10 +137,13 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
     //TODO
     val pointModel: Point2D = new Point2D(xModel, yModel)
 ////showPoints( pointModel/*, point*/);//TODO, magweg
-    if (Global.gDraggingMode) {
-      dragger.connectDragger(pointModel)
-    } else {
-      changer.makeNewVertex()
+    commonActions.connectVertex(pointModel)
+    if (!Global.gDraggingMode) {
+      //Ook een Edge kan worden aangewezen
+      changer.removeEdgeIfFound(pointModel)//zou moeten werken: changer III
+    taText("\nDragging mode: "+ Global.gDraggingMode)
+      
+      changer.makeNewVertex() //Beter naar dragging?
     }
   }
     
@@ -192,16 +195,7 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 //
 //  def getVertexIsDraggedForEditing(): Boolean = vertexIsDragged
 //
-//  def getDraggingLine(): Line2D =
-//    if (vertexIsDragged) {
-//      val vertices: ArrayBuffer[Vertex3D] = model.vertices
-//      val x1: Double = vertices(foundVertexPressed).getX
-//      val y1: Double = vertices(foundVertexPressed).getY
-//      val p1: Point2D = new Point2D(x1, y1)
-//      val p2: Point2D = draggingCursor
-//      new graph.lib.Line2D (p1, p2)
-//    } else null
-//
+
 //
 //
 //  def onMouseIsDragged(point: Point2D): Unit = {
@@ -273,15 +267,16 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
   //waarschijnlijk kan Expander een object blijven, maar dit is
   //gemakkelijker en consistenter 
 	
-  var graph:EDrawings = getRandomDrawing()
-  //var graph:EDrawings = EDrawings.STICK
+  //var graph:EDrawings = getRandomDrawing()
+  var graph:EDrawings = EDrawings.STICK
   //var graph:EDrawings = EDrawings.CUBE //getRandomDrawing()
   
   private var model: TGraphModel =  new GraphModel( graph )
 			drawGraph(/*model*/)
   val dragger = new Dragger(model, this)
-  val changer = new Changer(model)
+  val changer = new Changer(model, this)
   val expander = new Expander(model, this)
+  val commonActions = new CommonActions(model, this)
 			
 //Expander doet niets 
 //			//			Thread.sleep(1000)

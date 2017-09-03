@@ -94,9 +94,10 @@ class EditGraphController(var model: TGraphModel, cv:html.Canvas) extends{val ca
     draggingCursor = point
   }
 
-  def removeEdge(foundEdgeVertex1: Int, foundEdgeVertex2: Int): Unit = {
-    model.removeEdge(foundEdgeVertex1, foundEdgeVertex2)
-  }
+//  //Naar Changer
+//  def removeEdge(foundEdgeVertex1: Int, foundEdgeVertex2: Int): Unit = {
+//    model.removeEdge(foundEdgeVertex1, foundEdgeVertex2)
+//  }
 //		Grid edges = model.getEdges();
 //		edges.setConnected( foundEdgeVertex1, foundEdgeVertex2, false);
 //		Grid edges = model.getEdges();

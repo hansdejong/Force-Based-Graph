@@ -23,16 +23,16 @@ trait TGraphModel  {
   def findFirstVertex(point: Point2D): Int
 
 //Blijft over
-  def removeEdge(vertex1: Int, vertex2: Int): Unit
+//  def removeEdge(vertex1: Int, vertex2: Int): Unit
 
 //Moet weg
-  def findEdge(point: Point2D): Boolean
+//  def findEdge(point: Point2D): Boolean
 
 //Moet weg
-  def getLastFoundEdgeVertex1(): Int
+//  def getLastFoundEdgeVertex1(): Int
 
 //Moet weg
-  def getLastFoundEdgeVertex2(): Int
+//  def getLastFoundEdgeVertex2(): Int
 
 }
 

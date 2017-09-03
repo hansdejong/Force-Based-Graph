@@ -1,6 +1,6 @@
 package graph.lib
 
-class FBGLib {
+object FBGLib {
   def melding (what:String,where:String): Unit = {} //dummy
   
 //	//Ook behoefte aan een losse versie
@@ -79,9 +79,9 @@ class FBGLib {
 //	  	false
 //	}
 	
-		def onLine( xP:Double, yP:Double, x1:Double, y1:Double, x2:Double, y2:Double, d:Double ): Boolean = {
+		def onLine( xP:Double, yP:Double, x1:Double, y1:Double, x2:Double, y2:Double ): Boolean = {
   		  if (x1==x2 && y1==y2 ) return false
-
+       val d:Double = 1
 //      translatie naar O:
 //      val trans_xP = xP-x1
 //		  val trans_yP = yP-y1
