@@ -9,11 +9,55 @@ import graph.lib._
  * III- Een edge wordt aangeklikt => edge verdwijnt
  * */
 class Changer ( model: TGraphModel, writer: FBGPainting ) {
+  var x = 0.0; var y = 0.0
+  //onPressed A
+  def findVertexXY(): Point2D = {
+    var default = new Point2D()
+    for (i <- 0 until model.vertices.size) {
+      var v: Vertex3D = model.vertices(i)
+      if (v.isDragged){
+        var x: Int = v.getX
+        var y: Int = v.getY
+        default = new Point2D(x,y)
+      }
+    }
+    default
+   }
+  //onPressed B
+  def startLine( xCursor: Int, yCursor: Int) = {
+    x = xCursor; y = yCursor
+  }
+  //onDragged
+  def dragLine( xCursor: Int, yCursor: Int): Unit = {
+    writer.drawLine(x,y,xCursor, yCursor)
+  }
+  //onReleased A (niet op andere vertex)
   def makeNewVertex() ={
   //////is al maal zoom
-  ////      val foundVertex: Int = model.findFirstVertex(pointModel)
-  ////      graphController.onMouseIsReleased(pointModel, foundVertex)
+  ////      val foundVertex: Int = model.findFirstVertex(pointCursor)
+  ////      graphController.onMouseIsReleased(pointCursor, foundVertex)
    
+  }
+  //onReleased A (wel op andere vertex)
+  def makeEdgeOrVertex(xy: Point2D) ={
+    val vertex1 = writer.commonActions.lastFoundVertexIndex
+    if(writer.commonActions.connectVertex(xy)){
+      //edge tussen twee vertices
+      val vertex2 = writer.commonActions.lastFoundVertexIndex
+      model.edges.setConnected(vertex1,vertex2,true)
+      writer.taAppendText("Connected " + vertex1 + " en " + vertex2)
+    }
+    else
+    {
+      //Nieuwe vertex, verbonden met vertrekpunt
+      val edges: Grid = model.edges
+      val vertex3D: Vertex3D = new Vertex3D()
+      vertex3D.setXYZ(xy.x, xy.y, 0)
+      edges.setConnected(vertex1, model.vertices.size, true)
+      model.vertices.append(vertex3D) 
+      //OK maar werkt scherm niet meteen bij 
+      
+    }
   }
       //  def onMouseIsReleased(point: Point2D, releasedVertex: Int): Unit = {
 //    if (vertexIsDragged) {
@@ -29,7 +73,7 @@ class Changer ( model: TGraphModel, writer: FBGPainting ) {
   
   
   //      val leftButton: Boolean = (event.getModifiers == InputEvent.BUTTON1_MASK)
-//      val foundVertex: Int = model.findFirstVertex(pointModel)
+//      val foundVertex: Int = model.findFirstVertex(pointCursor)
 //      if (foundVertex != -1) {
 //        if (!leftButton) {
 ////Lib.melding( "RechterMuisknop", "ForceBasedGraphPaintingPanel.mousePressed()" );
@@ -37,7 +81,7 @@ class Changer ( model: TGraphModel, writer: FBGPainting ) {
 //        } else {
 //          graphController.onMouseIsPressed(leftButton, foundVertex)
 //        }
-//      } else if (model.findEdge(pointModel)) {
+//      } else if (model.findEdge(pointCursor)) {
 //        graphController.removeEdge(model.getLastFoundEdgeVertex1,
 //                                   model.getLastFoundEdgeVertex2)
 //      }

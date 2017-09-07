@@ -85,41 +85,48 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 	}
 	
 	//------------Mouse---------------------------------------------------------------------
-	  def onDragged(e: dom.MouseEvent)
+	def onDragged(e: dom.MouseEvent)
   {//add whatever
 	    	
-	      val xModel: Double = (e.clientX -rect.left) * zoom //even zonder zoom
-        val yModel: Double = (e.clientY -rect.top) * zoom
-        val pointModel: Point2D = new Point2D(xModel, yModel)
+	      val xCursor: Double = (e.clientX -rect.left) * zoom //even zonder zoom
+        val yCursor: Double = (e.clientY -rect.top) * zoom
+        //val pointCursor: Point2D = new Point2D(xCursor, yCursor)
    	  scratch(e)
 //taText("left "+ rect.left+ ", top " + rect.top)
    	  if (Global.gDraggingMode){
    	   //// taText("voor "+ model) 
-   	    dragger.dragVertex(xModel.toInt, yModel.toInt)
+   	    dragger.dragVertex(xCursor.toInt, yCursor.toInt)
+    	  testDrawing()
+     	  //nog eens proberen
+	      //expander.expandGraph(model)//Doet het (hier) niet
+   	    drawGraph()
+
    	    taText("left "+ rect.left+ ", top " + rect.top)//19,95
 
    	    /////taAppendText("na "+ model)
    	  }
    	  else{
-   	    changer.tryConnecting
+   	    testDrawing()
+     	  changer.dragLine(xCursor.toInt, yCursor.toInt)
+   	    drawGraph()
+   	    //changer.tryConnecting
    	  }
-   	  testDrawing()
-	    //expander.expandGraph(model)//Doet het (hier) niet
-   	  drawGraph()
   }
-  def onMoved(e: dom.MouseEvent){//add whatever
+  
+	def onMoved(e: dom.MouseEvent){//add whatever
   }
+  
   def onReleased(e: dom.MouseEvent) = {//add whatever
     val rect = canvas.getBoundingClientRect()
     ////  override def mouseReleased(event: MouseEvent): Unit = {
-    val xModel: Double = (e.clientX - rect.left) * zoom
-    val yModel: Double = (e.clientY - rect.top) * zoom
-    val pointModel: Point2D = new Point2D(xModel, yModel)
+    val xCursor: Double = (e.clientX - rect.left) * zoom
+    val yCursor: Double = (e.clientY - rect.top) * zoom
+    val pointCursor: Point2D = new Point2D(xCursor, yCursor)
 //Lib.melding("Omhoog: " + x + ", " + y, "ForceBasedGraphPaintingPanel.mouseReleased");
  if (Global.gDraggingMode){////    if (draggingMode) {
-       dragger.releaseDragger()
+       //dragger.releaseDragger()
     } else {
-       changer.makeNewVertex()
+       changer.makeEdgeOrVertex(pointCursor)
     }
 //////Lib.melding( "Release before recalc ", "ForceBasedGraphPaintingPanel.mouseReleased");
 //////Lib.melding( "Release before recalc ", "ForceBasedGraphPaintingPanel.mouseReleased");
@@ -132,16 +139,25 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
   def onPressed(e: dom.MouseEvent) = {//add whatever
       //////mouseListener = new MouseAdapter(){
 ////  def mousePressed(event: MouseEvent): Unit = {
-    val xModel: Double = (e.clientX - rect.left) * zoom
-    val yModel: Double = (e.clientY - rect.top) * zoom
+    var vertexConnected = false
+    val xCursor: Double = (e.clientX - rect.left) * zoom
+    val yCursor: Double = (e.clientY - rect.top) * zoom
     //TODO
-    val pointModel: Point2D = new Point2D(xModel, yModel)
+    val pointCursor: Point2D = new Point2D(xCursor, yCursor)
 ////showPoints( pointModel/*, point*/);//TODO, magweg
-    commonActions.connectVertex(pointModel)
+    vertexConnected = commonActions.connectVertex(pointCursor) //geldt voor alle acties
     if (!Global.gDraggingMode) {
-      //Ook een Edge kan worden aangewezen
-      changer.removeEdgeIfFound(pointModel)//zou moeten werken: changer III
-    taText("\nDragging mode: "+ Global.gDraggingMode)
+      if (vertexConnected){
+        val xy = changer.findVertexXY
+        changer.startLine( xy.x.toInt, xy.y.toInt )
+      }
+      else{
+        //Ook een Edge kan worden aangewezen
+        changer.removeEdgeIfFound(pointCursor)//zou moeten werken: changer III
+      }
+      
+       
+      taText("\nDragging mode: "+ Global.gDraggingMode)
       
       changer.makeNewVertex() //Beter naar dragging?
     }

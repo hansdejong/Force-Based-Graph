@@ -42,7 +42,7 @@ class Expander (model: TGraphModel, writer: FBGPainting  ) {
       v.setNet_force(0, 0, 0)
       for (j <- 0 until vertices.size) {
  //// loop through other vertices
-        if (i != j){ //continue
+        if (i != j){ // else continue
           u = vertices(j)
           v.addRepulsion(u)
  //        
@@ -54,7 +54,7 @@ class Expander (model: TGraphModel, writer: FBGPainting  ) {
       }
       for (j <- 0 until vertices.size) {
  //// loop through edges
-        if (edges.isConnected(i, j)){ //continue
+        if (edges.isConnected(i, j)){ //else continue
           u = vertices(j)
           v.addAttraction(u)
           v.addCenterForce(/*zoom*/)
