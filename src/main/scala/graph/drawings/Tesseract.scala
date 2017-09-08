@@ -1,23 +1,17 @@
 package graph.drawings
 
-import graph.lib._
-
 import scala.collection.mutable.ArrayBuffer
-
 import graph.model.Grid
-
 import graph.model.Vertex3D
 
 class Tesseract extends TDrawing {
 
   var vertices: ArrayBuffer[Vertex3D] = new ArrayBuffer[Vertex3D]()
-
   var edges: Grid = null
 
   makeGraph_Tesseract()
 
   private def makeGraph_Tesseract(): Unit = {
-//		int numVertices = 25;
     val numVertices: Int = 16
     val numVerticesPerCube: Int = 8
     edges = new Grid(numVertices)
@@ -65,45 +59,5 @@ class Tesseract extends TDrawing {
       edges.setConnected(i, i + 8, true)
     }
   }
-  /*
-//Maak 8 extra spikes=========================
-    	for( int i=0; i<numVerticesPerCube; i++){
-			Vertex3D v = new Vertex3D( new Color( 0xccffff ));
-			v.setLabel( Integer.toString( i+16 ));
-			v.setXYZ(200+Math.random()*300, 100+Math.random()*200, 100+Math.random()*200);
-			vertices.add( v );
-		}
-    	for( int i=0; i<numVerticesPerCube; i++){
-    		edges.setConnected(i, i+16, true);
-    	}    	
-//Maak een gele en
-		Vertex3D v = new Vertex3D( Color.YELLOW );
-		v.setXYZ(200+Math.random()*300, 100+Math.random()*200, 100+Math.random()*200);
-		vertices.add( v );
-    	for( int i=8; i<16; i++){
-    		edges.setConnected(i, 24, true);
-    	}    	
-   */
-
-  /*
-//Maak 8 extra spikes=========================
-    	for( int i=0; i<numVerticesPerCube; i++){
-			Vertex3D v = new Vertex3D( new Color( 0xccffff ));
-			v.setLabel( Integer.toString( i+16 ));
-			v.setXYZ(200+Math.random()*300, 100+Math.random()*200, 100+Math.random()*200);
-			vertices.add( v );
-		}
-    	for( int i=0; i<numVerticesPerCube; i++){
-    		edges.setConnected(i, i+16, true);
-    	}    	
-//Maak een gele en
-		Vertex3D v = new Vertex3D( Color.YELLOW );
-		v.setXYZ(200+Math.random()*300, 100+Math.random()*200, 100+Math.random()*200);
-		vertices.add( v );
-    	for( int i=8; i<16; i++){
-    		edges.setConnected(i, 24, true);
-    	}    	
- */
-
 }
 

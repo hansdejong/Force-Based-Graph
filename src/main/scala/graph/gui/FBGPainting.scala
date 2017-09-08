@@ -90,26 +90,30 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 	    	
 	      val xCursor: Double = (e.clientX -rect.left) * zoom //even zonder zoom
         val yCursor: Double = (e.clientY -rect.top) * zoom
-        //val pointCursor: Point2D = new Point2D(xCursor, yCursor)
-   	  scratch(e)
+        val pointCursor: Point2D = new Point2D(xCursor, yCursor)
+   	 // scratch(e)
 //taText("left "+ rect.left+ ", top " + rect.top)
-   	  if (Global.gDraggingMode){
-   	   //// taText("voor "+ model) 
-   	    dragger.dragVertex(xCursor.toInt, yCursor.toInt)
-    	  testDrawing()
-     	  //nog eens proberen
-	      //expander.expandGraph(model)//Doet het (hier) niet
-   	    drawGraph()
-
-   	    taText("left "+ rect.left+ ", top " + rect.top)//19,95
-
-   	    /////taAppendText("na "+ model)
-   	  }
-   	  else{
-   	    testDrawing()
-     	  changer.dragLine(xCursor.toInt, yCursor.toInt)
-   	    drawGraph()
-   	    //changer.tryConnecting
+   	  //Het volgende werkt niet
+   	  taAppendText("Vertex hit:" + commonActions.pressedAVertex)
+   	  if( commonActions.pressedAVertex ){
+     	  if (Global.gDraggingMode ){
+     	   //// taText("voor "+ model) 
+     	    dragger.dragVertex(xCursor.toInt, yCursor.toInt)
+      	  testDrawing()
+       	  //nog eens proberen
+  	      //expander.expandGraph(model)//Doet het (hier) niet
+     	    drawGraph()
+  
+     	    //taText("left "+ rect.left+ ", top " + rect.top)//19,95
+  
+     	    /////taAppendText("na "+ model)
+     	  }
+     	  else{
+     	    testDrawing()
+       	  changer.dragLine(xCursor.toInt, yCursor.toInt)
+     	    drawGraph()
+     	    //changer.tryConnecting
+     	  }
    	  }
   }
   
@@ -145,7 +149,8 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
     //TODO
     val pointCursor: Point2D = new Point2D(xCursor, yCursor)
 ////showPoints( pointModel/*, point*/);//TODO, magweg
-    vertexConnected = commonActions.connectVertex(pointCursor) //geldt voor alle acties
+    commonActions.inspectCursorSpot(pointCursor) //geldt voor alle acties
+    vertexConnected = commonActions.pressedAVertex
     if (!Global.gDraggingMode) {
       if (vertexConnected){
         val xy = changer.findVertexXY
@@ -283,8 +288,8 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
   //waarschijnlijk kan Expander een object blijven, maar dit is
   //gemakkelijker en consistenter 
 	
-  //var graph:EDrawings = getRandomDrawing()
-  var graph:EDrawings = EDrawings.STICK
+  var graph:EDrawings = getRandomDrawing()
+  //var graph:EDrawings = EDrawings.STICK
   //var graph:EDrawings = EDrawings.CUBE //getRandomDrawing()
   
   private var model: TGraphModel =  new GraphModel( graph )

@@ -3,21 +3,15 @@ package graph.model
 import scala.collection.mutable.ArrayBuffer
 import graph.drawings._
 import graph.drawings.EDrawings._
-import graph.errors.ProgrammingError
 import graph.lib._
 
 
 class GraphModel extends TGraphModel{
 
   var vertices: ArrayBuffer[Vertex3D] = new ArrayBuffer[Vertex3D]()
-
   var maxNumberOfEdges: Int = 0
-
   var edges: Grid = null
 
-//  private var foundEdgeVertex1: Int = 0
-//
-//  private var foundEdgeVertex2: Int = 0
 
   def this(theNumberOfVertices: Int, theMaxNumberOfEdges: Int) = {
     this()
@@ -67,7 +61,6 @@ class GraphModel extends TGraphModel{
     val x: Double = vertex.getX
     val y: Double = vertex.getY
     val r: Double = Vertex3D.radius
-//  val shape: Shape = new Ellipse2D.Double(x - r, y - r, 2 * r, 2 * r)
     val shape: Circle2D = new Circle2D(new Point2D(x, y), r)
     shape.contains(point)
   }
@@ -77,7 +70,7 @@ class GraphModel extends TGraphModel{
     theGraphName match {
       case BUCKYBALL => makeGraph_Buckyball()
       case CUBE => makeGraph_Cube()
-      case DODECAEDER => makeGraph_Dodecaeder()
+      case DODECAEDER => makeGraph_Romb_Dodecaeder()
       case DOUGHNUT => makeGraph_Doughnut()
       case MOBIUS => makeGraph_Mobius()
       case RANDOM => makeGraph_Random()
@@ -88,23 +81,10 @@ class GraphModel extends TGraphModel{
       case STICK => makeGraph_Stick()
       case TESSERACT => makeGraph_Tesseract()
       case _ =>
-        throw new ProgrammingError(
-          "Unknown graphname inGraphModel.makeGraph()")
-
     }
 
 
   }
-//		makeGraph_Doughnut();
-//		makeGraph_Tesseract();
-//		makeGraph_Snake();
-//		makeGraph_Snakering();
-//		makeGraph_Simplex4();
-//		makeGraph_Doughnut();
-//		makeGraph_Tesseract();
-//		makeGraph_Snake();
-//		makeGraph_Snakering();
-//		makeGraph_Simplex4();
 
   private def makeGraph_Buckyball(): Unit = {
     val bucky: TDrawing = new BuckyBall()
@@ -118,7 +98,7 @@ class GraphModel extends TGraphModel{
     edges = cube.edges
   }
 
-  private def makeGraph_Dodecaeder(): Unit = {
+  private def makeGraph_Romb_Dodecaeder(): Unit = {
     val dodecaeder: TDrawing = new RombischeDodecaeder()
     vertices = dodecaeder.vertices
     edges = dodecaeder.edges
@@ -183,7 +163,7 @@ class GraphModel extends TGraphModel{
 
   //Alleen om te kunnen zien of een model is veranderd
   override def toString ={
-  var dragged = ""  
+    var dragged = ""  
     	for (i <- 0 until vertices.size) {
 				if (vertices(i).isDragged){
 					dragged = dragged +"<" + i +">"

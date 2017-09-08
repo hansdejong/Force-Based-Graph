@@ -1,6 +1,6 @@
 package graph.opstart
 /*** 
- * Afgezien van de objectnaam begonnen als een kopie van Scratchpad (en zou moeten tekenen)
+ * Afgezien van de objectnaam begonnen als een kopie van Scratchpad (zou moeten tekenen).
  * Eerst wil ik de mogelijke communicatiemanieren met de FBG.html uitproberen, 
  * daarna pas andere klassen betrekken: 
  * Ik krijg een referentie binnen naar Canvas --> daar op tekenen
@@ -113,23 +113,15 @@ object StartGraph{
   
   @JSExport //Is dit goed of moet het TopLevel zijn?  
   def main(canvas: html.Canvas, tekstvak: html.TextArea) = {
-    //Globals.gCanvas = Some(canvas)
-    //mCanvas = canvas
-    //Globals.gTextArea = Some(tekstvak)
-    //Global.canvasRect = canvas.getBoundingClientRect()
     tekstvak.defaultValue = "Huidige app:" + Global.gApp
     Global.gApp match{
       case "FBG" => runFBG(canvas, tekstvak)
       case "ScratchPad" => ScratchPad.runScratchPad(canvas)
       case "Sierpinski" => ScalaJSExample.runSierpinski(canvas)
       case _ => println ("Foutje in StartGraph.loadCanvas")
-          
-      
     }
     
     def runFBG(canvas: html.Canvas, tekstvak: html.TextArea):Unit = {
-//       painter = new FBGPaintingPanel(canvas,tekstvak)
-       //new FBGPaintingPanel(canvas,tekstvak)
        new FBGPainting(canvas,tekstvak)
     }
   }

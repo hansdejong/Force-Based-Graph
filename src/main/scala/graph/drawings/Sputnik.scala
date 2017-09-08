@@ -1,18 +1,14 @@
 package graph.drawings
 
-import graph.lib._
-
 import scala.collection.mutable.ArrayBuffer
-
 import graph.model.Grid
-
 import graph.model.Vertex3D
+import graph.lib._
 
 
 class Sputnik extends TDrawing {
 
   var vertices: ArrayBuffer[Vertex3D] = new ArrayBuffer[Vertex3D]()
-
   var edges: Grid = null
 
   makeGraph_Sputnik()
@@ -64,6 +60,7 @@ class Sputnik extends TDrawing {
     for (i <- 0.until(8)) {
       edges.setConnected(i, i + 8, true)
     }
+    //spikes
     for (i <- 0 until numVerticesPerCube) {
       val v: Vertex3D = new Vertex3D("#ccffff")
       v.label_=(java.lang.Integer.toString(i + 16))
@@ -75,7 +72,7 @@ class Sputnik extends TDrawing {
     for (i <- 0 until numVerticesPerCube) {
       edges.setConnected(i, i + 16, true)
     }
-//Maak een gele en
+//Maak een gele vertex
     val v: Vertex3D = new Vertex3D(Color.YELLOW)
     v.setXYZ(200 + Math.random() * 300,
              100 + Math.random() * 200,

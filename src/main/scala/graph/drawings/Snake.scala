@@ -1,18 +1,14 @@
 package graph.drawings
 
 import graph.lib._
-
 import scala.collection.mutable.ArrayBuffer
-
 import graph.model.Grid
-
 import graph.model.Vertex3D
 
 
 class Snake extends TDrawing {
 
   var vertices: ArrayBuffer[Vertex3D] = new ArrayBuffer[Vertex3D]()
-
   var edges: Grid = null
 
   makeGraph_Snake()
@@ -119,6 +115,5 @@ class Snake extends TDrawing {
     edges.setConnected(38, 18, true)
     edges.setConnected(39, 19, true)
   }
-
 }
 

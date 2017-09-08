@@ -1,6 +1,8 @@
 package graph.gui
+
 import graph.model._
 import graph.lib._
+import graph.global._
 
 /**
  * Wijzigmode
@@ -41,7 +43,8 @@ class Changer ( model: TGraphModel, writer: FBGPainting ) {
   //onReleased A (wel op andere vertex)
   def makeEdgeOrVertex(xy: Point2D) ={
     val vertex1 = writer.commonActions.lastFoundVertexIndex
-    if(writer.commonActions.connectVertex(xy)){
+    writer.commonActions.inspectCursorSpot(xy)
+    if( writer.commonActions.pressedAVertex ){
       //edge tussen twee vertices
       val vertex2 = writer.commonActions.lastFoundVertexIndex
       model.edges.setConnected(vertex1,vertex2,true)
@@ -51,7 +54,8 @@ class Changer ( model: TGraphModel, writer: FBGPainting ) {
     {
       //Nieuwe vertex, verbonden met vertrekpunt
       val edges: Grid = model.edges
-      val vertex3D: Vertex3D = new Vertex3D()
+//      val vertex3D: Vertex3D = new Vertex3D()
+      val vertex3D: Vertex3D = new Vertex3D(Global.gColor)
       vertex3D.setXYZ(xy.x, xy.y, 0)
       edges.setConnected(vertex1, model.vertices.size, true)
       model.vertices.append(vertex3D) 

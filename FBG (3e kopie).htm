@@ -7,23 +7,23 @@
         <script src="./webixcode/webix.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
-    Deze pagina wil ik geleidelijk veranderen in een FBG-app-frontend:<br>
+    Dit wil ik geleidelijk veranderen in een FBG-app-frontend:<br>
 Een canvas, een aantal labels, knoppen en sliders. Zie de 
-<a href="https://webix.com/tutorials/" target="_blank">Webix tutorials</a>.<br>
-De canvascode is voorlopig die van de canvas-app van Li Haoyi.<br>
+<a href="https://webix.com/tutorials/" target="_blank">Webix tutorials</a><br>
+De canvascode is voorlopig die van de canvas-app van Li Haoyi.
 Ik moet kunnen tekenen, slepen, de sliders uitlezen, schrijven naar een tekstvak, <br>
 een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties. 
-<!--======= Canvas ==================================================================-->
+
 <!-- Ik zie geen canvas-view dus dan maar zo: -->
-    <div id="FBG" style="width:750px; height:400px; margin:10px; border:1px solid #c0c0c0;">
+    <div id="FBG" style="width:750px; height:300px; margin:10px; border:1px solid #c0c0c0;">
       <canvas id="canvas">
       </canvas>
     </div>
-<!--======= Tekstvak (-ken) =============================================================-->
-    <div id="Tekstvakken" style="width:750px; height:43px; margin:10px; border:1px solid #c0c0c0;">
-	<TEXTAREA  ID="tekstvak1" ROWS="2" COLS="105" style="resize:none"></TEXTAREA>
-<!--	<TEXTAREA  ID="tekstvak2" ROWS="4" COLS="25" READONLY>Niet veranderbaar</TEXTAREA>
-	<TEXTAREA  ID="tekstvak3" ROWS="4" COLS="20" DISABLED>Disabled</TEXTAREA>-->
+    
+    <div id="Tekstvakken" style="width:750px; height:80px; margin:10px; border:1px solid #c0c0c0;">
+	<TEXTAREA  ID="tekstvak1" ROWS="4" COLS="50" style="resize:none"></TEXTAREA>
+	<TEXTAREA  ID="tekstvak2" ROWS="4" COLS="25" READONLY>Niet veranderbaar</TEXTAREA>
+	<TEXTAREA  ID="tekstvak3" ROWS="4" COLS="20" DISABLED>Disabled</TEXTAREA>
     </div>
     <div id="Controls" style="width:500px; height:200px; margin:10px;"></div>
     
@@ -31,7 +31,7 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 
         <script type="text/javascript" charset="utf-8"> //De webix-code ==========
         //place for your app
-        //webix.ui() can be optionally placed into the webix.ready() function 
+        //webix.ui() can be optionally placed into webix.ready() function 
         //to ensure that your code will be executed as soon as page loading is complete.
 	webix.ready(function(){
 
@@ -70,17 +70,20 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 //======= De toolbar ================================================================
  { view:"toolbar", id:"mybar", elements:[
 	{ view:"button", value:"Volgende", width: 70, click:"SCALA_volgende()"},
+//				 document.getElementById('canvas'), 
+//				 document.getElementById('tekstvak1')
+//				 )"},
 	    
 	{ view:"button", value:"Activeer kleur:", width: 110, click:function(){	    
 			var json = JSON.stringify(this.getParentView().getValues(),0,1);
 			var kleur = JSON.parse(json)["color"];
 			SCALA_kiesKleur(kleur);
-//			webix.message("<pre>"+ kleur +"</pre>");        
+			webix.message("<pre>"+ kleur +"</pre>");        
 		}
 	},
 	
 	{ view:"colorpicker", id:"colorId", name:"color", value:"#ffaadd", width:120 },
-	/*  Uitlezen kleurenpicker lukt, koppelen event (functie) niet.
+	/*
 	{ view:"colorpicker", name:"color", value:"#ffaadd", width:120, update:function(){	
 	webix.message("<pre>"+ "Hallo"+"</pre>");        
 		}
@@ -104,7 +107,7 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 		}
 	},
 */
- /*       { view:"button", value:"Test waarden", width: 95, click:"ToonWaarden" }*/
+        { view:"button", value:"Test waarden", width: 95, click:"ToonWaarden" }
 	
 ]//einde toolbar-elementen array
 }//Einde toolbarview
@@ -113,7 +116,7 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 	}); //Einde webix.ready
 //======= De Hulpfuncties =======================================================
 
-function ToonWaarden(){ //Bewaren
+function ToonWaarden(){
 	var json = JSON.stringify(this.getParentView().getValues(),0,1);
 	webix.message("<pre>"+ json +"</pre>");        	
 };
@@ -130,8 +133,6 @@ function ToonWaarden(){ //Bewaren
      StartGraph.main(document.getElementById('canvas'), 
 				 document.getElementById('tekstvak1') );
 </script>
-<br><br><br>
-<!--
 ToDo (aanpassen): 
 <button id="click-me-button" type="button" onclick="SCALA_test()">
 	  Scala testknop
@@ -146,6 +147,5 @@ ToDo (aanpassen):
 	<li>webix.message("String"); vanuit Scala? Denk het niet      
 	
 </ul>
--->
     </body> 
 </html>

@@ -6,10 +6,11 @@ import org.scalajs.dom
 
 class CommonActions(model: TGraphModel, writer: FBGPainting ) {
   var lastFoundVertexIndex = -1
+  var pressedAVertex = false
   
   //Deze routine ook gebruiken in wijzigmodel. Hernoemen en verplaatsen.
   //Dit was connectDragger
-  def connectVertex(/*e: dom.MouseEvent, */pointCursor: Point2D):Boolean = {
+  def inspectCursorSpot(/*e: dom.MouseEvent, */pointCursor: Point2D):Unit = {
     writer.taAppendText ("Cursor "+ pointCursor.x + "," + pointCursor.y)
        var oneConnected:Boolean  = false
        var index = -1
@@ -26,7 +27,7 @@ class CommonActions(model: TGraphModel, writer: FBGPainting ) {
        //Dit er weer uit:
        for (vertex3D <- model.vertices; if(vertex3D.isDragged)) 
             writer.taText("raak")
-       oneConnected
+       pressedAVertex = oneConnected
   }
 
 }

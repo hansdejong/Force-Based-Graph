@@ -1,17 +1,13 @@
 package graph.drawings
 
 import graph.lib._
-
 import scala.collection.mutable.ArrayBuffer
-
 import graph.model.Grid
-
 import graph.model.Vertex3D
 
 class Cube extends TDrawing {
 
   var vertices: ArrayBuffer[Vertex3D] = new ArrayBuffer[Vertex3D]()
-
   var edges: Grid = null
 
   makeGraph_Cube()

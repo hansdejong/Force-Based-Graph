@@ -1,20 +1,13 @@
 package graph.drawings
 
 import graph.lib._
-
 import scala.collection.mutable.ArrayBuffer
-
 import graph.model.Grid
-
 import graph.model.Vertex3D
-
-import scala.beans.{BeanProperty, BooleanBeanProperty}
-
 
 class Mobius extends TDrawing {
 
   var vertices: ArrayBuffer[Vertex3D] = new ArrayBuffer[Vertex3D]()
-
   var edges: Grid = null
 
   makeGraph_Mobius()
@@ -53,6 +46,5 @@ class Mobius extends TDrawing {
   }
 //Verbind 0 met 3 en 2 met 5,
 //Verbind 0 met 3 en 2 met 5,
-
 }
 

@@ -1,18 +1,14 @@
 package graph.drawings
 
 import graph.lib._
-
 import scala.collection.mutable.ArrayBuffer
-
 import graph.model.Grid
-
 import graph.model.Vertex3D
 
 
 class BuckyBall extends TDrawing {
 
   var vertices: ArrayBuffer[Vertex3D] = new ArrayBuffer[Vertex3D]()
-
   var edges: Grid = null
 
   makeGraph_BuckyBall()
@@ -216,6 +212,5 @@ class BuckyBall extends TDrawing {
     edges.setConnected(47, 9, true)
     edges.setConnected(48, 59, true)
   }
-
 }
 

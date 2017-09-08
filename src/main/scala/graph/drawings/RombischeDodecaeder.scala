@@ -1,11 +1,8 @@
 package graph.drawings
 
 import graph.lib._
-
 import scala.collection.mutable.ArrayBuffer
-
 import graph.model.Grid
-
 import graph.model.Vertex3D
 
 //remove if not needed
@@ -14,7 +11,6 @@ import scala.collection.JavaConversions._
 class RombischeDodecaeder extends TDrawing {
 
   var vertices: ArrayBuffer[Vertex3D] = new ArrayBuffer[Vertex3D]()
-
   var edges: Grid = null
 
   makeGraph_Dodecaeder()
@@ -31,7 +27,6 @@ class RombischeDodecaeder extends TDrawing {
       vertices.add(v)
     }
     for (i <- 8.until(14)) {
-//    		Vertex3D v = new Vertex3D( Color.YELLOW );
       var v: Vertex3D = null
       if (i == 8 || i == 13) v = new Vertex3D(Color.YELLOW)
       else if (i == 10 || i == 11) //        		v = new Vertex3D( Color.MAGENTA );

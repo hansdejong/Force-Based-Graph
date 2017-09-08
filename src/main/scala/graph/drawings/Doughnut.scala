@@ -1,24 +1,18 @@
 package graph.drawings
 
 import graph.lib._
-
 import scala.collection.mutable.ArrayBuffer
-
 import graph.model.Grid
-
 import graph.model.Vertex3D
 
 
 class Doughnut extends TDrawing {
 
   var vertices: ArrayBuffer[Vertex3D] = new ArrayBuffer[Vertex3D]()
-
   var edges: Grid = null
 
-//Liefst even
+//Beide liefst even
   private var numRows: Int = 8
-
-//Liefst even
   private var numColumns: Int = 8
 
   makeGraph_Doughnut()
