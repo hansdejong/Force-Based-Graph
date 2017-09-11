@@ -19,7 +19,6 @@ object Vertex3D {
 
 class Vertex3D extends Comparable[Vertex3D] {
 val dummy = 4
-// location. Toegevoegd. Beter in Sprite?
   var location: Point3D = new Point3D()
 
   var color: String = getRandomColor
@@ -58,20 +57,10 @@ val dummy = 4
   }
 
   def setXYZ(x: Double, y: Double, z: Double): Unit = {
-//Lib.melding( "yyy","Vertex3D.setXYZ()");
     val newPoint: Point3D = new Point3D(x, y, z)
     location = newPoint
   }
 
-
-////Wat onzin om de bloel; te laten compileren
-//  def this(theColor: String) = {this();/* color = theColor*/ }
-//  def setXYZ(x: Double, y: Double, z: Double):Unit={}
-//  def getX(): Int = 0
-//  def getY(): Int = 0
-//  def getZ(): Int = 0
-//  var label: String = ""
-  
   def getX(): Int = location.x.toInt
 
   def getY(): Int = location.y.toInt
@@ -80,17 +69,16 @@ val dummy = 4
 
   def getLastMovement(): Double = movement
 
-  /**Ik heb de zoomfactor eruit gesloopt. 
-   * Expanderen heeft niets met de schaal te maken als het goed is.*/
+//Hier wel scaling, geen zooming  
 //Als addAttraction, maar naar vast centraal punt
-  def addCenterForce(/*zoomFactor: Double*/): Unit = {
+  def addCenterForce(): Unit = {
     val scaling: Double = 0.00001
     val vx: Double = location.x
     val vy: Double = location.y
     val vz: Double = location.z
-    val cx: Double = 600 /* * zoomFactor*/
-    val cy: Double = 400 /* * zoomFactor*/
-    val cz: Double = 200 /* * zoomFactor*/
+    val cx: Double = 600
+    val cy: Double = 400
+    val cz: Double = 200
     net_force.x = net_force.x + scaling * (cx - vx)
     net_force.y = net_force.y + scaling * (cy - vy)
     net_force.z = net_force.z + scaling * (cz - vz)
@@ -185,9 +173,6 @@ val dummy = 4
     val oy: Double = other.location.y
     if ((ty < oy)) -1 else (if ((ty == oy)) 0 else 1)
   
-//  //Ik wilde dat de boel eerst compileerde. 
-//  //Bij Point3D blijft hij zeueren over een Point3d not found 
-//    if ((this.dummy < other.dummy)) -1 else (if ((this.dummy == other.dummy)) 0 else 1)
   }
 
 }

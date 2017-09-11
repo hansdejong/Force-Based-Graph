@@ -1,4 +1,4 @@
-package graph.gui
+package graph.view
 import graph.model._
 import graph.gui._
 import graph.lib._

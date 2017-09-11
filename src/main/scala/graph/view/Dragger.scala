@@ -1,9 +1,9 @@
-package graph.gui
+package graph.view
 import graph.model._
 import graph.gui._
 import graph.lib._
 import org.scalajs.dom
-
+//Zoom nodig?
 class Dragger(model: TGraphModel, writer: FBGPainting ) {
   
    def dragVertex( xCursor: Int, yCursor: Int): Unit = {

@@ -25,7 +25,9 @@ object Global {
  // var gTextArea: Option[html.TextArea] = None
   var gColor: String = "red" //TOCH NOG HANDHAVEN
   var gDraggingMode: Boolean = true //anders "wijzig"
-  var gZoom_Int = 1
+  var gZoom:Int = 1
+  var gNodes:Int = 1
+  var gEdges:Int = 1
  // var canvasRect:ClientRect = new ClientRect()
 
   //gApp geeft de  actiev applicatie, in te stellen via "welke"

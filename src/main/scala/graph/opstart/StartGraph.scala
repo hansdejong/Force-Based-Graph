@@ -56,15 +56,17 @@ object StartGraph{
 
   @JSExportTopLevel("SCALA_nodes")
   def SCALA_nodes( noNodes:Int ): Unit = {
+    Global.gNodes = noNodes
     appendPar(document.body, "Aantal nodes nu ingesteld op " + noNodes)
   }
   @JSExportTopLevel("SCALA_edges")
   def SCALA_edges( noEdges:Int ): Unit = {
+    Global.gEdges = noEdges
     appendPar(document.body, "Aantal connecties nu ingesteld op " + noEdges)
   }
   @JSExportTopLevel("SCALA_zoom")
   def SCALA_zoom( zoom:Int ): Unit = {
-    
+    Global.gZoom = zoom
     appendPar(document.body, "Zoom-factor nu ingesteld op " + zoom)
   }
   @JSExportTopLevel("SCALA_volgende")

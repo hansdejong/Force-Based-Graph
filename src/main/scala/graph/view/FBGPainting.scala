@@ -1,4 +1,4 @@
-package graph.gui
+package graph.view
 /**Ik wil hier opniew een painting opbouwen
  * De controller bevatte nauwelijks basis routines (sec reageren op muiw en zo)
  * Ik begin zonder link naar de controller en kopieer wat ik nodig heb
@@ -24,7 +24,8 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 { val canvas = cv; val textarea = ta } with TCanvas with TTextArea {
   //val canvasTop = Global.canvasRect.top
   //val canvasLeft = Global.canvasRect.left
-  val zoom = 1 //TODO
+  //val zoom = 1 //TODO
+  
   val rect = canvas.getBoundingClientRect()
   private var vertexIsChosen: Boolean = false
   private var vertexIsDragged: Boolean = false
@@ -53,10 +54,10 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 	private def drawEdges(vertices:ArrayBuffer[Vertex3D], edges:Grid): Unit = {
 			for (i <- 0 until vertices.size; j <- 0 until vertices.size) {
 				if(edges.isConnected(i, j) ){
-					val x1 = (vertices(i).getX() / zoom)
-					val y1 = (vertices(i).getY() / zoom)
-					val x2 = (vertices(j).getX() / zoom)
-					val y2 = (vertices(j).getY() / zoom)
+					val x1 = (vertices(i).getX() / Global.gZoom)
+					val y1 = (vertices(i).getY() / Global.gZoom)
+					val x2 = (vertices(j).getX() / Global.gZoom)
+					val y2 = (vertices(j).getY() / Global.gZoom)
 					drawLine( x1, y1, x2, y2 )
 				}
 			}
@@ -69,17 +70,17 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 	}
 
 	def drawVertex( vertex: Vertex3D): Unit = {
-			val xScreen: Double = vertex.getX / zoom
-			val yScreen: Double = vertex.getY / zoom
+			val xScreen: Double = vertex.getX / Global.gZoom
+			val yScreen: Double = vertex.getY / Global.gZoom
 			val color: String = vertex.color
 			val label: String = vertex.label
-			val r: Double = Vertex3D.radius / zoom
+			val r: Double = Vertex3D.radius / Global.gZoom
 			drawCircle(xScreen,yScreen,r, color)
 	}
 
 	def drawVertexLabel( vertex: Vertex3D): Unit = {
-			val xScreen: Double = vertex.getX / zoom
-			val yScreen: Double = vertex.getY / zoom
+			val xScreen: Double = vertex.getX / Global.gZoom
+			val yScreen: Double = vertex.getY / Global.gZoom
 			val txt = "" + xScreen + ", "+ yScreen
 			drawText(txt,xScreen+15,yScreen )
 	}
@@ -88,13 +89,13 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 	def onDragged(e: dom.MouseEvent)
   {//add whatever
 	    	
-	      val xCursor: Double = (e.clientX -rect.left) * zoom //even zonder zoom
-        val yCursor: Double = (e.clientY -rect.top) * zoom
+	      val xCursor: Double = (e.clientX -rect.left) * Global.gZoom //even zonder zoom
+        val yCursor: Double = (e.clientY -rect.top) * Global.gZoom
         val pointCursor: Point2D = new Point2D(xCursor, yCursor)
    	 // scratch(e)
 //taText("left "+ rect.left+ ", top " + rect.top)
    	  //Het volgende werkt niet
-   	  taAppendText("Vertex hit:" + commonActions.pressedAVertex)
+   	  ///taAppendText("Vertex hit:" + commonActions.pressedAVertex)
    	  if( commonActions.pressedAVertex ){
      	  if (Global.gDraggingMode ){
      	   //// taText("voor "+ model) 
@@ -123,8 +124,8 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
   def onReleased(e: dom.MouseEvent) = {//add whatever
     val rect = canvas.getBoundingClientRect()
     ////  override def mouseReleased(event: MouseEvent): Unit = {
-    val xCursor: Double = (e.clientX - rect.left) * zoom
-    val yCursor: Double = (e.clientY - rect.top) * zoom
+    val xCursor: Double = (e.clientX - rect.left) * Global.gZoom
+    val yCursor: Double = (e.clientY - rect.top) * Global.gZoom
     val pointCursor: Point2D = new Point2D(xCursor, yCursor)
 //Lib.melding("Omhoog: " + x + ", " + y, "ForceBasedGraphPaintingPanel.mouseReleased");
  if (Global.gDraggingMode){////    if (draggingMode) {
@@ -144,8 +145,8 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
       //////mouseListener = new MouseAdapter(){
 ////  def mousePressed(event: MouseEvent): Unit = {
     var vertexConnected = false
-    val xCursor: Double = (e.clientX - rect.left) * zoom
-    val yCursor: Double = (e.clientY - rect.top) * zoom
+    val xCursor: Double = (e.clientX - rect.left) * Global.gZoom
+    val yCursor: Double = (e.clientY - rect.top) * Global.gZoom
     //TODO
     val pointCursor: Point2D = new Point2D(xCursor, yCursor)
 ////showPoints( pointModel/*, point*/);//TODO, magweg

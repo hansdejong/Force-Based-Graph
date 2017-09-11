@@ -1,4 +1,4 @@
-package graph.gui
+package graph.view
 
 import graph.model._
 import scala.collection.mutable.ArrayBuffer

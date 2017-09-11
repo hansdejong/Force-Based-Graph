@@ -1,4 +1,4 @@
-//package graph.gui
+package GraphGui
 ////
 ////import java.awt.BorderLayout
 ////
