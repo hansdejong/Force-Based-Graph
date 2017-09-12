@@ -15,7 +15,7 @@ import graph.model.Edge
 import graph.model.Grid
 import graph.model.TGraphModel
 import graph.model.Vertex3D
-import graph.gui._
+import graph.view._
 import graph.lib._
 import org.scalajs.dom
 import dom.html
@@ -88,7 +88,7 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 	//------------Mouse---------------------------------------------------------------------
 	def onDragged(e: dom.MouseEvent)
   {//add whatever
-	    	
+	    	//Lijkt niet de juiste naamgeving
 	      val xCursor: Double = (e.clientX -rect.left) * Global.gZoom //even zonder zoom
         val yCursor: Double = (e.clientY -rect.top) * Global.gZoom
         val pointCursor: Point2D = new Point2D(xCursor, yCursor)

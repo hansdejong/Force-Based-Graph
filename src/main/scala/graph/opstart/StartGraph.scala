@@ -17,7 +17,7 @@ import dom.html
 import dom.raw.ClientRect
 import canvasapp._
 import sierpinski._
-import graph.gui._
+import graph.view._
 import graph.global._
 
 /* [warn] /home/hans/scalaJS/CanvasApp fromTemplate/CanvasAppJS/src/main/scala/graph/opstart/StartGraph.scala:

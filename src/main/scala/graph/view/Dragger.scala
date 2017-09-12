@@ -1,6 +1,6 @@
 package graph.view
 import graph.model._
-import graph.gui._
+import graph.view._
 import graph.lib._
 import org.scalajs.dom
 //Zoom nodig?
