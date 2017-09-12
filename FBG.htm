@@ -47,23 +47,30 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 {view:"form", id:"kolom1", width: 250, elements:[
         { view:"text", text:"Knopen (random poging)", width:200, align:"center"},  
 	{ view:"slider", id:"slider1", value:[10], width: 200, align:"left",
-	title:function(obj){return obj.value;}, click: function(){
-		SCALA_nodes( this.getValue() ); 
+//	title:function(obj){return obj.value;}, click: function(){
+	title:function(obj){return obj.value;}, on:{
+		onChange:function(){
+			SCALA_nodes( this.getValue() ); 
+		}
 //		webix.message("<pre>"+ this.getValue() +"</pre>");
 	}}]},
 
 {view:"form", id:"kolom2", width: 250, elements:[
 	{ view:"text",  text:"Connecties (random poging)", width:200, align:"center"},  
         { view:"slider", id:"slider2", width: 200, align:"left",
-	title:function(obj){return obj.value;}, click: function(){ 
-		SCALA_edges( this.getValue() ); 
+	title:function(obj){return obj.value;}, on:{ 
+		onChange:function(){
+			SCALA_edges( this.getValue() ); 
+		}
 	}}]}, 
-
+//https://docs.webix.com/desktop__slider.html
  {view:"form", id:"kolom3", width: 245, elements:[
         { view:"text", text:"Zoomfactor", width:200, align:"center"},  
         { view:"slider", id:"slider3", value: 1, value: 1, min: 1, max: 5, align:"left",
-	title:function(obj){return obj.value;}, click: function(){ 
-		SCALA_zoom( this.getValue() ); 
+	title:function(obj){return obj.value;}, on:{
+		onChange:function(){
+			SCALA_zoom( this.getValue() ); 
+		}
 	}}]}
 ]}//Einde klommen
 ,	
@@ -71,7 +78,7 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
  { view:"toolbar", id:"mybar", elements:[
 	{ view:"button", value:"Volgende", width: 70, click:"SCALA_volgende()"},
 	    
-	{ view:"button", value:"Activeer kleur:", width: 110, click:function(){	    
+/*	{ view:"button", value:"Activeer kleur:", width: 110, click:function(){	    
 			var json = JSON.stringify(this.getParentView().getValues(),0,1);
 			var kleur = JSON.parse(json)["color"];
 			SCALA_kiesKleur(kleur);
@@ -80,13 +87,23 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 	},
 	
 	{ view:"colorpicker", id:"colorId", name:"color", value:"#ffaadd", width:120 },
+*/
+	{ view:"label", label:"Knoopkleur:", width:105},
+	{ view:"colorpicker", id:"colorId", name:"color", value:"#ffaadd", width:120, on:{
+		onChange:function(){
+			var json = JSON.stringify(this.getParentView().getValues(),0,1);
+			var kleur = JSON.parse(json)["color"];
+			SCALA_kiesKleur(kleur);
+//			webix.message("<pre>"+ kleur +"</pre>");        
+		}
+	} },
 	/*  Uitlezen kleurenpicker lukt, koppelen event (functie) niet.
 	{ view:"colorpicker", name:"color", value:"#ffaadd", width:120, update:function(){	
 	webix.message("<pre>"+ "Hallo"+"</pre>");        
 		}
 	},
 */
-	{ view:"toggle", name:"toggle", id:"toggle", width: 85,offLabel:"Sleep", onLabel:"Wijzig", click:function(){	    
+       { view:"toggle", name:"toggle", id:"toggle", width: 85,offLabel:"Sleep", onLabel:"Wijzig", click:function(){	    
 			var json = JSON.stringify(this.getParentView().getValues(),0,1);
 			var tg = JSON.parse(json)["toggle"];
 			SCALA_onToggle(tg);
