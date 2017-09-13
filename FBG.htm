@@ -65,8 +65,8 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 	}}]}, 
 //https://docs.webix.com/desktop__slider.html
  {view:"form", id:"kolom3", width: 245, elements:[
-        { view:"text", text:"Zoomfactor", width:200, align:"center"},  
-        { view:"slider", id:"slider3", value: 1, value: 1, min: 1, max: 5, align:"left",
+        { view:"text", text:"Zoom (factor 1.5)", width:200, align:"center"},  
+        { view:"slider", id:"slider3", value: 1, value: 0, min: -5, max: 5, align:"left",
 	title:function(obj){return obj.value;}, on:{
 		onChange:function(){
 			SCALA_zoom( this.getValue() ); 

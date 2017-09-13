@@ -29,20 +29,21 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
   private var model: TGraphModel =  new GraphModel( graph )
   private val dragger = new Dragger(model, this)
   private val changer = new Changer(model, this)
-  private val old = new Dismissed(model, this)
+
   val expander = new Expander(model, this)
   val common = new Common(model, this) 
+  //val old = new Dismissed(model, this) 
 
 	//============Method Declarations=======================================================
-	def getRandomDrawing(): EDrawings = {
+	private def getRandomDrawing(): EDrawings = {
 			val graph = EDrawings(scala.util.Random.nextInt(EDrawings.maxId))
 			taText("\nGekozen Graph: "+ graph.toString())
 			graph 
 	}
-  def init():Unit = {
+  def redraw():Unit = {
     common.redraw()
   }
-  init()
+  redraw()
 	//------------Mouse---------------------------------------------------------------------
 	def onDragged(e: dom.MouseEvent)
   {//add whatever
@@ -58,7 +59,7 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
      	  if (Global.gDraggingMode ){
      	   //// taText("voor "+ model) 
      	    dragger.dragVertex(xCursor.toInt, yCursor.toInt)
-      	  old.testDrawing()
+      	  //old.testDrawing()
        	  //nog eens proberen
   	      //expander.expandGraph(model)//Doet het (hier) niet
      	    common.redraw()
@@ -68,7 +69,7 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
      	    /////taAppendText("na "+ model)
      	  }
      	  else{
-     	    old.testDrawing()
+//       	  old.testDrawing()
        	  changer.dragLine(xCursor.toInt, yCursor.toInt)
      	    common.redraw()
      	    //changer.tryConnecting
@@ -85,10 +86,11 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
     val xCursor: Double = (e.clientX - rect.left) * Global.gZoom
     val yCursor: Double = (e.clientY - rect.top) * Global.gZoom
     val pointCursor: Point2D = new Point2D(xCursor, yCursor)
- if (Global.gDraggingMode){
-   
+    if (Global.gDraggingMode){
+       //Niets
     } else {
        changer.makeEdgeOrVertex(pointCursor)
+       common.redraw()
     }
   }
 
@@ -110,8 +112,8 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
         //Ook een Edge kan worden aangewezen
         changer.removeEdgeIfFound(pointCursor)//zou moeten werken: changer III
       }
-      taText("\nDragging mode: "+ Global.gDraggingMode)
-      changer.makeNewVertex() //Beter naar dragging?
+      //taText("\nDragging mode: "+ Global.gDraggingMode)
+      //changer.makeNewVertex() //Beter naar dragging?
     }
   }
 }

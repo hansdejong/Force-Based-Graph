@@ -2,12 +2,8 @@ package graph.view
 
 import graph.global._
 import scala.collection.mutable.ArrayBuffer
-import graph.drawings.EDrawings._
-import graph.drawings.EDrawings
 import graph.model._
-import graph.view._
 import graph.lib._
-import org.scalajs.dom
 
 class Common(model: TGraphModel, painting: FBGPainting ) {
   var lastFoundVertexIndex = -1
@@ -16,7 +12,7 @@ class Common(model: TGraphModel, painting: FBGPainting ) {
   //Deze routine ook gebruiken in wijzigmodel. Hernoemen en verplaatsen.
   //Dit was connectDragger
   def inspectCursorSpot(/*e: dom.MouseEvent, */pointCursor: Point2D):Unit = {
-    painting.taAppendText ("Cursor "+ pointCursor.x + "," + pointCursor.y)
+       //painting.taAppendText ("Cursor "+ pointCursor.x + "," + pointCursor.y)
        var oneConnected:Boolean  = false
        var index = -1
        for (vertex3D <- model.vertices) {
@@ -30,8 +26,9 @@ class Common(model: TGraphModel, painting: FBGPainting ) {
            vertex3D.setDragged(false)
        }
        //Dit er weer uit:
-       for (vertex3D <- model.vertices; if(vertex3D.isDragged)) 
-            painting.taText("raak")
+       //for (vertex3D <- model.vertices; if(vertex3D.isDragged)){ 
+            //painting.taText("raak")
+       //}
        pressedAVertex = oneConnected
   }
   def redraw() = {
@@ -65,7 +62,9 @@ class Common(model: TGraphModel, painting: FBGPainting ) {
 	private def drawVertices(vertices: ArrayBuffer[Vertex3D]): Unit = {
 			for (vertex3D <- vertices) {
 				drawVertex( vertex3D)
-				drawVertexLabel( vertex3D)
+				if( Global.gLabels ){
+				  drawVertexLabel( vertex3D)
+				}
 			}
 	}
 

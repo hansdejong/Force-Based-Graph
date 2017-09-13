@@ -69,19 +69,20 @@ object StartGraph{
   }
   @JSExportTopLevel("SCALA_zoom")
   def SCALA_zoom( zoom:Int ): Unit = {
-    Global.gZoom = zoom
+    val factor = 1.5  
+    val zoomFactor = Math.pow(factor, zoom)
+    Global.gZoom = zoomFactor
+    mPainting.get.redraw()
     appendPar(document.body, "Zoom-factor nu ingesteld op " + zoom)
   }
   @JSExportTopLevel("SCALA_volgende")
-  def SCALA_volgende(/*canvas: html.Canvas, tekstvak: html.TextArea*/): Unit = {
-   ///// new FBGPainting(canvas,tekstvak)
-   // document.location.reload()
+  def SCALA_volgende(): Unit = {
     mPainting = Option( new FBGPainting(mCanvas.get, mTekstvak.get) )//Bit tricky
     appendPar(document.body, "Je klikte op de VOLGENDE knop!")
   }
   @JSExportTopLevel("SCALA_kiesKleur")
   def SCALA_kiesKleur(kleur: String): Unit = {
-    Global.gColor = kleur //NOG EVEN HANDHAVEN 
+    Global.gColor = kleur 
     appendPar(document.body, "De volgende kleur is nu actief: " + kleur)
   }
   @JSExportTopLevel("SCALA_onToggle")

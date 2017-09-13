@@ -1,27 +1,24 @@
 package canvasapp
 
 import org.scalajs.dom
-import graph.opstart._
 import dom.html
-//import graph.global.Global
+import graph.global._
 
 object ScratchPad {
 
   def runScratchPad(canvas: html.Canvas):Unit = {
       /*setup*/
-      val ctx = canvas.getContext("2d")
-                           .asInstanceOf[dom.CanvasRenderingContext2D]
+      val ctx = canvas.getContext("2d").asInstanceOf[dom.CanvasRenderingContext2D]
   
       canvas.width = canvas.parentElement.clientWidth
       canvas.height = canvas.parentElement.clientHeight
   
-
-//      ctx.fillStyle = "#a6F611" 
+      //Let op"dit is de achtergrondkleur
       ctx.fillStyle =   "#f8f8c8" 
       ctx.fillRect(0, 0, canvas.width, canvas.height)
   
-      /*code*/
-      ctx.fillStyle = "blue" // Global.gColor
+      //En dit de voorgrondkleur, wordt niet ververst
+      ctx.fillStyle = "blue" //Global.gColor
   
       var down = false
       canvas.onmousedown =

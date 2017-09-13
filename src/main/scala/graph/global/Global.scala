@@ -17,10 +17,12 @@ object Global {
 
   var gColor: String = "red" //TOCH NOG HANDHAVEN
   var gDraggingMode: Boolean = true //anders "wijzig"
-  var gZoom:Int = 1
+  var gZoom:Double = 1.0
   var gNodes:Int = 1
   var gEdges:Int = 1
-
+  
+  val gLabels:Boolean = false
+  
   //gApp geeft de  actieve applicatie, in te stellen via "welke"
   val welke = 3
   val gApp = welke match{

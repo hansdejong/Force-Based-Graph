@@ -3,7 +3,7 @@ import graph.model._
 import graph.view._
 import graph.lib._
 import org.scalajs.dom
-//Zoom nodig?
+//Zoom nodig? Nee, zoomen is al gebeurd
 class Dragger(model: TGraphModel, writer: FBGPainting ) {
   
    def dragVertex( xCursor: Int, yCursor: Int): Unit = {
