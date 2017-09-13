@@ -33,7 +33,10 @@ object StartGraph{
 //Niet getest, maar ik denk dat dit object als enige niet TCanvas en TTextArea moet gebruiken 
   
   //var mCanvas= (Bij BasisTutorial->test hebben ze het over html-elementen in memory)
-  
+  var mPainting = None: Option[FBGPainting]
+  //Voor "SCALA_volgende". Lijkt eleganter dan opnieuw als argument meegeven
+  var mCanvas = None: Option[html.Canvas]
+  var mTekstvak = None: Option[html.TextArea]
   //1. Gebruikt DOM. Later er uit
   //var painter: FBGPaintingPanel=new FBGPaintingPanel(null,null)//Kan dit beter?
   //compileert maar wordt niet geaccepteerd. Misschien de klassen uit de basic-tutorial test?
@@ -73,6 +76,7 @@ object StartGraph{
   def SCALA_volgende(/*canvas: html.Canvas, tekstvak: html.TextArea*/): Unit = {
    ///// new FBGPainting(canvas,tekstvak)
    // document.location.reload()
+    mPainting = Option( new FBGPainting(mCanvas.get, mTekstvak.get) )//Bit tricky
     appendPar(document.body, "Je klikte op de VOLGENDE knop!")
   }
   @JSExportTopLevel("SCALA_kiesKleur")
@@ -124,7 +128,9 @@ object StartGraph{
     }
     
     def runFBG(canvas: html.Canvas, tekstvak: html.TextArea):Unit = {
-       new FBGPainting(canvas,tekstvak)
+       mCanvas = Option( canvas )
+       mTekstvak = Option( tekstvak )
+       mPainting = Option( new FBGPainting(canvas,tekstvak) )
     }
   }
   

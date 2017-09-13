@@ -42,11 +42,11 @@ class Changer ( model: TGraphModel, writer: FBGPainting ) {
   }
   //onReleased A (wel op andere vertex)
   def makeEdgeOrVertex(xy: Point2D) ={
-    val vertex1 = writer.commonActions.lastFoundVertexIndex
-    writer.commonActions.inspectCursorSpot(xy)
-    if( writer.commonActions.pressedAVertex ){
+    val vertex1 = writer.common.lastFoundVertexIndex
+    writer.common.inspectCursorSpot(xy)
+    if( writer.common.pressedAVertex ){
       //edge tussen twee vertices
-      val vertex2 = writer.commonActions.lastFoundVertexIndex
+      val vertex2 = writer.common.lastFoundVertexIndex
       model.edges.setConnected(vertex1,vertex2,true)
       writer.taAppendText("Connected " + vertex1 + " en " + vertex2)
     }
