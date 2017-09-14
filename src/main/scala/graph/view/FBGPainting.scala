@@ -43,8 +43,53 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
   def redraw():Unit = {
     common.redraw()
   }
-  redraw()
+  redraw()//I. Bij opstart
 	//------------Mouse---------------------------------------------------------------------
+  def onPressed(e: dom.MouseEvent) = {//add whatever
+    var vertexConnected = false
+    val xCursor: Double = (e.clientX - rect.left) * Global.gZoom
+    val yCursor: Double = (e.clientY - rect.top) * Global.gZoom
+    val pointCursor: Point2D = new Point2D(xCursor, yCursor)
+    
+//    taText(if(vertexConnected)"raak" else "mis")
+    if (Global.gDraggingMode){
+        dragger.checkOnSpot(pointCursor)
+        redraw() //II. Na elke klik (te veel van het goede?)
+      }
+    else{//Wijzigmode
+      changer.inspectCursorSpot(pointCursor) //geldt voor alle acties
+      vertexConnected = changer.pressedAVertex
+      if (vertexConnected){
+        val xy:Point2D = changer.findVertexXY //nu niet pointCursor gebruiken
+        changer.startLine( (xy.x / Global.gZoom).toInt, (xy.y / Global.gZoom).toInt )
+      }
+      else{
+        //Ook een Edge kan worden aangewezen
+        changer.removeEdgeIfFound(pointCursor)//zou moeten werken: changer III
+        redraw() //III.Na verwijderen edge
+      }
+      //taText("\nDragging mode: "+ Global.gDraggingMode)
+      //changer.makeNewVertex() //Beter naar dragging?
+    }
+  }
+
+  def onReleased(e: dom.MouseEvent) = {//add whatever
+    val rect = canvas.getBoundingClientRect()
+    val xCursor: Double = (e.clientX - rect.left) * Global.gZoom
+    val yCursor: Double = (e.clientY - rect.top) * Global.gZoom
+    val pointCursor: Point2D = new Point2D(xCursor, yCursor)
+    if (Global.gDraggingMode){
+       //Niets
+    } else {//Wijzigmode
+        //Te gevoelig? Minimale afstand inbouwen?
+       if(changer.pressedAVertex){
+         changer.makeEdgeOrVertex(pointCursor)
+         changer.pressedAVertex = false
+       }
+       redraw()//IV. Na verandering
+    }
+  }
+
 	def onDragged(e: dom.MouseEvent)
   {//add whatever
 	    	//Lijkt niet de juiste naamgeving
@@ -55,67 +100,37 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 //taText("left "+ rect.left+ ", top " + rect.top)
    	  //Het volgende werkt niet
    	  ///taAppendText("Vertex hit:" + common.pressedAVertex)
-   	  if( common.pressedAVertex ){
+	      
+   	  //if( changer.pressedAVertex ){
      	  if (Global.gDraggingMode ){
-     	   //// taText("voor "+ model) 
-     	    dragger.dragVertex(xCursor.toInt, yCursor.toInt)
-      	  //old.testDrawing()
-       	  //nog eens proberen
-  	      //expander.expandGraph(model)//Doet het (hier) niet
-     	    common.redraw()
-  
-     	    //taText("left "+ rect.left+ ", top " + rect.top)//19,95
-  
-     	    /////taAppendText("na "+ model)
+     	    if( dragger.dragging){
+       	   //// taText("voor "+ model) 
+       	    dragger.dragVertex(xCursor.toInt, yCursor.toInt)
+        	  //old.testDrawing()
+         	  //nog eens proberen
+    	      //expander.expandGraph(model)//Doet het (hier) niet
+       	    redraw()//V. Bij verplaatsen
+       	    //taText("left "+ rect.left+ ", top " + rect.top)//19,95
+       	    /////taAppendText("na "+ model)
+     	    }
      	  }
-     	  else{
+     	  else{//wijzigmode
+     	    if( changer.pressedAVertex ){
 //       	  old.testDrawing()
-       	  changer.dragLine(xCursor.toInt, yCursor.toInt)
-     	    common.redraw()
-     	    //changer.tryConnecting
+     	      common.redraw_forLine()//VI. Na tekenen lijn
+       	    changer.dragLine((xCursor / Global.gZoom).toInt, (yCursor / Global.gZoom).toInt)
+     	      //changer.tryConnecting
+     	    }
      	  }
-   	  }
+   	  //}
 	    
   }
   
 	def onMoved(e: dom.MouseEvent){//add whatever
   }
   
-  def onReleased(e: dom.MouseEvent) = {//add whatever
-    val rect = canvas.getBoundingClientRect()
-    val xCursor: Double = (e.clientX - rect.left) * Global.gZoom
-    val yCursor: Double = (e.clientY - rect.top) * Global.gZoom
-    val pointCursor: Point2D = new Point2D(xCursor, yCursor)
-    if (Global.gDraggingMode){
-       //Niets
-    } else {
-       changer.makeEdgeOrVertex(pointCursor)
-       common.redraw()
-    }
-  }
 
 	
-  def onPressed(e: dom.MouseEvent) = {//add whatever
-    var vertexConnected = false
-    val xCursor: Double = (e.clientX - rect.left) * Global.gZoom
-    val yCursor: Double = (e.clientY - rect.top) * Global.gZoom
-    //TODO
-    val pointCursor: Point2D = new Point2D(xCursor, yCursor)
-    common.inspectCursorSpot(pointCursor) //geldt voor alle acties
-    vertexConnected = common.pressedAVertex
-    if (!Global.gDraggingMode) {
-      if (vertexConnected){
-        val xy = changer.findVertexXY
-        changer.startLine( xy.x.toInt, xy.y.toInt )
-      }
-      else{
-        //Ook een Edge kan worden aangewezen
-        changer.removeEdgeIfFound(pointCursor)//zou moeten werken: changer III
-      }
-      //taText("\nDragging mode: "+ Global.gDraggingMode)
-      //changer.makeNewVertex() //Beter naar dragging?
-    }
-  }
 }
 
 
