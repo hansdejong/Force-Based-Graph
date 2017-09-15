@@ -16,10 +16,7 @@ class Changer ( model: TGraphModel, writer: FBGPainting ) {
   var lastFoundVertexIndex = -1
   var pressedAVertex = false
   
-  //Deze routine ook gebruiken in wijzigmodel. Hernoemen en verplaatsen.
-  //Dit was connectDragger
-  def inspectCursorSpot(/*e: dom.MouseEvent, */pointCursor: Point2D):Unit = {
-       //painting.taAppendText ("Cursor "+ pointCursor.x + "," + pointCursor.y)
+  def inspectCursorSpot(pointCursor: Point2D):Unit = {
        var oneConnected:Boolean  = false
        var index = -1
        for (vertex3D <- model.vertices) {
@@ -32,14 +29,9 @@ class Changer ( model: TGraphModel, writer: FBGPainting ) {
          else
            vertex3D.setDragged(false)
        }
-       //Dit er weer uit:
-       //for (vertex3D <- model.vertices; if(vertex3D.isDragged)){ 
-            //painting.taText("raak")
-       //}
        pressedAVertex = oneConnected
   }
 
-  //onPressed A
   def findVertexXY(): Point2D = {
     var default = new Point2D()
     for (i <- 0 until model.vertices.size) {
@@ -52,15 +44,14 @@ class Changer ( model: TGraphModel, writer: FBGPainting ) {
     }
     default
    }
-  //onPressed B
+
   def startLine( xCursor: Int, yCursor: Int) = {
     x = xCursor; y = yCursor
-    writer.taAppendText("StartLine op " + xCursor+","+yCursor)
   }
-  //onDragged
+
+  
   def dragLine( xCursor: Int, yCursor: Int): Unit = {
     writer.drawLine(x,y,xCursor, yCursor)
-    writer.taAppendText("DragLine " + x + "," + y + " naar " + xCursor+","+yCursor)
   }
 
   def makeEdgeOrVertex(xy: Point2D) ={
@@ -70,7 +61,6 @@ class Changer ( model: TGraphModel, writer: FBGPainting ) {
       //edge tussen twee vertices
       val vertex2 = lastFoundVertexIndex
       model.edges.setConnected(vertex1,vertex2,true)
-      //writer.taAppendText("Connected " + vertex1 + " en " + vertex2)
     }
     else
     {
@@ -80,8 +70,6 @@ class Changer ( model: TGraphModel, writer: FBGPainting ) {
       vertex3D.setXYZ(xy.x, xy.y, 0)
       edges.setConnected(vertex1, model.vertices.size, true)
       model.vertices.append(vertex3D) 
-      //OK maar werkt scherm niet meteen bij 
-      
     }
   }
 
@@ -103,7 +91,5 @@ class Changer ( model: TGraphModel, writer: FBGPainting ) {
     val y2: Double = vtx2.getY
     if( FBGLib.onLine(point.x, point.y, x1, y1, x2, y2))true else false
   }
-
-  
 
 }

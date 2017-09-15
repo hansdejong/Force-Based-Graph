@@ -60,12 +60,12 @@ object StartGraph{
   @JSExportTopLevel("SCALA_nodes")
   def SCALA_nodes( noNodes:Int ): Unit = {
     Global.gNodes = noNodes
-    appendPar(document.body, "Aantal nodes nu ingesteld op " + noNodes)
+    //appendPar(document.body, "Aantal nodes nu ingesteld op " + noNodes)
   }
   @JSExportTopLevel("SCALA_edges")
   def SCALA_edges( noEdges:Int ): Unit = {
     Global.gEdges = noEdges
-    appendPar(document.body, "Aantal connecties nu ingesteld op " + noEdges)
+    //appendPar(document.body, "Aantal connecties nu ingesteld op " + noEdges)
   }
   @JSExportTopLevel("SCALA_zoom")
   def SCALA_zoom( zoom:Int ): Unit = {
@@ -73,17 +73,17 @@ object StartGraph{
     val zoomFactor = Math.pow(factor, zoom)
     Global.gZoom = zoomFactor
     mPainting.get.redraw()
-    appendPar(document.body, "Zoom-factor nu ingesteld op " + zoom)
+    //appendPar(document.body, "Zoom-factor nu ingesteld op " + zoom)
   }
   @JSExportTopLevel("SCALA_volgende")
   def SCALA_volgende(): Unit = {
     mPainting = Option( new FBGPainting(mCanvas.get, mTekstvak.get) )//Bit tricky
-    appendPar(document.body, "Je klikte op de VOLGENDE knop!")
+    //appendPar(document.body, "Je klikte op de VOLGENDE knop!")
   }
   @JSExportTopLevel("SCALA_kiesKleur")
   def SCALA_kiesKleur(kleur: String): Unit = {
     Global.gColor = kleur 
-    appendPar(document.body, "De volgende kleur is nu actief: " + kleur)
+    //appendPar(document.body, "De volgende kleur is nu actief: " + kleur)
   }
   @JSExportTopLevel("SCALA_onToggle")
   def SCALA_onToggle(waarde: Int): Unit = {
@@ -93,7 +93,7 @@ object StartGraph{
       case _ => "pardon?"  
     }
     Global.gDraggingMode = if (waarde == 1) true else false
-    appendPar(document.body, "Toggle is nu: " + keuze)
+    //appendPar(document.body, "Toggle is nu: " + keuze)
   }
 //Tijdelijk. Bedoeld voor combo die het soort applicatie zou moeten instellen
   @JSExportTopLevel("SCALA_app")
@@ -104,7 +104,7 @@ object StartGraph{
       case 3 => "FBG"
       case _ => "pardon?"  
     }
-    appendPar(document.body, "Applicatie is nu: " + keuze)
+    //appendPar(document.body, "Applicatie is nu: " + keuze)
   }
 
 //  //Voor het starten van willekeurige tests in scala

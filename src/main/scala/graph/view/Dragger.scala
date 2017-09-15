@@ -3,7 +3,7 @@ import graph.model._
 import graph.view._
 import graph.lib._
 import org.scalajs.dom
-//Zoom nodig? Nee, zoomen is al gebeurd
+//Hier niet zoomen, is al gebeurd
 class Dragger(model: TGraphModel, writer: FBGPainting ) {
   
   var dragging=false

@@ -1,10 +1,4 @@
 package graph.view
-/**Ik wil hier opniew een painting opbouwen
- * De controller bevatte nauwelijks basis routines (sec reageren op muiw en zo)
- * Ik begin zonder link naar de controller en kopieer wat ik nodig heb
- * later kan ik altijd nog van alles asplitsen naar hulp klassen of traits
- * 
- */
 
 import graph.global._
 import scala.collection.mutable.ArrayBuffer
@@ -25,7 +19,7 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
   private val rect = canvas.getBoundingClientRect()
   private var graph:EDrawings = getRandomDrawing()
   //var graph:EDrawings = EDrawings.STICK
-  //var graph:EDrawings = EDrawings.CUBE //getRandomDrawing()
+  //var graph:EDrawings = EDrawings.CUBE
   private var model: TGraphModel =  new GraphModel( graph )
   private val dragger = new Dragger(model, this)
   private val changer = new Changer(model, this)
@@ -55,24 +49,40 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
       dragger.checkOnSpot(pointCursor)
       redraw() //II. Na elke klik
     }
-      /*
-      else{//Wijzigmode
-
+    else{//Wijzigmode
+      changer.inspectCursorSpot(pointCursor)
+      vertexConnected = changer.pressedAVertex
       if (vertexConnected){
-        val xy = changer.findVertexXY
-        changer.startLine( xy.x.toInt, xy.y.toInt )
+        val xy = changer.findVertexXY //nu niet pointCursor gebruiken
+        changer.startLine( (xy.x / Global.gZoom).toInt, (xy.y / Global.gZoom).toInt )
+      }else{//Ook een Edge kan worden aangewezen
+        changer.removeEdgeIfFound(pointCursor)
+        redraw() //III. Na verwijderen edge
       }
-      changer.inspectCursorSpot(pointCursor) //geldt voor alle acties//XXX
-      vertexConnected = changer.pressedAVertex ///XXX
-        //Ook een Edge kan worden aangewezen
-        changer.removeEdgeIfFound(pointCursor)//zou moeten werken: changer III
-      }
-      //taText("\nDragging mode: "+ Global.gDraggingMode)
-      //changer.makeNewVertex() //Beter naar dragging?
     }
-      */
   }
 
+  def onDragged(e: dom.MouseEvent)
+  {
+	    //Lijkt niet de juiste naamgeving
+	    val xCursor: Double = (e.clientX -rect.left) * Global.gZoom //even zonder zoom
+      val yCursor: Double = (e.clientY -rect.top) * Global.gZoom
+      val pointCursor: Point2D = new Point2D(xCursor, yCursor)
+     	if (Global.gDraggingMode ){
+       	  //old.scratch(e)
+          if( dragger.dragging ){ //XXX
+       	    dragger.dragVertex(xCursor.toInt, yCursor.toInt)
+       	    common.redraw() //IV. Bij verplaatsen
+   	      }
+     	  }
+     	  else{//wijzigmode
+ 	     	  if( changer.pressedAVertex ){
+     	      common.redraw_forLine()//V. Na tekenen lijn
+       	    changer.dragLine((xCursor / Global.gZoom).toInt, (yCursor / Global.gZoom).toInt)
+     	    }
+     	  }
+  }
+  
   def onReleased(e: dom.MouseEvent) = {
     val rect = canvas.getBoundingClientRect()
     val xCursor: Double = (e.clientX - rect.left) * Global.gZoom
@@ -81,44 +91,18 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
     if (Global.gDraggingMode){
        //Niets
     } 
-    /*
     else {//Wijzigmode
-       changer.makeEdgeOrVertex(pointCursor)
-       common.redraw()
+       if(changer.pressedAVertex){
+         changer.makeEdgeOrVertex(pointCursor)
+         changer.pressedAVertex = false
+         redraw() //VI. Na verandering
+       }
     }
-    */
   }
 
 
-  def onDragged(e: dom.MouseEvent)
-  {//add whatever
-	    //Lijkt niet de juiste naamgeving
-	    val xCursor: Double = (e.clientX -rect.left) * Global.gZoom //even zonder zoom
-      val yCursor: Double = (e.clientY -rect.top) * Global.gZoom
-      val pointCursor: Point2D = new Point2D(xCursor, yCursor)
-     	if (Global.gDraggingMode ){
-       	  //old.scratch(e)
-          if( dragger.dragging ){ //XXX
-       	    //// taText("voor "+ model) 
-       	    dragger.dragVertex(xCursor.toInt, yCursor.toInt)
-       	    common.redraw()
-   	      }
-     	  }
-	      /*
-     	  else{
- 	     	  if( changer.pressedAVertex ){ //XXX
-//       	  old.testDrawing()
-        	  changer.dragLine(xCursor.toInt, yCursor.toInt)
-      	    common.redraw()
-      	    //changer.tryConnecting
-     	    }
-     	  }
-     	  */
-  }
-  
 	def onMoved(e: dom.MouseEvent){//add whatever
   }
-  
 	
 }
 
