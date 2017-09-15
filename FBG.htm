@@ -47,7 +47,6 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 {view:"form", id:"kolom1", width: 250, elements:[
         { view:"text", text:"Knopen (random poging)", width:200, align:"center"},  
 	{ view:"slider", id:"slider1", value:[10], width: 200, align:"left",
-//	title:function(obj){return obj.value;}, click: function(){
 	title:function(obj){return obj.value;}, on:{
 		onChange:function(){
 			SCALA_nodes( this.getValue() ); 
@@ -78,18 +77,8 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
  { view:"toolbar", id:"mybar", elements:[
 	{ view:"button", value:"Volgende", width: 70, click:"SCALA_volgende()"},
 	    
-/*	{ view:"button", value:"Activeer kleur:", width: 110, click:function(){	    
-			var json = JSON.stringify(this.getParentView().getValues(),0,1);
-			var kleur = JSON.parse(json)["color"];
-			SCALA_kiesKleur(kleur);
-//			webix.message("<pre>"+ kleur +"</pre>");        
-		}
-	},
-	
-	{ view:"colorpicker", id:"colorId", name:"color", value:"#ffaadd", width:120 },
-*/
 	{ view:"label", label:"Knoopkleur:", width:105},
-	{ view:"colorpicker", id:"colorId", name:"color", value:"#ffaadd", width:120, on:{
+	{ view:"colorpicker", id:"colorId", name:"color", value:"#ff0000", width:120, on:{
 		onChange:function(){
 			var json = JSON.stringify(this.getParentView().getValues(),0,1);
 			var kleur = JSON.parse(json)["color"];
@@ -97,17 +86,11 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 //			webix.message("<pre>"+ kleur +"</pre>");        
 		}
 	} },
-	/*  Uitlezen kleurenpicker lukt, koppelen event (functie) niet.
-	{ view:"colorpicker", name:"color", value:"#ffaadd", width:120, update:function(){	
-	webix.message("<pre>"+ "Hallo"+"</pre>");        
-		}
-	},
-*/
        { view:"toggle", name:"toggle", id:"toggle", width: 85,offLabel:"Sleep", onLabel:"Wijzig", click:function(){	    
 			var json = JSON.stringify(this.getParentView().getValues(),0,1);
 			var tg = JSON.parse(json)["toggle"];
 			SCALA_onToggle(tg);
-			webix.message("<pre>"+ tg +"</pre>");   
+//			webix.message("<pre>"+ tg +"</pre>");   
 		}			
 	},
 /*
@@ -141,28 +124,9 @@ function ToonWaarden(){ //Bewaren
 <script type="text/javascript" src="target/scala-2.12/graph-fastopt.js"></script>
 <script type="text/javascript" src="target/scala-2.12/classes/workbench.js"></script>
 <script>
-//    canvasapp.ScratchPad().main(document.getElementById('canvas'));
-//    StartGraph.loadCanvas(document.getElementById('canvas'));
-//    StartGraph.loadTekstvak1(document.getElementById('tekstvak1'));
      StartGraph.main(document.getElementById('canvas'), 
 				 document.getElementById('tekstvak1') );
 </script>
 <br><br><br>
-<!--
-ToDo (aanpassen): 
-<button id="click-me-button" type="button" onclick="SCALA_test()">
-	  Scala testknop
-	</button>
-<ul>
-	<li>sliders uitlezen
-	<li>toggle uitlezen
-	<li> (jQuery uit de sbt-dependencies)
-	<li>Scala functie voor tekst schrijven in tekstvak<br>
-		eventueel ook voor uitlezen
-	<li>SCALA_kies_kleur naar camel-case
-	<li>webix.message("String"); vanuit Scala? Denk het niet      
-	
-</ul>
--->
     </body> 
 </html>

@@ -55,7 +55,7 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 //taText("left "+ rect.left+ ", top " + rect.top)
    	  //Het volgende werkt niet
    	  ///taAppendText("Vertex hit:" + common.pressedAVertex)
-   	  if( common.pressedAVertex ){
+   	  if( changer.pressedAVertex ){ //XXX
      	  if (Global.gDraggingMode ){
      	   //// taText("voor "+ model) 
      	    dragger.dragVertex(xCursor.toInt, yCursor.toInt)
@@ -101,8 +101,8 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
     val yCursor: Double = (e.clientY - rect.top) * Global.gZoom
     //TODO
     val pointCursor: Point2D = new Point2D(xCursor, yCursor)
-    common.inspectCursorSpot(pointCursor) //geldt voor alle acties
-    vertexConnected = common.pressedAVertex
+    changer.inspectCursorSpot(pointCursor) //geldt voor alle acties//XXX
+    vertexConnected = changer.pressedAVertex ///XXX
     if (!Global.gDraggingMode) {
       if (vertexConnected){
         val xy = changer.findVertexXY

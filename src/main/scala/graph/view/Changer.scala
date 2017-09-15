@@ -13,6 +13,32 @@ import graph.global._
  * */
 class Changer ( model: TGraphModel, writer: FBGPainting ) {
   var x = 0.0; var y = 0.0
+  var lastFoundVertexIndex = -1
+  var pressedAVertex = false
+  
+  //Deze routine ook gebruiken in wijzigmodel. Hernoemen en verplaatsen.
+  //Dit was connectDragger
+  def inspectCursorSpot(/*e: dom.MouseEvent, */pointCursor: Point2D):Unit = {
+       //painting.taAppendText ("Cursor "+ pointCursor.x + "," + pointCursor.y)
+       var oneConnected:Boolean  = false
+       var index = -1
+       for (vertex3D <- model.vertices) {
+         index=index+1 //beginnen bij 0
+         if(model.VertexContains(vertex3D, pointCursor)){
+           vertex3D.setDragged(true)
+           oneConnected = true
+           lastFoundVertexIndex = index
+           }
+         else
+           vertex3D.setDragged(false)
+       }
+       //Dit er weer uit:
+       //for (vertex3D <- model.vertices; if(vertex3D.isDragged)){ 
+            //painting.taText("raak")
+       //}
+       pressedAVertex = oneConnected
+  }
+
   //onPressed A
   def findVertexXY(): Point2D = {
     var default = new Point2D()
@@ -29,27 +55,20 @@ class Changer ( model: TGraphModel, writer: FBGPainting ) {
   //onPressed B
   def startLine( xCursor: Int, yCursor: Int) = {
     x = xCursor; y = yCursor
-    writer.taText("StartLine op " + xCursor+","+yCursor)
+    writer.taAppendText("StartLine op " + xCursor+","+yCursor)
   }
   //onDragged
   def dragLine( xCursor: Int, yCursor: Int): Unit = {
     writer.drawLine(x,y,xCursor, yCursor)
-    writer.taText("DragLine " + x + "," + y + " naar " + xCursor+","+yCursor)
+    writer.taAppendText("DragLine " + x + "," + y + " naar " + xCursor+","+yCursor)
   }
-//onReleased A (niet op andere vertex)
-//  def makeNewVertex() ={
-//  //////is al maal zoom
-//  ////      val foundVertex: Int = model.findFirstVertex(pointCursor)
-//  ////      graphController.onMouseIsReleased(pointCursor, foundVertex)
-//   
-//  }
-  //onReleased A (wel op andere vertex)
+
   def makeEdgeOrVertex(xy: Point2D) ={
-    val vertex1 = writer.common.lastFoundVertexIndex
-    writer.common.inspectCursorSpot(xy)
-    if( writer.common.pressedAVertex ){
+    val vertex1 = lastFoundVertexIndex
+    inspectCursorSpot(xy)
+    if( pressedAVertex ){
       //edge tussen twee vertices
-      val vertex2 = writer.common.lastFoundVertexIndex
+      val vertex2 = lastFoundVertexIndex
       model.edges.setConnected(vertex1,vertex2,true)
       //writer.taAppendText("Connected " + vertex1 + " en " + vertex2)
     }
