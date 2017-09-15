@@ -15,7 +15,7 @@ Ik moet kunnen tekenen, slepen, de sliders uitlezen, schrijven naar een tekstvak
 een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties. 
 <!--======= Canvas ==================================================================-->
 <!-- Ik zie geen canvas-view dus dan maar zo: -->
-    <div id="FBG" style="width:750px; height:400px; margin:10px; border:1px solid #c0c0c0;">
+    <div id="FBG" style="width:750px; height:600px; margin:10px; border:1px solid #c0c0c0;">
       <canvas id="canvas">
       </canvas>
     </div>
@@ -89,7 +89,7 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 	{ view:"colorpicker", id:"colorId", name:"color", value:"#ffaadd", width:120 },
 */
 	{ view:"label", label:"Knoopkleur:", width:105},
-	{ view:"colorpicker", id:"colorId", name:"color", value:"#ffaadd", width:120, on:{
+	{ view:"colorpicker", id:"colorId", name:"color", value:"#fe0e0e", width:120, on:{
 		onChange:function(){
 			var json = JSON.stringify(this.getParentView().getValues(),0,1);
 			var kleur = JSON.parse(json)["color"];
