@@ -30,7 +30,7 @@ class Grid {
     } else //========================================
     if (x <= edgeCount && y <= edgeCount) {
 //goed, al dan niet met resizen
-      { edgeCount += 1; edgeCount - 1 }
+      { edgeCount += 1; edgeCount - 1 }//vreemde conversie
       if (x == ribSize || y == ribSize) {
         resize()
       }
@@ -55,6 +55,7 @@ class Grid {
     }
     //graph.lib.FBGLib.melding("Resized!", "Grid.resize()")
   }
+  override def toString() =  {edgeArray.map(_.mkString).mkString("\n")}
 
 }
 

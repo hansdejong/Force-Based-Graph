@@ -20,6 +20,8 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
   private var graph:EDrawings = getRandomDrawing()
   //var graph:EDrawings = EDrawings.STICK
   //var graph:EDrawings = EDrawings.CUBE
+  //var graph:EDrawings = EDrawings.DOUGHNUT
+  //var graph:EDrawings = EDrawings.RANDOM
   private var model: TGraphModel =  new GraphModel( graph )
   private val dragger = new Dragger(model, this)
   private val changer = new Changer(model, this)

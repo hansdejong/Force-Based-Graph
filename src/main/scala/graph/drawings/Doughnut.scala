@@ -17,12 +17,14 @@ class Doughnut extends TDrawing {
 
   makeGraph_Doughnut()
 
-  def this(rows: Int, columns: Int) = {
-    this()
-    numRows = rows
-    numColumns = columns
-    makeGraph_Doughnut()
-  }
+//Maakt de doughnut twee keer 
+//  def this(rows: Int, columns: Int) = {
+//    this()
+//    numRows = rows
+//    numColumns = columns
+//    makeGraph_Doughnut()
+//  }
+  
 
   private def makeGraph_Doughnut(): Unit = {
     val numVertices: Int = numRows * numColumns

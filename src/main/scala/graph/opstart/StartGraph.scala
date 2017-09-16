@@ -10,7 +10,7 @@ package graph.opstart
  * Dit aLLES LIEFST ZONDER JqUERY 
 */
 import org.scalajs.dom
-import dom.document    //1. later er uit
+import dom.document 
 import scala.scalajs.js.annotation.JSExportTopLevel
 import scalajs.js.annotation.JSExport
 import dom.html

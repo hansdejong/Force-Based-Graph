@@ -1,5 +1,8 @@
 package graph.global
 
+import org.scalajs.dom
+import dom.document
+
 object Global {
   /**Het is de bedoeling hier een enkele referentie te hebben naar html-objecten.
    * Als je alleen met vals wilt werken kun je de referentie alleen maar doorgeven, 
@@ -18,8 +21,8 @@ object Global {
   var gColor: String = "red" //TOCH NOG HANDHAVEN
   var gDraggingMode: Boolean = true //anders "wijzig"
   var gZoom:Double = 1.0
-  var gNodes:Int = 1
-  var gEdges:Int = 1
+  var gNodes:Int = 10
+  var gEdges:Int = 20
   
   val gLabels:Boolean = false
   
@@ -32,4 +35,12 @@ object Global {
     case _ => "Oeps"
   }
   
+  def appendBodyMsg( text: String): Unit = {
+    val targetNode: dom.Node = document.body
+    val parNode = document.createElement("p")
+    val textNode = document.createTextNode(text)
+    parNode.appendChild(textNode)
+    targetNode.appendChild(parNode)
+  }
+
 }

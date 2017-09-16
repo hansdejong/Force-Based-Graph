@@ -45,7 +45,7 @@ class Expander (model: TGraphModel, writer: FBGPainting  ) {
         if (edges.isConnected(i, j)){ //else continue
           u = vertices(j)
           v.addAttraction(u)
-          v.addCenterForce(/*zoom*/)
+          v.addCenterForce()
         }
       }
       v.addDamping()

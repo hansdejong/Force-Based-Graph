@@ -4,21 +4,22 @@ import scala.collection.mutable.ArrayBuffer
 import graph.drawings._
 import graph.drawings.EDrawings._
 import graph.lib._
+import graph.global._
 
 
 class GraphModel extends TGraphModel{
 
   var vertices: ArrayBuffer[Vertex3D] = new ArrayBuffer[Vertex3D]()
-  var maxNumberOfEdges: Int = 0
+  var maxNumberOfEdges: Int = 10
   var edges: Grid = null
 
 
-  def this(theNumberOfVertices: Int, theMaxNumberOfEdges: Int) = {
-    this()
-    maxNumberOfEdges = theMaxNumberOfEdges
-    edges = new Grid(theNumberOfVertices)
-    makeGraph(theNumberOfVertices)
-  }
+//  def this(theNumberOfVertices: Int, theMaxNumberOfEdges: Int) = {
+//    this()
+//    maxNumberOfEdges = theMaxNumberOfEdges
+//    edges = new Grid(theNumberOfVertices)
+//    makeGraph(theNumberOfVertices)
+//  }
 
   def this(graphName: EDrawings) = {
     this()
@@ -29,23 +30,6 @@ class GraphModel extends TGraphModel{
     (vertices(index)).color_=(newColor)
   }
 
-  private def makeGraph(numVertices: Int): Unit = {
-    for (j <- 0 until maxNumberOfEdges) {
-// add some edges
-      val a: Int = Math.floor(Math.random() * numVertices).toInt
-      val b: Int = Math.floor(Math.random() * numVertices).toInt
-      if (a == b || edges.isConnected(a, b)) //continue
-//tweezijdig, en soms al true
-        edges.setConnected(a, b, true)
-    }
-    for (i <- 0 until numVertices) {
-      val v: Vertex3D = new Vertex3D()
-      v.setXYZ(200 + Math.random() * 300,
-               100 + Math.random() * 200,
-               100 + Math.random() * 200)
-      vertices.append(v)
-    }
-  }
 
 //=====================================Vertex-code===================
   def findFirstVertex(point: Point2D): Int = {
@@ -105,9 +89,10 @@ class GraphModel extends TGraphModel{
   }
 
   private def makeGraph_Doughnut(): Unit = {
-    val donut: TDrawing = new Doughnut(8, 8)
-    vertices = donut.vertices
-    edges = donut.edges
+    //val doughnut: TDrawing = new Doughnut(8, 8)
+    val doughnut: TDrawing = new Doughnut()
+    vertices = doughnut.vertices
+    edges = doughnut.edges
   }
 
   private def makeGraph_Mobius(): Unit = {
@@ -116,14 +101,39 @@ class GraphModel extends TGraphModel{
     edges = mobius.edges
   }
 
-  private def makeGraph_Random(): Unit = {
-//Voorlopig zelfde aantallen
-    val numEdges: Int = 20
-    val numVertices: Int = 15
-    maxNumberOfEdges = numEdges
+  //Voor random graph. Beter twee argumenten?
+  private def makeGraph_Random()(/*numVertices: Int*/): Unit = {
+    val numVertices = Global.gNodes
+    maxNumberOfEdges = Global.gEdges
     edges = new Grid(numVertices)
-    makeGraph(numVertices)
+    Global.appendBodyMsg("GraphModel.makeRandomGraph knopen: " + numVertices + ", maxlijntjes: " + maxNumberOfEdges)
+    for (j <- 0 until maxNumberOfEdges) {
+// add some edges
+      val a: Int = Math.floor(Math.random() * numVertices).toInt
+      val b: Int = Math.floor(Math.random() * numVertices).toInt
+      if (!(a == b || edges.isConnected(a, b))) //continue
+//tweezijdig, en soms al true
+        edges.setConnected(a, b, true)
+    }
+    for (i <- 0 until numVertices) {
+      val v: Vertex3D = new Vertex3D()
+      v.setXYZ(200 + Math.random() * 300,
+               100 + Math.random() * 200,
+               100 + Math.random() * 200)
+      vertices.append(v)
+    }
+    Global.appendBodyMsg("GraphModel.makeGraph RandomGraph:\n" + edges)
   }
+
+//  private def makeGraph_Random(): Unit = {
+//////Voorlopig zelfde aantallen
+////    val numEdges: Int = 20
+////    val numVertices: Int = 15
+////    maxNumberOfEdges = numEdges
+////    edges = new Grid(numVertices)
+////    makeGraph(numVertices)
+//      makeRandomGraph()
+//  }
 
   private def makeGraph_Simplex4(): Unit = {
     val simplex4: TDrawing = new Simplex4()
