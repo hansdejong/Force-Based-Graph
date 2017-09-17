@@ -51,10 +51,12 @@ object StartGraph{
    Het probleem is dan met de TCanvas Trait. Die zal dan met lazy vals moeten werken
   */
   def appendPar(targetNode: dom.Node, text: String): Unit = {
-    val parNode = document.createElement("p")
-    val textNode = document.createTextNode(text)
-    parNode.appendChild(textNode)
-    targetNode.appendChild(parNode)
+    if (!Global.gRelease){
+      val parNode = document.createElement("p")
+      val textNode = document.createTextNode(text)
+      parNode.appendChild(textNode)
+      targetNode.appendChild(parNode)
+    }
   }
 
   @JSExportTopLevel("SCALA_nodes")

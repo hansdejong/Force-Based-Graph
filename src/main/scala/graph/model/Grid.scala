@@ -56,7 +56,6 @@ class Grid {
     //graph.lib.FBGLib.melding("Resized!", "Grid.resize()")
   }
   override def toString() =  {edgeArray.map(_.mkString).mkString("\n")}
-
 }
 
 //Grid is een vierkant array van Edges

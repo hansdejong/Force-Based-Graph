@@ -13,14 +13,6 @@ class GraphModel extends TGraphModel{
   var maxNumberOfEdges: Int = 10
   var edges: Grid = null
 
-
-//  def this(theNumberOfVertices: Int, theMaxNumberOfEdges: Int) = {
-//    this()
-//    maxNumberOfEdges = theMaxNumberOfEdges
-//    edges = new Grid(theNumberOfVertices)
-//    makeGraph(theNumberOfVertices)
-//  }
-
   def this(graphName: EDrawings) = {
     this()
     makeGraph(graphName)
@@ -66,8 +58,6 @@ class GraphModel extends TGraphModel{
       case TESSERACT => makeGraph_Tesseract()
       case _ =>
     }
-
-
   }
 
   private def makeGraph_Buckyball(): Unit = {
@@ -101,8 +91,7 @@ class GraphModel extends TGraphModel{
     edges = mobius.edges
   }
 
-  //Voor random graph. Beter twee argumenten?
-  private def makeGraph_Random()(/*numVertices: Int*/): Unit = {
+  private def makeGraph_Random(): Unit = {
     val numVertices = Global.gNodes
     maxNumberOfEdges = Global.gEdges
     edges = new Grid(numVertices)
@@ -124,16 +113,6 @@ class GraphModel extends TGraphModel{
     }
     Global.appendBodyMsg("GraphModel.makeGraph RandomGraph:\n" + edges)
   }
-
-//  private def makeGraph_Random(): Unit = {
-//////Voorlopig zelfde aantallen
-////    val numEdges: Int = 20
-////    val numVertices: Int = 15
-////    maxNumberOfEdges = numEdges
-////    edges = new Grid(numVertices)
-////    makeGraph(numVertices)
-//      makeRandomGraph()
-//  }
 
   private def makeGraph_Simplex4(): Unit = {
     val simplex4: TDrawing = new Simplex4()
@@ -172,7 +151,7 @@ class GraphModel extends TGraphModel{
   }
 
   //Alleen om te kunnen zien of een model is veranderd
-  override def toString ={
+  override def toString = {
     var dragged = ""  
     	for (i <- 0 until vertices.size) {
 				if (vertices(i).isDragged){

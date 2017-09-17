@@ -24,6 +24,7 @@ object Global {
   var gNodes:Int = 10
   var gEdges:Int = 20
   
+  val gRelease:Boolean = true 
   val gLabels:Boolean = false
   
   //gApp geeft de  actieve applicatie, in te stellen via "welke"
@@ -36,11 +37,13 @@ object Global {
   }
   
   def appendBodyMsg( text: String): Unit = {
-    val targetNode: dom.Node = document.body
-    val parNode = document.createElement("p")
-    val textNode = document.createTextNode(text)
-    parNode.appendChild(textNode)
-    targetNode.appendChild(parNode)
+    if(!gRelease){
+      val targetNode: dom.Node = document.body
+      val parNode = document.createElement("p")
+      val textNode = document.createTextNode(text)
+      parNode.appendChild(textNode)
+      targetNode.appendChild(parNode)
+    }
   }
 
 }
