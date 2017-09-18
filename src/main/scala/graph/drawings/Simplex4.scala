@@ -59,7 +59,8 @@ class Simplex4 extends TDrawing {
   }
 */
   private def makeGraph_SimplexX(base: Int, n: Int): Unit = {
-    for (i <- 0 until n; j <- i + 1 until n + 1) {
+ //   for (i <- 0 until n; j <- i + 1 until n + 1) {
+    for (i <- 0 until n; j <- i until n) {
       edges.setConnected(base + i, base + j, true)
     }
   }

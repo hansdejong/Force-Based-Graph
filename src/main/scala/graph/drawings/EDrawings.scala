@@ -59,7 +59,7 @@ object EDrawings extends Enumeration {
 
 //  class EDrawings{
     val /*values = ValueSet(*/BUCKYBALL, CUBE, DODECAEDER, DOUGHNUT, MOBIUS, RANDOM, 
-        SNAKE, SNAKERING, SIMPLEX4, SPUTNIK, STICK, TESSERACT= Value
+        SNAKE, SNAKERING, /*SIMPLEX4,*/ SPUTNIK, STICK, TESSERACT= Value
         //)
   //}
   

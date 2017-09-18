@@ -52,7 +52,7 @@ class GraphModel extends TGraphModel{
       case RANDOM => makeGraph_Random()
       case SNAKE => makeGraph_Snake()
       case SNAKERING => makeGraph_Snakering()
-      case SIMPLEX4 => makeGraph_Simplex4()
+//    case SIMPLEX4 => makeGraph_Simplex4()
       case SPUTNIK => makeGraph_Sputnik()
       case STICK => makeGraph_Stick()
       case TESSERACT => makeGraph_Tesseract()
