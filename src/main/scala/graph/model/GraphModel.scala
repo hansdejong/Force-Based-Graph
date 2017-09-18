@@ -95,7 +95,7 @@ class GraphModel extends TGraphModel{
     val numVertices = Global.gNodes
     maxNumberOfEdges = Global.gEdges
     edges = new Grid(numVertices)
-    Global.appendBodyMsg("GraphModel.makeRandomGraph knopen: " + numVertices + ", maxlijntjes: " + maxNumberOfEdges)
+
     for (j <- 0 until maxNumberOfEdges) {
 // add some edges
       val a: Int = Math.floor(Math.random() * numVertices).toInt
@@ -111,7 +111,7 @@ class GraphModel extends TGraphModel{
                100 + Math.random() * 200)
       vertices.append(v)
     }
-    Global.appendBodyMsg("GraphModel.makeGraph RandomGraph:\n" + edges)
+    Global.appendMsg("GraphModel.makeGraph RandomGraph:\n" + edges)
   }
 
   private def makeGraph_Simplex4(): Unit = {

@@ -12,11 +12,11 @@ import graph.model.Vertex3D
 import graph.view._
 import graph.lib._
 import org.scalajs.dom
+import dom.document
 import dom.html
 
 class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 { val canvas = cv; val textarea = ta } with TCanvas with TTextArea {
-  private val rect = canvas.getBoundingClientRect()
   private var graph:EDrawings = getRandomDrawing()
   //var graph:EDrawings = EDrawings.STICK
   //var graph:EDrawings = EDrawings.CUBE
@@ -28,7 +28,6 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 
   val expander = new Expander(model, this)
   val common = new Common(model, this) 
-  //val old = new Dismissed(model, this) 
 
 	//============Method Declarations=======================================================
 	private def getRandomDrawing(): EDrawings = {
@@ -42,6 +41,7 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
   redraw()//I. Bij opstart
 	//------------Mouse---------------------------------------------------------------------
   def onPressed(e: dom.MouseEvent) = {//add whatever
+    val rect = canvas.getBoundingClientRect()
     var vertexConnected = false
     val xCursor: Double = (e.clientX - rect.left) * Global.gZoom
     val yCursor: Double = (e.clientY - rect.top) * Global.gZoom
@@ -50,6 +50,7 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
     if (Global.gDraggingMode) {
       dragger.checkOnSpot(pointCursor)
       redraw() //II. Na elke klik
+      Global.appendMsg( "FBGPainting.onPressed "+ toString() )
     }
     else{//Wijzigmode
       changer.inspectCursorSpot(pointCursor)
@@ -66,6 +67,7 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 
   def onDragged(e: dom.MouseEvent)
   {
+      val rect = canvas.getBoundingClientRect()
 	    //Lijkt niet de juiste naamgeving
 	    val xCursor: Double = (e.clientX -rect.left) * Global.gZoom //even zonder zoom
       val yCursor: Double = (e.clientY -rect.top) * Global.gZoom
@@ -74,7 +76,7 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
        	  //old.scratch(e)
           if( dragger.dragging ){ //XXX
        	    dragger.dragVertex(xCursor.toInt, yCursor.toInt)
-       	    common.redraw() //IV. Bij verplaatsen
+       	    redraw() //IV. Bij verplaatsen
    	      }
      	  }
      	  else{//wijzigmode
@@ -106,6 +108,25 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
 	def onMoved(e: dom.MouseEvent){//add whatever
   }
 	
+	//Om de oorzaak van de instabiliteit uit te vissen.
+	//Voorlopig streven de situatie qua toestandsvariabelen weer te geven.
+	override def toString = {
+	  val toestand = 
+	    if(Global.gDraggingMode){
+	      if(dragger.dragging)
+	        "Dragging, connected"
+	      else
+	        "Dragging, not connected"
+	     }
+	  
+	    else{
+	      if(changer.pressedAVertex) 
+	        "Changing, connected"
+	      else
+	        "Changing, not connected"
+	    }
+	  toestand + " "
+	}
 }
 
 

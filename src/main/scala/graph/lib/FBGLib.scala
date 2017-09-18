@@ -1,6 +1,8 @@
 package graph.lib
 
 object FBGLib {
+ 
+     
   def melding (what:String,where:String): Unit = {} //dummy
   
 //	//Ook behoefte aan een losse versie

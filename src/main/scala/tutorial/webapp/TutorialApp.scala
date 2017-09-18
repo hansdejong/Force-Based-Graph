@@ -1,5 +1,6 @@
 
 package tutorial.webapp
+//https://www.scala-js.org/tutorial/basic/index.html
 
 import org.scalajs.dom //1. later er uit
 import dom.document    //1. later er uit
@@ -21,23 +22,24 @@ object TutorialApp {
     appendPar(document.body, "You clicked the DOM button!")
   }
 
-  def main(args: Array[String]): Unit = {
-    //1. Gebruikt DOM. Later er uit
-    appendPar(document.body, "Paragraaf met DOM")
+// //Eruit gehaald wegens sbt warning: Multiple main classes detected
+//  def main(args: Array[String]): Unit = {
+//    //1. Gebruikt DOM. Later er uit
+//    appendPar(document.body, "Paragraaf met DOM")
+//
+//
+//    println("Hallo allemaal.\nDit zie je alleen terug in de webconsole!")//Toegevoegd Hans
+//    jQuery(() => setupUI())
+//  }
 
-
-    println("Hallo allemaal.\nDit zie je alleen terug in de webconsole!")//Toegevoegd Hans
-    jQuery(() => setupUI())
-  }
-
-  def setupUI(): Unit = {
+  private def setupUI(): Unit = {
     jQuery("""<button type="button">Click me jQ!</button>""")
       .click(() => addClickedMessage())
       .appendTo(jQuery("body"))
     jQuery("body").append("<p>Hello World met jQuery</p>")
   }
 
-  def addClickedMessage(): Unit = {
+  private def addClickedMessage(): Unit = {
     jQuery("body").append("<p>You clicked the jQuery button!</p>")
   }
 

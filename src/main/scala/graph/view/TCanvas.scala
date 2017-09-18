@@ -1,7 +1,8 @@
-package graph.global
+package graph.view
 
 import org.scalajs.dom
 import dom.html
+import graph.global.Global
 
 /**Strategie: de muiscode hier houden. Los van wat variabelen subclasses 
  * alleen laten werken met implementaties van abstracte classen.

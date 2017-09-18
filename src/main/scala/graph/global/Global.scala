@@ -18,14 +18,15 @@ object Global {
    * En als ik hier een lazy val gebruik met een functie die de waarde ophaalt uit StartGraph? 
    * */
 
+  val gRelease:Boolean = true //weer terug naar true
+  val gLabels:Boolean = false   //weer terug naar false
+  
   var gColor: String = "red" //TOCH NOG HANDHAVEN
   var gDraggingMode: Boolean = true //anders "wijzig"
-  var gZoom:Double = 1.0
+    var gZoom:Double = 1.0
   var gNodes:Int = 10
   var gEdges:Int = 20
   
-  val gRelease:Boolean = true 
-  val gLabels:Boolean = false
   
   //gApp geeft de  actieve applicatie, in te stellen via "welke"
   val welke = 3
@@ -36,7 +37,7 @@ object Global {
     case _ => "Oeps"
   }
   
-  def appendBodyMsg( text: String): Unit = {
+  def appendMsg( text: String): Unit = {
     if(!gRelease){
       val targetNode: dom.Node = document.body
       val parNode = document.createElement("p")

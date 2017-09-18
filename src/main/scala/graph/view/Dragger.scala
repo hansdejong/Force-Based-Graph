@@ -9,15 +9,14 @@ class Dragger(model: TGraphModel, writer: FBGPainting ) {
   var dragging=false
   def checkOnSpot(pointCursor: Point2D):Unit = {
        var oneConnected:Boolean  = false
-       var index = -1
        for (vertex3D <- model.vertices) {
-         index=index+1 //beginnen bij 0
          if(model.VertexContains(vertex3D, pointCursor)){
            vertex3D.setDragged(true)
            oneConnected = true
-           }
-         else
+         }
+         else{
            vertex3D.setDragged(false)
+         }
        }
        dragging=oneConnected
   }

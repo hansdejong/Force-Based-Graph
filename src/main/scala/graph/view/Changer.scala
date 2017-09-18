@@ -25,9 +25,10 @@ class Changer ( model: TGraphModel, writer: FBGPainting ) {
            vertex3D.setDragged(true)
            oneConnected = true
            lastFoundVertexIndex = index
-           }
-         else
+         }
+         else{
            vertex3D.setDragged(false)
+         }
        }
        pressedAVertex = oneConnected
   }

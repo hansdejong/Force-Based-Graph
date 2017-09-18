@@ -1,4 +1,4 @@
-package graph.global
+package graph.view
 
 import org.scalajs.dom
 import dom.html

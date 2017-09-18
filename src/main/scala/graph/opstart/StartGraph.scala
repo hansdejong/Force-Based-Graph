@@ -14,7 +14,6 @@ import dom.document
 import scala.scalajs.js.annotation.JSExportTopLevel
 import scalajs.js.annotation.JSExport
 import dom.html
-import dom.raw.ClientRect
 import canvasapp._
 import sierpinski._
 import graph.view._
