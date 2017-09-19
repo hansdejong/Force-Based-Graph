@@ -1,4 +1,4 @@
-# File Based Graph
+# Force Based Graph
 ## A Scala.js program
 
 This repository started out by cloning the [Scala.js tutorial](http://www.scala-js.org/doc/tutorial.html), and also contains some exercises following the [Hands-on Scala.js](http://www.lihaoyi.com/hands-on-scala-js/) tutorial by Li Haoyi.
