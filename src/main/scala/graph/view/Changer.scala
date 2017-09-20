@@ -16,35 +16,41 @@ class Changer ( model: TGraphModel, writer: FBGPainting ) {
   var lastFoundVertexIndex = -1
   var pressedAVertex = false
   
+  
   def inspectCursorSpot(pointCursor: Point2D):Unit = {
        var oneConnected:Boolean  = false
        var index = -1
-       for (vertex3D <- model.vertices) {
+       
+       val inspectVertex = (vertex:Vertex3D) => {
          index=index+1 //beginnen bij 0
-         if(model.VertexContains(vertex3D, pointCursor)){
-           vertex3D.setDragged(true)
+         if(model.VertexContains(vertex, pointCursor)){
+           vertex.setDragged(true)
            oneConnected = true
            lastFoundVertexIndex = index
          }
          else{
-           vertex3D.setDragged(false)
+           vertex.setDragged(false)
          }
        }
+       
+       model.vertices.map(inspectVertex)
        pressedAVertex = oneConnected
   }
 
-  def findVertexXY(): Point2D = {
+  def findDraggedVertexXY(): Point2D = {
     var default = new Point2D()
-    for (i <- 0 until model.vertices.size) {
-      var v: Vertex3D = model.vertices(i)
-      if (v.isDragged){
-        var x: Int = v.getX
-        var y: Int = v.getY
+    
+    val whenDragged = (vertex:Vertex3D) => {
+      if (vertex.isDragged){
+        var x: Int = vertex.getX
+        var y: Int = vertex.getY
         default = new Point2D(x,y)
       }
     }
+
+    model.vertices.map(whenDragged)
     default
-   }
+  }
 
   def startLine( xCursor: Int, yCursor: Int) = {
     x = xCursor; y = yCursor

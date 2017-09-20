@@ -7,21 +7,12 @@ class Expander (model: TGraphModel, writer: FBGPainting  ) {
 	val edges: Grid = model.edges
 	val vertices: ArrayBuffer[Vertex3D] = model.vertices
 	
-  var mTeller = 0 //Alleen voor testen
-  
   def expandGraph(model: TGraphModel):Unit = {
 			recalcGraphAsNeeded()
 	}
 
-	private def tel = {
-    mTeller = mTeller+1
-    //writer.taText("teller: "+ mTeller + "\n")
-  }
-
 	private def recalcGraphAsNeeded(): Unit = {
-		//tel
     recalcGraph(vertices, edges)
-		//tel
     repeatAsNeeded(vertices, edges)
   }
 
@@ -55,14 +46,10 @@ class Expander (model: TGraphModel, writer: FBGPainting  ) {
   private def repeatAsNeeded(vertices: ArrayBuffer[Vertex3D],edges: Grid): Unit = {
     var avgMovement: Double = 10
     val epsilon: Double = 1
-    var teller: Int = 0
-    
-    //Geeft indicatie voor aantal iteraties
-    mTeller = 0;tel
+//  var teller: Int = 0//wordt niet meer gebruikt
     
     try{
-      while ((avgMovement > epsilon) && (teller < 25)) {
-        //tel
+      while ((avgMovement > epsilon)/* && (teller < 25)*/) {
         avgMovement = getAvgLastMovement(vertices)
         moveVertices(vertices)
         recalcGraph(vertices, edges) //{ teller += 1; teller - 1 }
@@ -77,17 +64,12 @@ class Expander (model: TGraphModel, writer: FBGPainting  ) {
 
   private def getAvgLastMovement(vertices: ArrayBuffer[Vertex3D]): Double = {
     var totalMovement: Double = 0
-    for (vertex3D <- vertices) {
-      totalMovement += vertex3D.getLastMovement
-    }
+    vertices.map(totalMovement += _.getLastMovement)
     totalMovement / vertices.size
   }
 
   private def moveVertices(vertices: ArrayBuffer[Vertex3D]): Unit = {
-    for (i <- 0 until vertices.size) {
-      val v: Vertex3D = vertices(i)
-      v.move()
-    }
+     vertices.map(_.move)
   }
   
 

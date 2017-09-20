@@ -19,7 +19,7 @@ class GraphModel extends TGraphModel{
   }
 
   def setVertexColor(index: Int, newColor: String): Unit = {
-    (vertices(index)).color_=(newColor)
+    (vertices(index)).color_= (newColor)
   }
 
 

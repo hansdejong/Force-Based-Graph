@@ -56,7 +56,7 @@ class FBGPainting(cv: html.Canvas, ta: html.TextArea) extends
       changer.inspectCursorSpot(pointCursor)
       vertexConnected = changer.pressedAVertex
       if (vertexConnected){
-        val xy = changer.findVertexXY //nu niet pointCursor gebruiken
+        val xy = changer.findDraggedVertexXY //nu niet pointCursor gebruiken
         changer.startLine( (xy.x / Global.gZoom).toInt, (xy.y / Global.gZoom).toInt )
       }else{//Ook een Edge kan worden aangewezen
         changer.removeEdgeIfFound(pointCursor)

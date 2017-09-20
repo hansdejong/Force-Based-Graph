@@ -7,26 +7,31 @@ import org.scalajs.dom
 class Dragger(model: TGraphModel, writer: FBGPainting ) {
   
   var dragging=false
+
   def checkOnSpot(pointCursor: Point2D):Unit = {
        var oneConnected:Boolean  = false
-       for (vertex3D <- model.vertices) {
-         if(model.VertexContains(vertex3D, pointCursor)){
-           vertex3D.setDragged(true)
+
+       val checkVertex = (vertex:Vertex3D) => {
+         if(model.VertexContains(vertex, pointCursor)){
+           vertex.setDragged(true)
            oneConnected = true
          }
          else{
-           vertex3D.setDragged(false)
+           vertex.setDragged(false)
          }
        }
+       
+       model.vertices.map( checkVertex )
        dragging=oneConnected
   }
   
   def dragVertex( xCursor: Int, yCursor: Int): Unit = {
-    for (i <- 0 until model.vertices.size) {
-      var v: Vertex3D = model.vertices(i)
-      val z: Int = v.getZ
-      if (v.isDragged) v.setXYZ(xCursor, yCursor, z)
+    val drag = (vertex:Vertex3D) => {
+      val z: Int = vertex.getZ
+      if (vertex.isDragged) vertex.setXYZ(xCursor, yCursor, z)
     }
+    
+    model.vertices.map(drag)
   }
 
 }
