@@ -7,10 +7,10 @@ But then I started porting an Java-applet I once made, so that is the main appli
 The inspiration for the FBG came from this [blog](http://blog.ivank.net/force-based-graph-drawing-in-as3.html).
 
 
-Of course it is scala code (you cannot mix Scala and Java as in JVM-Scala), but I  started by using a [Java to Scala converter](http://javatoscala.com/). Then I started to make it more scala-ish.
+Of course it is scala code (you cannot mix Scala and Java as in JVM-Scala), but I  started by using a [Java to Scala converter](http://javatoscala.com/). Then I tried to make it more scala-ish.
 
 It is my first serious Scala.js experience, and my main conclusion is that it can be used very well to make applet-like programs.<br>
-In my opinion the value of easy browser-deployable GUI´s for Java and Scala is underestimated. The Java-applet occupied an very important niche for small applications exposing all kinds of creative and intellectual ideas, but now is essentially killed for security reasons.
+In my opinion the value of easy browser-deployable GUI´s for Java and Scala is underestimated. The Java-applet occupied a very important niche for small applications exposing all kinds of creative and intellectual ideas, but now it is essentially killed for security reasons.
 
 Most Scala(-js) tutorials are focussing on big web applications with server- and client side code. They also use nice but complicating tooling. But I experienced Scala.js (once setup, because that´s not really easy) as a lightweigt programming environment. I did not use jQuery, Node.js or Li Haoyi´s local webserver or Scalatags. Scala.js can fill the now empty Java-applet niche, but it requires programming in pure Scala.
 
