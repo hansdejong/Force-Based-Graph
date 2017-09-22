@@ -32,7 +32,7 @@ object TutorialApp {
 //    jQuery(() => setupUI())
 //  }
 
-  private def setupUI(): Unit = {
+  def setupUI(): Unit = {
     jQuery("""<button type="button">Click me jQ!</button>""")
       .click(() => addClickedMessage())
       .appendTo(jQuery("body"))

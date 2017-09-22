@@ -3,7 +3,8 @@ package tutorial.webapp
 import utest._
 import graph.model._
 import graph.drawings._
-import org.scalajs.jquery.jQuery
+//import org.scalajs.jquery.jQuery
+//http://www.lihaoyi.com/post/uTesttheEssentialTestFrameworkforScala.html
 
 object FBGTest extends TestSuite {
   // Initialize App

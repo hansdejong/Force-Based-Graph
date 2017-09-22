@@ -26,5 +26,6 @@ jsDependencies +=
 jsDependencies += RuntimeDOM
 
 // uTest settings
+// Er schijnt al een versie 0.5.3 van utest te zijn 
 libraryDependencies += "com.lihaoyi" %%% "utest" % "0.4.4" % "test"
 testFrameworks += new TestFramework("utest.runner.Framework")

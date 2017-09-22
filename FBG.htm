@@ -46,7 +46,7 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
             { cols:[ 
 {view:"form", id:"kolom1", width: 250, elements:[
         { view:"text", text:"Knopen (random poging)", width:200, align:"center"},  
-	{ view:"slider", id:"slider1", value: 10, min: 2, max: 20, width: 200, align:"left",
+	{ view:"slider", id:"slider1", value: 10, min: 2, max: 100, width: 200, align:"left",
 	title:function(obj){return obj.value;}, on:{
 		onChange:function(){
 			SCALA_nodes( this.getValue() ); 
@@ -56,7 +56,7 @@ een kleur kiezen (dat kan al mooi met canvas) plus reageren op de knop acties.
 
 {view:"form", id:"kolom2", width: 250, elements:[
 	{ view:"text",  text:"Connecties (random poging)", width:200, align:"center"},  
-        { view:"slider", id:"slider2", value: 20, min: 1, max: 50, width: 200, align:"left",
+        { view:"slider", id:"slider2", value: 20, min: 1, max: 100, width: 200, align:"left",
 	title:function(obj){return obj.value;}, on:{ 
 		onChange:function(){
 			SCALA_edges( this.getValue() ); 
